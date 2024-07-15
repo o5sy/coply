@@ -1,5 +1,6 @@
 import { Logo, SearchInput } from '@/components/main';
 
+import { Button } from '@/components/shared';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -27,12 +28,7 @@ export default function Home() {
           </div>
 
           {/* login button */}
-          <button
-            className="text-md h-[35px] rounded-lg bg-primary px-[30px] text-white"
-            type="button"
-          >
-            로그인
-          </button>
+          <Button>로그인</Button>
         </div>
       </header>
       <main />
