@@ -1,7 +1,7 @@
+import { Logo, SearchInput } from '@/components/main';
+
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Logo } from '@/components/main';
 
 export default function Home() {
   return (
@@ -18,17 +18,7 @@ export default function Home() {
           </div>
 
           {/* search input */}
-          <label
-            className="flex w-[300px] gap-[8px] rounded-lg bg-secondary px-[16px] py-[8px]"
-            htmlFor="search-input"
-          >
-            <Image src="/search.svg" alt="search" width={18} height={18} />
-            <input
-              className="flex-1 text-primary"
-              id="search-input"
-              placeholder="search"
-            />
-          </label>
+          <SearchInput />
 
           {/* navigation */}
           <div className="flex flex-1 justify-end gap-[36px] px-[32px]">
