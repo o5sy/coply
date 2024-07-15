@@ -47,6 +47,7 @@
         "selector": "function",
         "format": ["camelCase"]
       }
-    ]
+    ],
+    "import/prefer-default-export": "off"
   }
 }
