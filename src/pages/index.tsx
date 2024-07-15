@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Logo } from '@/components/main';
 
 export default function Home() {
   return (
@@ -12,9 +13,8 @@ export default function Home() {
       <header className="flex h-[65px] w-full justify-center px-[200px]">
         <div className="flex h-full w-[1520px] items-center border-[1px]">
           {/* logo */}
-          <div className="flex items-center pr-[32px]">
-            <Image src="/flag.svg" alt="logo" width={28} height={28} />
-            <span className="text-2xl text-primary">Coply</span>
+          <div className="pr-[32px]">
+            <Logo />
           </div>
 
           {/* search input */}
