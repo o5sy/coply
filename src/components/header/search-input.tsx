@@ -10,7 +10,7 @@ export function SearchInput({ inputProps, ...rest }: SearchInputProps) {
   return (
     <label
       {...rest}
-      className={`flex w-[300px] gap-[8px] rounded-lg bg-secondary px-[16px] py-[8px] ${rest.className}`}
+      className={`flex gap-[8px] rounded-lg bg-secondary px-[16px] py-[8px] ${rest.className}`}
     >
       <Image src="/search.svg" alt="search" width={18} height={18} />
       <input
