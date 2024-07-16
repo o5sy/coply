@@ -8,9 +8,9 @@ export function Header() {
     <header className="absolute z-10 w-full">
       <nav className="mx-auto box-content flex h-[65px] max-w-[1440px] items-center px-[32px]">
         {/* logo */}
-        <div className="pr-[32px]">
+        <Link href="/" className="pr-[32px]">
           <Logo />
-        </div>
+        </Link>
 
         {/* search input */}
         <SearchInput className="w-[300px]" />
