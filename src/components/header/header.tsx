@@ -5,12 +5,12 @@ import { SearchInput } from './search-input';
 
 export function Header() {
   return (
-    <header className="flex h-[65px] w-full justify-center px-[200px]">
-      <div className="flex h-full w-[1520px] items-center border-[1px]">
+    <header className="fixed left-0 top-0 z-10 w-full bg-white">
+      <nav className="layout flex h-[65px] items-center">
         {/* logo */}
-        <div className="pr-[32px]">
+        <Link href="/" className="pr-[32px]">
           <Logo />
-        </div>
+        </Link>
 
         {/* search input */}
         <SearchInput className="w-[300px]" />
@@ -23,7 +23,7 @@ export function Header() {
 
         {/* login button */}
         <Button>로그인</Button>
-      </div>
+      </nav>
     </header>
   );
 }
