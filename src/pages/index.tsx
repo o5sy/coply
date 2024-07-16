@@ -1,3 +1,4 @@
+import { Header } from '@/components/header';
 import Head from 'next/head';
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
       <Head>
         <title>Coply</title>
       </Head>
+      <Header />
       <main />
     </>
   );

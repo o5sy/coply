@@ -47,6 +47,15 @@
         "selector": "function",
         "format": ["camelCase"]
       }
-    ]
+    ],
+    "import/prefer-default-export": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "some": ["nesting", "id"]
+      }
+    ],
+    "react/require-default-props": "off",
+    "comma-dangle": ["error", "always-multiline"]
   }
 }
