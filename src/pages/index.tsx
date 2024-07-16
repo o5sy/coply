@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { Header } from '@/components/header';
 import { SearchInput } from '@/components/header/search-input';
 import { Category, SectionTitle, VideoCard } from '@/components/main-page';
