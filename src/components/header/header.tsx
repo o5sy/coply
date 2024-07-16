@@ -5,7 +5,7 @@ import { SearchInput } from './search-input';
 
 export function Header() {
   return (
-    <header className="absolute z-10 w-full">
+    <header className="fixed left-0 top-0 z-10 w-full bg-white">
       <nav className="layout flex h-[65px] items-center">
         {/* logo */}
         <Link href="/" className="pr-[32px]">

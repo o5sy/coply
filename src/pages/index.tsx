@@ -9,7 +9,7 @@ export default function Home() {
       </Head>
       <div className="relative">
         <Header />
-        <main />
+        <main className="absolute top-0 mt-[65px] w-full"></main>
       </div>
     </>
   );
