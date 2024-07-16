@@ -6,7 +6,7 @@ import { SearchInput } from './search-input';
 export function Header() {
   return (
     <header className="absolute z-10 w-full">
-      <nav className="mx-auto box-content flex h-[65px] max-w-[1440px] items-center px-[32px]">
+      <nav className="layout flex h-[65px] items-center">
         {/* logo */}
         <Link href="/" className="pr-[32px]">
           <Logo />
