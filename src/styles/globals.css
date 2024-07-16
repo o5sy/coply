@@ -4,7 +4,7 @@
 
 @layer components {
   .layout {
-    @apply mx-auto box-content max-w-[1440px] px-[32px];
+    @apply mx-auto box-content max-w-[1200px] px-[32px];
   }
 }
 
