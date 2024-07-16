@@ -7,8 +7,10 @@ export default function Home() {
       <Head>
         <title>Coply</title>
       </Head>
-      <Header />
-      <main />
+      <div className="relative">
+        <Header />
+        <main />
+      </div>
     </>
   );
 }

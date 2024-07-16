@@ -5,8 +5,8 @@ import { SearchInput } from './search-input';
 
 export function Header() {
   return (
-    <header className="flex h-[65px] w-full justify-center px-[200px]">
-      <div className="flex h-full w-[1520px] items-center border-[1px]">
+    <header className="absolute z-10 w-full">
+      <nav className="mx-auto box-content flex h-[65px] max-w-[1440px] items-center px-[32px]">
         {/* logo */}
         <div className="pr-[32px]">
           <Logo />
@@ -23,7 +23,7 @@ export function Header() {
 
         {/* login button */}
         <Button>로그인</Button>
-      </div>
+      </nav>
     </header>
   );
 }
