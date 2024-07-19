@@ -32,11 +32,9 @@ export default function WatchPage() {
               {title}
             </h1>
 
-            <ProfileIcon
-              width={36}
-              height={36}
-              className="ml-auto box-content px-[24px]"
-            />
+            <button className="ml-auto box-content px-[24px]">
+              <ProfileIcon width={36} height={36} />
+            </button>
           </header>
 
           {/* player */}
@@ -62,7 +60,7 @@ export default function WatchPage() {
 
         {/* drawer */}
         {isOpen && (
-          <PopoverBackdrop onClick={handleDrawer.close}>
+          <PopoverBackdrop className="bg-black/70" onClick={handleDrawer.close}>
             <VideoInfoSection
               title={title}
               onClose={handleDrawer.close}
