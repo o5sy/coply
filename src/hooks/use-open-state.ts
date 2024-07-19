@@ -7,7 +7,7 @@ interface UseOpenStateProps {
 export const useOpenState = (
   props: UseOpenStateProps = { initOpen: false },
 ) => {
-  const [isOpen, setIsOpen] = useState(props.initOpen);
+  const [isOpen, setIsOpen] = useState(props.initOpen ?? false);
 
   const handleState = {
     open: () => setIsOpen(true),
