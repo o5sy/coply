@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
+import Image from 'next/image';
+import Head from 'next/head';
 import { Header } from '@/components/header';
 import { SearchInput } from '@/components/header/search-input';
 import { Category, SectionTitle, VideoCard } from '@/components/main-page';
-import Head from 'next/head';
-import Image from 'next/image';
 
-export default function Home() {
+export default function MainPage() {
   return (
     <>
       <Head>
@@ -56,6 +56,7 @@ export default function Home() {
                   title="React 웹 개발"
                   channelName="코플리 월드"
                   thumbnailUrl="/sample-thumbnail.png"
+                  href="/watch"
                 />
               ))}
             </ul>
@@ -70,6 +71,7 @@ export default function Home() {
                   title="LLM 이란?"
                   channelName="코플리 월드"
                   thumbnailUrl="/sample-thumbnail.png"
+                  href="/watch"
                 />
               ))}
             </ul>
@@ -84,6 +86,7 @@ export default function Home() {
                   title="4차 산업혁명 시대, 코딩을 배워야 하는 이유"
                   channelName="코플리 월드"
                   thumbnailUrl="/sample-thumbnail.png"
+                  href="/watch"
                 />
               ))}
             </ul>
@@ -98,6 +101,7 @@ export default function Home() {
                   title="이력서, 어떻게 쓸까?"
                   channelName="코플리 월드"
                   thumbnailUrl="/sample-thumbnail.png"
+                  href="/watch"
                 />
               ))}
             </ul>

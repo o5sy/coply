@@ -1,0 +1,3 @@
+.menuItem {
+  @apply rounded-md p-[18px] text-gray-300 hover:bg-gray-500;
+}
