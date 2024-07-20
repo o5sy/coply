@@ -57,7 +57,7 @@
     ],
     "react/require-default-props": "off",
     "comma-dangle": ["error", "always-multiline"],
-    "import/extensions": "ignorePackages",
+    "import/extensions": ["warn", "ignorePackages"],
     "import/order": [
       "warn",
       {
