@@ -57,17 +57,16 @@
     ],
     "react/require-default-props": "off",
     "comma-dangle": ["error", "always-multiline"],
-    "import/extensions": ["warn", "ignorePackages"],
     "import/order": [
       "warn",
       {
         "groups": [
-          "index",
-          "sibling",
-          "parent",
-          "internal",
-          "external",
           "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
           "object",
           "type"
         ]

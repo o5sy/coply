@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
+import Image from 'next/image';
+import Head from 'next/head';
 import { Header } from '@/components/header';
 import { SearchInput } from '@/components/header/search-input';
 import { Category, SectionTitle, VideoCard } from '@/components/main-page';
-import Head from 'next/head';
-import Image from 'next/image';
 
 export default function MainPage() {
   return (

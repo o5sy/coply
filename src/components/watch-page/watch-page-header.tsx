@@ -25,7 +25,12 @@ export function WatchPageHeader({
       <h1 className="pl-[8px] text-lg font-semibold text-white">{title}</h1>
 
       {/* user menu button */}
-      <button className="ml-auto box-content px-[24px]" onClick={onUserMenu}>
+      <button
+        className="ml-auto box-content px-[24px]"
+        type="button"
+        onClick={onUserMenu}
+        aria-label="user menu"
+      >
         <ProfileIcon width={36} height={36} />
       </button>
     </header>

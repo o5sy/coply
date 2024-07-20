@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import styles from './user-menu.module.css';
 import { twMerge } from 'tailwind-merge';
+import styles from './user-menu.module.css';
 
 interface UserMenuProps {
   className?: string;
@@ -20,7 +20,9 @@ export function UserMenu({ className }: UserMenuProps) {
       <Link className={styles.menuItem} href="/mypage">
         마이페이지
       </Link>
-      <button className={`${styles.menuItem} text-left`}>로그아웃</button>
+      <button className={`${styles.menuItem} text-left`} type="button">
+        로그아웃
+      </button>
     </div>
   );
 }
