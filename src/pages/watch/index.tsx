@@ -1,9 +1,12 @@
-import { PopoverBackdrop, VideoInfoSection } from '@/components/watch-page';
+import {
+  PopoverBackdrop,
+  UserMenu,
+  VideoInfoSection,
+  WatchPageHeader,
+} from '@/components/watch-page';
 import { useOpenState } from '@/hooks';
 import Head from 'next/head';
 import Link from 'next/link';
-import MenuIcon from 'public/hamburger-menu.svg';
-import ProfileIcon from 'public/profile.svg';
 import YouTube from 'react-youtube';
 
 export default function WatchPage() {
@@ -24,27 +27,11 @@ export default function WatchPage() {
       >
         <div className="flex h-full w-full flex-col">
           {/* header */}
-          <header className="flex h-[65px] w-full items-center bg-gray-800">
-            {/* drawer menu button */}
-            <button
-              type="button"
-              className="flex-center h-full w-[65px] hover:bg-gray-500"
-              onClick={handleDrawer.open}
-            >
-              <MenuIcon stroke="white" alt="영상 정보" />
-            </button>
-            <h1 className="pl-[8px] text-lg font-semibold text-white">
-              {title}
-            </h1>
-
-            {/* user menu button */}
-            <button
-              className="ml-auto box-content px-[24px]"
-              onClick={handleUserMenu.open}
-            >
-              <ProfileIcon width={36} height={36} />
-            </button>
-          </header>
+          <WatchPageHeader
+            title={title}
+            onDrawerMenu={handleDrawer.open}
+            onUserMenu={handleUserMenu.open}
+          />
 
           {/* player */}
           <main className="flex-center flex-1 bg-gray-700">
@@ -67,7 +54,7 @@ export default function WatchPage() {
           </div>
         </div>
 
-        {/* video sidebar */}
+        {/* drawer menu */}
         {isOpenDrawer && (
           <PopoverBackdrop className="bg-black/70" onClick={handleDrawer.close}>
             <VideoInfoSection
@@ -83,11 +70,7 @@ export default function WatchPage() {
         {/* user menu */}
         {isOpenUserMenu && (
           <PopoverBackdrop onClick={handleUserMenu.close}>
-            <div className="absolute right-[24px] top-[60px] flex h-[100px] w-[200px] flex-col bg-slate-50">
-              <Link href="/">홈</Link>
-              <Link href="mypage">마이페이지</Link>
-              <button>로그아웃</button>
-            </div>
+            <UserMenu className="absolute right-[24px] top-[60px]" />
           </PopoverBackdrop>
         )}
       </div>
