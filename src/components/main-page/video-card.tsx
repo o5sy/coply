@@ -18,7 +18,12 @@ export function VideoCard({
   className,
 }: VideoCardProps) {
   return (
-    <li className={twMerge('w-[250px] cursor-pointer', className)}>
+    <li
+      className={twMerge(
+        'aspect-[1.2/1] min-w-[250px] cursor-pointer',
+        className,
+      )}
+    >
       <Link href={href}>
         <div className="relative h-[74%] w-full">
           <Image
