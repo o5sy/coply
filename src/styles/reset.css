@@ -131,3 +131,7 @@ table {
 input {
   background-color: inherit;
 }
+
+li {
+  list-style-type: none;
+}
