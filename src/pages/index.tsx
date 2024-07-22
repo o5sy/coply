@@ -11,9 +11,10 @@ export default function MainPage() {
       <Head>
         <title>Coply</title>
       </Head>
+
       <div className="relative">
         <Header />
-        <main className="absolute top-0 mb-[100px] mt-[65px] w-full">
+        <main className="mb-[100px] w-full">
           {/* hero */}
           <section className="layout flex-center pt-[32px]">
             <Image

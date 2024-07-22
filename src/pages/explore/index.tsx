@@ -15,7 +15,7 @@ export default function ExplorePage() {
 
       <div className="relative">
         <Header />
-        <main className="absolute top-0 mb-[100px] mt-[65px] w-full">
+        <main className="mb-[100px] w-full">
           <div className="layout">
             <div className="flex items-center justify-between py-[32px]">
               <h1 className="text-3xl font-bold">영상 탐색</h1>
