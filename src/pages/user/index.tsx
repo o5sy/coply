@@ -9,7 +9,7 @@ export default function UserPage() {
   return (
     <>
       <Head>
-        <title>영상 찾아보기 | Coply</title>
+        <title>내 정보 | Coply</title>
       </Head>
 
       <div className="relative">
