@@ -23,9 +23,43 @@ export default function ExplorePage() {
             </div>
 
             <div className="flex w-full gap-[24px]">
-              <aside className="flex w-[300px] flex-col gap-[10px]">
+              <aside className="flex w-[300px] flex-col gap-[24px]">
                 <div className="text-xl">필터</div>
                 <Separator className="border-black" />
+
+                {/* 난이도 */}
+                <fieldset>
+                  <legend className="text-md pb-[16px] font-bold">
+                    난이도
+                  </legend>
+                  <div className="flex flex-col gap-[8px]">
+                    {['입문', '초급', '중급 이상'].map((level) => {
+                      return (
+                        <label key={level} className="flex gap-[8px]">
+                          <input type="checkbox" name="level" value={level} />
+                          {level}
+                        </label>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+
+                {/* 주제 */}
+                <fieldset>
+                  <legend className="text-md pb-[16px] font-bold">주제</legend>
+                  <div className="flex flex-col gap-[8px]">
+                    {['전체', 'FE', 'BE', '취업 준비', 'CS', '알고리즘'].map(
+                      (level) => {
+                        return (
+                          <label key={level} className="flex gap-[8px]">
+                            <input type="radio" name="level" value={level} />
+                            {level}
+                          </label>
+                        );
+                      },
+                    )}
+                  </div>
+                </fieldset>
               </aside>
 
               <div className="w-full">
