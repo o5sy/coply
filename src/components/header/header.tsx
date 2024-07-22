@@ -22,7 +22,9 @@ export function Header() {
         </div>
 
         {/* login button */}
-        <Button>로그인</Button>
+        <Link href="/signin">
+          <Button>로그인</Button>
+        </Link>
       </nav>
     </header>
   );
