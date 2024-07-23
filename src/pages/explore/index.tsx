@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import { Pagination, VideoList } from '@/components/explore-page';
 import { Header } from '@/components/header';
-import { SearchInput } from '@/components/header/search-input';
-import { Separator } from '@/components/shared';
+import { SearchInput, Separator } from '@/components/shared';
+import { useSearchInput } from '@/components/shared/search-input/use-search-input';
 
 export default function ExplorePage() {
-  const keyword = '';
+  const { defaultKeyword, onKeyDown } = useSearchInput();
 
   return (
     <>
@@ -19,7 +19,12 @@ export default function ExplorePage() {
           <div className="layout">
             <div className="flex items-center justify-between py-[32px]">
               <h1 className="text-3xl font-bold">영상 탐색</h1>
-              <SearchInput />
+              <SearchInput
+                inputProps={{
+                  onKeyDown,
+                  defaultValue: defaultKeyword,
+                }}
+              />
             </div>
 
             <div className="flex w-full gap-[24px]">
@@ -64,7 +69,9 @@ export default function ExplorePage() {
 
               <div className="w-full">
                 <div className="pb-[24px] text-xl">
-                  {keyword ? `"${keyword}" 검색 결과` : '10건의 영상'}
+                  {defaultKeyword
+                    ? `"${defaultKeyword}" 검색 결과`
+                    : '10건의 영상'}
                 </div>
                 <section className="flex w-full flex-col items-center justify-center">
                   {/* 영상 리스트 */}

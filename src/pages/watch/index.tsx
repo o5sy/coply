@@ -1,3 +1,6 @@
+import Head from 'next/head';
+import Link from 'next/link';
+import YouTube from 'react-youtube';
 import {
   PopoverBackdrop,
   UserMenu,
@@ -5,9 +8,6 @@ import {
   WatchPageHeader,
 } from '@/components/watch-page';
 import { useOpenState } from '@/hooks';
-import Head from 'next/head';
-import Link from 'next/link';
-import YouTube from 'react-youtube';
 
 export default function WatchPage() {
   const { isOpen: isOpenDrawer, handleState: handleDrawer } = useOpenState();
