@@ -1,11 +1,14 @@
 /* eslint-disable react/no-array-index-key */
-import Image from 'next/image';
 import Head from 'next/head';
+import Image from 'next/image';
 import { Header } from '@/components/header';
-import { SearchInput } from '@/components/header/search-input';
 import { Category, SectionTitle, VideoCard } from '@/components/main-page';
+import { SearchInput } from '@/components/shared';
+import { useHandleEnterAtSearchInput } from '@/components/shared/search-input/use-handle-enter-at-search-input';
 
 export default function MainPage() {
+  const { onKeyDown } = useHandleEnterAtSearchInput();
+
   return (
     <>
       <Head>
@@ -29,7 +32,10 @@ export default function MainPage() {
           <div className="layout flex-center pt-[24px]">
             <SearchInput
               className="w-full"
-              inputProps={{ placeholder: '배우고 싶은 지식을 입력해보세요.' }}
+              inputProps={{
+                placeholder: '배우고 싶은 지식을 입력해보세요.',
+                onKeyDown,
+              }}
             />
           </div>
 

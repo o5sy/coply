@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import { Pagination, VideoList } from '@/components/explore-page';
 import { Header } from '@/components/header';
-import { SearchInput } from '@/components/header/search-input';
-import { Separator } from '@/components/shared';
+import { SearchInput, Separator } from '@/components/shared';
 
 export default function ExplorePage() {
   const keyword = '';
