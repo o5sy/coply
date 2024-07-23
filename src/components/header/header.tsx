@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { Button, SearchInput } from '../shared';
-import { useHandleEnterAtSearchInput } from '../shared/search-input/use-handle-enter-at-search-input';
+import { useSearchInput } from '../shared/search-input/use-search-input';
 import { Logo } from './logo';
 
 export function Header() {
-  const { onKeyDown } = useHandleEnterAtSearchInput();
+  const { defaultKeyword, onKeyDown } = useSearchInput();
 
   return (
     <header className="sticky left-0 top-0 z-10 w-full bg-white">
@@ -19,6 +19,7 @@ export function Header() {
           className="w-[300px]"
           inputProps={{
             onKeyDown,
+            defaultValue: defaultKeyword,
           }}
         />
 

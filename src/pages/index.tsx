@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { Header } from '@/components/header';
 import { Category, SectionTitle, VideoCard } from '@/components/main-page';
 import { SearchInput } from '@/components/shared';
-import { useHandleEnterAtSearchInput } from '@/components/shared/search-input/use-handle-enter-at-search-input';
+import { useSearchInput } from '@/components/shared/search-input/use-search-input';
 
 export default function MainPage() {
-  const { onKeyDown } = useHandleEnterAtSearchInput();
+  const { onKeyDown } = useSearchInput();
 
   return (
     <>

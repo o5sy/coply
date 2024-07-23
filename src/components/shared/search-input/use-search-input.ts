@@ -1,8 +1,12 @@
+import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { KeyboardEvent } from 'react';
 
-export const useHandleEnterAtSearchInput = () => {
+export const useSearchInput = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const defaultKeyword = searchParams.get('q');
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const keyword = e.currentTarget.value.trim();
@@ -11,5 +15,5 @@ export const useHandleEnterAtSearchInput = () => {
     }
   };
 
-  return { onKeyDown };
+  return { defaultKeyword: defaultKeyword || '', onKeyDown };
 };
