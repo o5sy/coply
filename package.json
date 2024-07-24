@@ -10,15 +10,19 @@
     "tsc:check": "tsc --noEmit"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.51.11",
+    "@tanstack/react-query-devtools": "^5.51.11",
     "axios": "^1.7.2",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
     "react-youtube": "^10.1.0",
-    "tailwind-merge": "^2.4.0"
+    "tailwind-merge": "^2.4.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
+    "@tanstack/eslint-plugin-query": "^5.51.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
