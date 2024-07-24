@@ -6,11 +6,11 @@ export const videoSchema = z.object({
   description: z.string(),
   url: z.string(),
   uploadedAt: z.string(),
-  videoChanenl: z.object({
+  videoChannel: z.object({
     id: z.number(),
     name: z.string(),
     description: z.string(),
-    thumbnaiImageUrl: z.string(),
+    thumbnailImageUrl: z.string(),
     subscriberCount: z.number(),
   }),
 });
