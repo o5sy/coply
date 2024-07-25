@@ -5,9 +5,20 @@ import { Header } from '@/components/header';
 import { Category, SectionTitle, VideoCard } from '@/components/main-page';
 import { SearchInput } from '@/components/shared';
 import { useSearchInput } from '@/components/shared/search-input/use-search-input';
+import { useEffect, useState } from 'react';
+import { getSession } from '@/utils/session';
 
 export default function MainPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const { onKeyDown } = useSearchInput();
+
+  useEffect(() => {
+    const session = getSession();
+    if (session) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   return (
     <>
@@ -16,7 +27,7 @@ export default function MainPage() {
       </Head>
 
       <div className="relative">
-        <Header />
+        <Header isLoggedIn={isLoggedIn} />
         <main className="mb-[100px] w-full">
           {/* hero */}
           <section className="layout flex-center pt-[32px]">
