@@ -26,7 +26,7 @@ export default function SigninPage() {
       return;
     }
     signInMutation.mutate({ token: accessToken });
-  }, []);
+  }, [signInMutation.mutate]);
 
   const handleGoogleSignIn = () => {
     if (
