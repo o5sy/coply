@@ -16,6 +16,7 @@ export const useIsLoggedIn = () => {
       });
       return res.status === 200;
     } catch (e) {
+      // todo 리프레시 토큰 발급 받아서 재요청
       return false;
     }
   };
