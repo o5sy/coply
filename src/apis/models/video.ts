@@ -5,6 +5,7 @@ export const videoSchema = z.object({
   name: z.string(),
   description: z.string(),
   url: z.string(),
+  thumbnailImageUrl: z.string(),
   uploadedAt: z.string(),
   videoChannel: z.object({
     id: z.number(),
