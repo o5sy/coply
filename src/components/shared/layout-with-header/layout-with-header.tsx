@@ -1,7 +1,7 @@
+import { Header } from '@/components/header';
 import Head from 'next/head';
-import { PropsWithChildren, useEffect, useState } from 'react';
-import { getSession } from '@/utils/session';
-import { Header } from '../header';
+import { PropsWithChildren } from 'react';
+import { useIsLoggedIn } from './hooks';
 
 interface LayoutWithHeaderProps {
   title?: string;
@@ -11,14 +11,7 @@ export function LayoutWithHeader({
   children,
   title,
 }: PropsWithChildren<LayoutWithHeaderProps>) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const session = getSession();
-    if (session) {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  const { isLoggedIn } = useIsLoggedIn();
 
   return (
     <>
