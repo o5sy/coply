@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import { Button, SearchInput } from '../shared';
-import { useSearchInput } from '../shared/search-input/use-search-input';
-import { Logo } from './logo';
 import ProfileIcon from 'public/profile.svg';
+import { Button, SearchInput, useSearchInput } from '../shared';
+import { Logo } from './logo';
 
 interface HeaderProps {
   isLoggedIn?: boolean;

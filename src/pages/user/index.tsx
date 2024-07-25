@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import { ReactElement } from 'react';
 import { SectionTitle } from '@/components/main-page';
-import { Button, LayoutWithHeader } from '@/components/shared';
+import { Button } from '@/components/shared';
 import { VideoHistoryCard } from '@/components/user-page';
+import { LayoutWithHeader } from '@/components/shared/layout-with-header';
 
 export default function UserPage() {
   return (

@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
 import { Pagination, VideoList } from '@/components/explore-page';
-import { LayoutWithHeader, SearchInput, Separator } from '@/components/shared';
+import { SearchInput, Separator } from '@/components/shared';
 import { useSearchInput } from '@/components/shared/search-input/use-search-input';
+import { LayoutWithHeader } from '@/components/shared/layout-with-header';
 
 export default function ExplorePage() {
   const { defaultKeyword, onKeyDown } = useSearchInput();

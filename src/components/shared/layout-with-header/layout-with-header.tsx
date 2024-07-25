@@ -1,6 +1,6 @@
-import { Header } from '@/components/header';
 import Head from 'next/head';
 import { PropsWithChildren } from 'react';
+import { Header } from '@/components/header';
 import { useIsLoggedIn } from './hooks';
 
 interface LayoutWithHeaderProps {

@@ -2,8 +2,9 @@
 import Image from 'next/image';
 import { ReactElement } from 'react';
 import { Category, SectionTitle, VideoCard } from '@/components/main-page';
-import { LayoutWithHeader, SearchInput } from '@/components/shared';
+import { SearchInput } from '@/components/shared';
 import { useSearchInput } from '@/components/shared/search-input/use-search-input';
+import { LayoutWithHeader } from '@/components/shared/layout-with-header';
 
 export default function MainPage() {
   const { onKeyDown } = useSearchInput();
