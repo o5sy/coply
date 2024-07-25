@@ -1,9 +1,13 @@
 import Link from 'next/link';
-import { Button, SearchInput } from '../shared';
-import { useSearchInput } from '../shared/search-input/use-search-input';
+import ProfileIcon from 'public/profile.svg';
+import { Button, SearchInput, useSearchInput } from '../shared';
 import { Logo } from './logo';
 
-export function Header() {
+interface HeaderProps {
+  isLoggedIn?: boolean;
+}
+
+export function Header({ isLoggedIn = false }: HeaderProps) {
   const { defaultKeyword, onKeyDown } = useSearchInput();
 
   return (
@@ -29,10 +33,15 @@ export function Header() {
           <Link href="/explore">Explore</Link>
         </nav>
 
-        {/* login button */}
-        <Link href="/signin">
-          <Button>로그인</Button>
-        </Link>
+        {isLoggedIn ? (
+          <Link href="/user">
+            <ProfileIcon width={36} height={36} />
+          </Link>
+        ) : (
+          <Link href="/signin">
+            <Button>로그인</Button>
+          </Link>
+        )}
       </div>
     </header>
   );
