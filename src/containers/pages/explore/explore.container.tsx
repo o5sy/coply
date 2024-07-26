@@ -1,8 +1,11 @@
+import { useReducer } from 'react';
 import { getVideos } from '@/apis/videos';
 import { Pagination, VideoList } from '@/components/explore-page';
 import { usePagination } from '@/components/explore-page/pagination/hooks';
 import { SearchInput, Separator, useSearchInput } from '@/components/shared';
 import { useGetVideos } from './hooks';
+import { updateSearchFilterReducer } from './reducers';
+import { categoryItems, levelItems } from './constants';
 
 const LIMIT_COUNT = 12;
 
@@ -11,14 +14,24 @@ export function ExploreContainer() {
 
   const { currentPage, onPrev, onNext, onChange } = usePagination();
 
+  const [filter, updateFilter] = useReducer(updateSearchFilterReducer, {
+    level: 'all',
+    category: 'all',
+  });
+
   const { videos, totalCount } = useGetVideos({
     queryOptions: {
-      queryKey: ['videos', { page: currentPage, keyword: keywordFromParam }],
+      queryKey: [
+        'videos',
+        { page: currentPage, keyword: keywordFromParam, filter },
+      ],
       queryFn: () => {
         return getVideos({
           take: LIMIT_COUNT.toString(),
           page: currentPage,
           keyword: keywordFromParam,
+          level: filter.level === 'all' ? undefined : filter.level,
+          category: filter.category === 'all' ? undefined : filter.category,
         });
       },
       staleTime: 60 * 1000,
@@ -50,11 +63,18 @@ export function ExploreContainer() {
             <fieldset>
               <legend className="text-md pb-[16px] font-bold">난이도</legend>
               <div className="flex flex-col gap-[8px]">
-                {['입문', '초급', '중급 이상'].map((level) => {
+                {Array.from(levelItems).map(([key, label]) => {
                   return (
-                    <label key={level} className="flex gap-[8px]">
-                      <input type="checkbox" name="level" value={level} />
-                      {level}
+                    <label key={key} className="flex gap-[8px]">
+                      <input
+                        type="radio"
+                        name="level"
+                        value={key}
+                        onChange={() =>
+                          updateFilter({ type: 'level', payload: key })
+                        }
+                      />
+                      {label}
                     </label>
                   );
                 })}
@@ -65,16 +85,21 @@ export function ExploreContainer() {
             <fieldset>
               <legend className="text-md pb-[16px] font-bold">주제</legend>
               <div className="flex flex-col gap-[8px]">
-                {['전체', 'FE', 'BE', '취업 준비', 'CS', '알고리즘'].map(
-                  (level) => {
-                    return (
-                      <label key={level} className="flex gap-[8px]">
-                        <input type="radio" name="level" value={level} />
-                        {level}
-                      </label>
-                    );
-                  },
-                )}
+                {Array.from(categoryItems).map(([key, label]) => {
+                  return (
+                    <label key={key} className="flex gap-[8px]">
+                      <input
+                        type="radio"
+                        name="category"
+                        value={key}
+                        onChange={() =>
+                          updateFilter({ type: 'category', payload: key })
+                        }
+                      />
+                      {label}
+                    </label>
+                  );
+                })}
               </div>
             </fieldset>
           </aside>
