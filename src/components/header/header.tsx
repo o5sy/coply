@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 export function Header({ isLoggedIn = false }: HeaderProps) {
-  const { defaultKeyword, onKeyDown } = useSearchInput();
+  const { keywordFromParam, onKeyDown } = useSearchInput();
 
   return (
     <header className="sticky left-0 top-0 z-10 w-full bg-white">
@@ -23,7 +23,7 @@ export function Header({ isLoggedIn = false }: HeaderProps) {
           className="w-[300px]"
           inputProps={{
             onKeyDown,
-            defaultValue: defaultKeyword,
+            defaultValue: keywordFromParam,
           }}
         />
 

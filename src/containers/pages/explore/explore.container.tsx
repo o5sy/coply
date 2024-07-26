@@ -7,17 +7,18 @@ import { useGetVideos } from './hooks';
 const LIMIT_COUNT = 12;
 
 export function ExploreContainer() {
-  const { defaultKeyword, onKeyDown } = useSearchInput();
+  const { keywordFromParam, onKeyDown } = useSearchInput();
 
   const { currentPage, onPrev, onNext, onChange } = usePagination();
 
   const { videos, totalCount } = useGetVideos({
     queryOptions: {
-      queryKey: ['videos', { page: currentPage }],
+      queryKey: ['videos', { page: currentPage, keyword: keywordFromParam }],
       queryFn: () => {
         return getVideos({
           take: LIMIT_COUNT.toString(),
           page: currentPage,
+          keyword: keywordFromParam,
         });
       },
       staleTime: 60 * 1000,
@@ -34,7 +35,7 @@ export function ExploreContainer() {
           <SearchInput
             inputProps={{
               onKeyDown,
-              defaultValue: defaultKeyword,
+              defaultValue: keywordFromParam,
             }}
           />
         </div>
@@ -80,8 +81,8 @@ export function ExploreContainer() {
 
           <div className="w-full">
             <div className="pb-[24px] text-xl">
-              {defaultKeyword
-                ? `"${defaultKeyword}" 검색 결과`
+              {keywordFromParam
+                ? `"${keywordFromParam}" 검색 결과`
                 : `${totalCount}건의 영상`}
             </div>
             <section className="flex w-full flex-col items-center justify-center">
