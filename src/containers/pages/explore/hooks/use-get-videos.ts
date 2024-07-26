@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { GetVideosResponse } from '@/apis/models/video';
-import { getVideos } from '@/apis/videos';
 import { VideoItem } from '@/components/explore-page';
 
-export const useGetVideos = () => {
-  const { data } = useQuery<GetVideosResponse>({
-    queryKey: ['videos'],
-    queryFn: () => getVideos(),
-  });
+interface UseGetVideosProps {
+  queryOptions: UseQueryOptions<GetVideosResponse>;
+}
+
+export const useGetVideos = ({ queryOptions }: UseGetVideosProps) => {
+  const { data } = useQuery(queryOptions);
 
   const videos = data?.items.map<VideoItem>((video) => {
     return {

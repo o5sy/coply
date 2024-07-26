@@ -1,11 +1,25 @@
 import { Pagination, VideoList } from '@/components/explore-page';
 import { SearchInput, Separator, useSearchInput } from '@/components/shared';
 import { useGetVideos } from './hooks';
+import { getVideos } from '@/apis/videos';
+
+const LIMIT = 12;
 
 export function ExploreContainer() {
   const { defaultKeyword, onKeyDown } = useSearchInput();
 
-  const { videos, totalCount } = useGetVideos();
+  const { videos, totalCount } = useGetVideos({
+    queryOptions: {
+      queryKey: ['videos'],
+      queryFn: () => {
+        return getVideos({
+          take: LIMIT.toString(),
+        });
+      },
+    },
+  });
+
+  const totalPage = Math.ceil(totalCount / LIMIT);
 
   return (
     <main className="mb-[100px] w-full">
@@ -70,7 +84,7 @@ export function ExploreContainer() {
               {/* todo 없을 때 Nodata ui 표시 */}
               {videos ? <VideoList items={videos} /> : <div>nodata</div>}
               {/* 페이지네이션 */}
-              <Pagination totalPage={10} />
+              <Pagination totalPage={totalPage} />
             </section>
           </div>
         </div>
