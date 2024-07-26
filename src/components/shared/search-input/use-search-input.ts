@@ -6,7 +6,7 @@ export const useSearchInput = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const defaultKeyword = searchParams.get('q');
+  const keyword = searchParams.get('q');
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const keyword = e.currentTarget.value.trim();
@@ -15,5 +15,5 @@ export const useSearchInput = () => {
     }
   };
 
-  return { defaultKeyword: defaultKeyword || '', onKeyDown };
+  return { keywordFromParam: keyword || '', onKeyDown };
 };

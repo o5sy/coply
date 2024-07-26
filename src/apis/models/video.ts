@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+const levels = ['BEGINNER', 'LOW', 'MIDDLE'] as const;
+const categories = ['FE', 'BE', 'PREPARE', 'INTRODUCTION'] as const;
+
 export const videoSchema = z.object({
   id: z.number(),
   name: z.string(),
@@ -26,8 +29,8 @@ export const getVideosParamsSchema = z
     take: z.string(),
     page: z.number(),
     keyword: z.string(),
-    category: z.enum(['FE', 'BE', 'PREPARE', 'INTRODUCTION']),
-    level: z.enum(['BEGINNER', 'LOW', 'MIDDLE']),
+    category: z.enum(categories),
+    level: z.enum(levels),
   })
   .partial();
 
@@ -35,3 +38,6 @@ export type GetVideosResponse = z.infer<typeof getVideosResponseSchema>;
 export type GetVideosParams = z.infer<typeof getVideosParamsSchema>;
 
 export type GetVideoResponse = z.infer<typeof videoSchema>;
+
+export type LevelUnion = (typeof levels)[number];
+export type CategoryUnion = (typeof categories)[number];

@@ -9,7 +9,7 @@ interface UseGoogleLoginProps {
 }
 
 export const useGoogleLogin = ({ onSuccess }: UseGoogleLoginProps) => {
-  const { mutate, isPending } = useMutation({
+  const { mutate: signInMutate, isPending } = useMutation({
     mutationFn: signIn,
     onSuccess,
   });
@@ -34,8 +34,8 @@ export const useGoogleLogin = ({ onSuccess }: UseGoogleLoginProps) => {
     if (!accessToken) {
       return;
     }
-    mutate({ token: accessToken });
-  }, [mutate]);
+    signInMutate({ token: accessToken });
+  }, [signInMutate]);
 
   return {
     onGoogleLogin,
