@@ -2,13 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
-export interface Video {
+interface VideoCardProps {
   name: string;
   channelName: string;
   thumbnailUrl: string;
-}
-
-interface VideoCardProps extends Video {
   href: string;
   className?: string;
 }
