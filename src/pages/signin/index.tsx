@@ -29,12 +29,6 @@ export default function SigninPage() {
   }, [signInMutation.mutate]);
 
   const handleGoogleSignIn = () => {
-    console.log(
-      '🚀 ~ handleGoogleSignIn ~ env:',
-      Boolean(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID),
-      Boolean(process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI),
-    );
-
     if (
       !process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
       !process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI
@@ -53,7 +47,6 @@ export default function SigninPage() {
       'scope',
       'https://www.googleapis.com/auth/userinfo.email',
     );
-    console.log('🚀 ~ handleGoogleSignIn ~ url', url.toString());
     window.location.href = url.toString();
   };
 
