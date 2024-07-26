@@ -19,6 +19,7 @@ export function ExploreContainer() {
     category: 'all',
   });
 
+  // todo useQuery 를 꺼내고, data 를 전달해서 필요한 객체로 리턴하는 함수를 만드는게 나을듯
   const { videos, totalCount } = useGetVideos({
     queryOptions: {
       queryKey: [
