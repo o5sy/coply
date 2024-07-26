@@ -29,8 +29,8 @@ export const getVideosParamsSchema = z
     take: z.string(),
     page: z.number(),
     keyword: z.string(),
-    category: z.enum(levels),
-    level: z.enum(categories),
+    category: z.enum(categories),
+    level: z.enum(levels),
   })
   .partial();
 
