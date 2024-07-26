@@ -1,8 +1,27 @@
-import { Pagination, VideoList } from '@/components/explore-page';
+import { GetVideosResponse } from '@/apis/models/video';
+import { getVideos } from '@/apis/videos';
+import { Pagination, VideoItem, VideoList } from '@/components/explore-page';
 import { SearchInput, Separator, useSearchInput } from '@/components/shared';
+import { useQuery } from '@tanstack/react-query';
 
 export function ExploreContainer() {
   const { defaultKeyword, onKeyDown } = useSearchInput();
+
+  const { data } = useQuery<GetVideosResponse>({
+    queryKey: ['videos'],
+    queryFn: () => getVideos(),
+  });
+
+  const videos = data?.items.map<VideoItem>((video) => {
+    return {
+      id: video.id.toString(),
+      name: video.name,
+      channelName: video.videoChannel.name,
+      thumbnailUrl: video.thumbnailImageUrl,
+    };
+  });
+
+  const totalCount = data?.total ?? 0;
 
   return (
     <main className="mb-[100px] w-full">
@@ -18,6 +37,7 @@ export function ExploreContainer() {
         </div>
 
         <div className="flex w-full gap-[24px]">
+          {/* 필터 */}
           <aside className="flex w-[300px] flex-col gap-[24px]">
             <div className="text-xl">필터</div>
             <Separator className="border-black" />
@@ -57,13 +77,16 @@ export function ExploreContainer() {
 
           <div className="w-full">
             <div className="pb-[24px] text-xl">
-              {defaultKeyword ? `"${defaultKeyword}" 검색 결과` : '10건의 영상'}
+              {defaultKeyword
+                ? `"${defaultKeyword}" 검색 결과`
+                : `${totalCount}건의 영상`}
             </div>
             <section className="flex w-full flex-col items-center justify-center">
               {/* 영상 리스트 */}
-              <VideoList />
+              {/* todo 없을 때 Nodata ui 표시 */}
+              {videos ? <VideoList items={videos} /> : <div>nodata</div>}
               {/* 페이지네이션 */}
-              <Pagination totalPage={101} />
+              <Pagination totalPage={10} />
             </section>
           </div>
         </div>
