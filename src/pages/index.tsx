@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { ReactElement } from 'react';
 import { Category, SectionTitle, VideoCard } from '@/components/main-page';
 import { SearchInput } from '@/components/shared';
-import { useSearchInput } from '@/components/shared/search-input/use-search-input';
 import { LayoutWithHeader } from '@/components/shared/layout-with-header';
+import { useSearchInput } from '@/components/shared/search-input/use-search-input';
 
 export default function MainPage() {
   const { onKeyDown } = useSearchInput();
@@ -48,7 +48,7 @@ export default function MainPage() {
           {Array.from({ length: 4 }).map((_, index) => (
             <VideoCard
               key={index}
-              title="React 웹 개발"
+              name="React 웹 개발"
               channelName="코플리 월드"
               thumbnailUrl="/sample-thumbnail.png"
               href="/watch"
@@ -63,7 +63,7 @@ export default function MainPage() {
           {Array.from({ length: 4 }).map((_, index) => (
             <VideoCard
               key={index}
-              title="LLM 이란?"
+              name="LLM 이란?"
               channelName="코플리 월드"
               thumbnailUrl="/sample-thumbnail.png"
               href="/watch"
@@ -78,7 +78,7 @@ export default function MainPage() {
           {Array.from({ length: 4 }).map((_, index) => (
             <VideoCard
               key={index}
-              title="4차 산업혁명 시대, 코딩을 배워야 하는 이유"
+              name="4차 산업혁명 시대, 코딩을 배워야 하는 이유"
               channelName="코플리 월드"
               thumbnailUrl="/sample-thumbnail.png"
               href="/watch"
@@ -93,7 +93,7 @@ export default function MainPage() {
           {Array.from({ length: 4 }).map((_, index) => (
             <VideoCard
               key={index}
-              title="이력서, 어떻게 쓸까?"
+              name="이력서, 어떻게 쓸까?"
               channelName="코플리 월드"
               thumbnailUrl="/sample-thumbnail.png"
               href="/watch"

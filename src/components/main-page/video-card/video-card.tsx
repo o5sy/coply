@@ -2,18 +2,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
-interface VideoCardProps {
-  thumbnailUrl: string;
-  title: string;
+export interface Video {
+  name: string;
   channelName: string;
+  thumbnailUrl: string;
+}
+
+interface VideoCardProps extends Video {
   href: string;
   className?: string;
 }
 
 export function VideoCard({
-  thumbnailUrl,
-  title,
+  name,
   channelName,
+  thumbnailUrl,
   href,
   className,
 }: VideoCardProps) {
@@ -34,7 +37,7 @@ export function VideoCard({
           />
         </div>
         <div className="py-[12px]">
-          <div className="text-[#0D1A17]">{title}</div>
+          <div className="text-[#0D1A17]">{name}</div>
           <div className="text-primary">{channelName}</div>
         </div>
       </Link>

@@ -10,7 +10,7 @@ export function VideoList() {
           className="w-[unset]"
           thumbnailUrl="/sample-thumbnail.png"
           href="/watch"
-          title="React 로 웹 사이트 만들기"
+          name="React 로 웹 사이트 만들기"
           channelName="코플리"
         />
       ))}
