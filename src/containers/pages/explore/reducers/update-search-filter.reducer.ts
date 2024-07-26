@@ -1,9 +1,6 @@
-import { Reducer } from 'react';
 import { produce } from 'immer';
-import { CategoryUnion, LevelUnion } from '@/apis/models/video';
-
-type Level = 'all' | LevelUnion;
-type Category = 'all' | CategoryUnion;
+import { Reducer } from 'react';
+import { Category, Level } from '../models';
 
 type UpdateSearchFilterAction =
   | { type: 'level'; payload: Level }
