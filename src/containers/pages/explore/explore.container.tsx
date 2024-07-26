@@ -1,27 +1,11 @@
-import { GetVideosResponse } from '@/apis/models/video';
-import { getVideos } from '@/apis/videos';
-import { Pagination, VideoItem, VideoList } from '@/components/explore-page';
+import { Pagination, VideoList } from '@/components/explore-page';
 import { SearchInput, Separator, useSearchInput } from '@/components/shared';
-import { useQuery } from '@tanstack/react-query';
+import { useGetVideos } from './hooks';
 
 export function ExploreContainer() {
   const { defaultKeyword, onKeyDown } = useSearchInput();
 
-  const { data } = useQuery<GetVideosResponse>({
-    queryKey: ['videos'],
-    queryFn: () => getVideos(),
-  });
-
-  const videos = data?.items.map<VideoItem>((video) => {
-    return {
-      id: video.id.toString(),
-      name: video.name,
-      channelName: video.videoChannel.name,
-      thumbnailUrl: video.thumbnailImageUrl,
-    };
-  });
-
-  const totalCount = data?.total ?? 0;
+  const { videos, totalCount } = useGetVideos();
 
   return (
     <main className="mb-[100px] w-full">
