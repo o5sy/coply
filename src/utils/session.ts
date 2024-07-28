@@ -4,7 +4,8 @@ export const getSession = () => {
   if (typeof window === 'undefined') {
     return null;
   }
-  return localStorage.getItem('accessToken');
+  const token = localStorage.getItem(ACCESS_TOKEN);
+  return typeof token === 'string' ? token : JSON.parse(token || 'null');
 };
 
 export const setSession = (token: string) => {
