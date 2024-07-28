@@ -8,14 +8,12 @@ import {
 } from '@/components/watch-page';
 import { useOpenState } from '@/hooks';
 
-interface WatchContainerProps {
-  title: string;
-}
-
-export function WatchContainer({ title }: WatchContainerProps) {
+export function WatchContainer() {
   const { isOpen: isOpenDrawer, handleState: handleDrawer } = useOpenState();
   const { isOpen: isOpenUserMenu, handleState: handleUserMenu } =
     useOpenState();
+
+  const title = '';
 
   return (
     <div
