@@ -48,7 +48,7 @@ export function VideoInfoSection({
       </div>
 
       {/* description */}
-      <div className="mt-[24px] overflow-auto leading-6 text-gray-300">
+      <div className="mt-[24px] overflow-auto whitespace-pre-wrap leading-6 text-gray-300">
         {description}
       </div>
     </div>
