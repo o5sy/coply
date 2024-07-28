@@ -4,10 +4,9 @@ const levels = ['BEGINNER', 'LOW', 'MIDDLE'] as const;
 const categories = ['FE', 'BE', 'PREPARE', 'INTRODUCTION'] as const;
 
 export const videoSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   name: z.string(),
   description: z.string(),
-  url: z.string(),
   thumbnailImageUrl: z.string(),
   uploadedAt: z.string(),
   videoChannel: z.object({
@@ -26,7 +25,7 @@ export const getVideosResponseSchema = z.object({
 
 export const getVideosParamsSchema = z
   .object({
-    take: z.string(),
+    take: z.number(),
     page: z.number(),
     keyword: z.string(),
     category: z.enum(categories),

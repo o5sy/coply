@@ -28,9 +28,9 @@ export function ExploreContainer() {
       ],
       queryFn: () => {
         return getVideos({
-          take: LIMIT_COUNT.toString(),
+          take: LIMIT_COUNT,
           page: currentPage,
-          keyword: keywordFromParam,
+          keyword: keywordFromParam || undefined,
           level: filter.level === 'all' ? undefined : filter.level,
           category: filter.category === 'all' ? undefined : filter.category,
         });
