@@ -1,6 +1,10 @@
 import { ReactElement, ReactNode, useState } from 'react';
 import { NextPage } from 'next';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  HydrationBoundary,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import '@/styles/globals.css';
@@ -18,13 +22,24 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 60 * 1000,
+          },
+        },
+      }),
+  );
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return getLayout(
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <HydrationBoundary state={pageProps.dehydratedState}>
+        <Component {...pageProps} />
+      </HydrationBoundary>
       <ReactQueryDevtools />
     </QueryClientProvider>,
   );

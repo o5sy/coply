@@ -2,14 +2,14 @@ name: CI
 
 on:
   pull_request:
-    branches: [ "develop" ]
+    branches: ['develop']
 
-jobs:  
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Use Node.js 20
         uses: actions/setup-node@v3
         with:
@@ -18,12 +18,14 @@ jobs:
 
       - name: Install Dependencies
         run: npm i
-          
+
       - name: lint
         run: npm run lint
 
       - name: tsc:check
         run: npm run tsc:check
-        
-      - name: build 
+
+      - name: build
         run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
