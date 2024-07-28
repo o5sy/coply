@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import YouTube from 'react-youtube';
+import { useGetVideoByIdQuery } from './hooks';
 import {
   PopoverBackdrop,
   UserMenu,
@@ -9,11 +10,11 @@ import {
 import { useOpenState } from '@/hooks';
 
 export function WatchContainer() {
+  const { data: video } = useGetVideoByIdQuery();
+
   const { isOpen: isOpenDrawer, handleState: handleDrawer } = useOpenState();
   const { isOpen: isOpenUserMenu, handleState: handleUserMenu } =
     useOpenState();
-
-  const title = '';
 
   return (
     <div
@@ -22,22 +23,24 @@ export function WatchContainer() {
       <div className="flex h-full w-full flex-col">
         {/* header */}
         <WatchPageHeader
-          title={title}
+          title={video?.name ?? ''}
           onDrawerMenu={handleDrawer.open}
           onUserMenu={handleUserMenu.open}
         />
 
         {/* player */}
         <main className="flex-center flex-1 bg-gray-700">
-          <YouTube
-            videoId="M7lc1UVf-VE"
-            opt={{
-              height: '360',
-              width: '640',
-            }}
-            className="h-full w-full"
-            iframeClassName="h-[inherit] w-[inherit]"
-          />
+          {video && (
+            <YouTube
+              videoId={video.id}
+              opt={{
+                height: '360',
+                width: '640',
+              }}
+              className="h-full w-full"
+              iframeClassName="h-[inherit] w-[inherit]"
+            />
+          )}
         </main>
 
         {/* bottom */}
@@ -51,13 +54,15 @@ export function WatchContainer() {
       {/* drawer menu */}
       {isOpenDrawer && (
         <PopoverBackdrop className="bg-black/70" onClick={handleDrawer.close}>
-          <VideoInfoSection
-            title={title}
-            onClose={handleDrawer.close}
-            channelName="Coply"
-            description="설명"
-            uploadedAt="2022. 5. 1."
-          />
+          {video && (
+            <VideoInfoSection
+              title={video.name}
+              onClose={handleDrawer.close}
+              channelName={video.videoChannel.name}
+              description={video.description}
+              uploadedAt={video.uploadedAt}
+            />
+          )}
         </PopoverBackdrop>
       )}
 
