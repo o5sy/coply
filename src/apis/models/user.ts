@@ -6,6 +6,14 @@ export const getViewingHistoryResponseSchema = z.object({
   video: videoSchema,
 });
 
+export const UpsertViewingHistoryRequestParamsSchema = z.object({
+  duration: z.number(),
+});
+
 export type GetViewingHistoryResponse = z.infer<
   typeof getViewingHistoryResponseSchema
+>;
+
+export type UpsertViewingHistoryRequestParams = z.infer<
+  typeof UpsertViewingHistoryRequestParamsSchema
 >;
