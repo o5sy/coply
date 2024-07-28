@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import YouTube from 'react-youtube';
-import { useGetVideoByIdQuery } from './hooks';
 import {
   PopoverBackdrop,
   UserMenu,
@@ -8,6 +5,10 @@ import {
   WatchPageHeader,
 } from '@/components/watch-page';
 import { useOpenState } from '@/hooks';
+import { getFormattedDate } from '@/utils/date.util';
+import Link from 'next/link';
+import YouTube from 'react-youtube';
+import { useGetVideoByIdQuery } from './hooks';
 
 export function WatchContainer() {
   const { data: video } = useGetVideoByIdQuery();
@@ -60,7 +61,7 @@ export function WatchContainer() {
               onClose={handleDrawer.close}
               channelName={video.videoChannel.name}
               description={video.description}
-              uploadedAt={video.uploadedAt}
+              uploadedAt={getFormattedDate(video.uploadedAt)}
             />
           )}
         </PopoverBackdrop>
