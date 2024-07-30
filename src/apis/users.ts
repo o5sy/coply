@@ -24,12 +24,12 @@ export const getViewingHistoriesByVideoId = async (
   return viewingHistories;
 };
 
-export const updateViewingHistoryByVideoId = async (
+export const updateViewingHistoryByVideoId = (
   videoId: string,
   accessToken: string,
-  params?: UpsertViewingHistoryRequestParams,
+  params: UpsertViewingHistoryRequestParams,
 ) => {
-  await axiosInstance.post(
+  return axiosInstance.post(
     `/users/viewing-histories/${videoId}`,
     { ...params },
     { headers: { Authorization: `Bearer ${accessToken}` } },
