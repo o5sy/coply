@@ -16,3 +16,7 @@ export const signIn = async (
 export const signOut = () => {
   return axiosInstance.post('/auth/logout');
 };
+
+export const resign = () => {
+  return axiosInstance.delete('/auth/resign');
+};
