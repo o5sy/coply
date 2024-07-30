@@ -9,6 +9,9 @@ import { YoutubePlayerContainer } from '@/containers/youtube-player';
 import { useIsLoggedIn, useOpenState } from '@/hooks';
 import { getFormattedDate } from '@/utils/date.util';
 import { useGetVideoByIdQuery } from './hooks';
+import { useMutation } from '@tanstack/react-query';
+import { signOut } from '@/apis/auth';
+import { removeSession } from '@/utils/session';
 
 export function WatchContainer() {
   const { isOpen: isOpenDrawer, handleState: handleDrawer } = useOpenState();
@@ -18,6 +21,11 @@ export function WatchContainer() {
   const { data: video } = useGetVideoByIdQuery();
 
   const { isLoggedIn } = useIsLoggedIn();
+
+  const { mutate: signOutMutate } = useMutation({
+    mutationFn: signOut,
+    onSuccess: removeSession,
+  });
 
   return (
     <div
@@ -68,7 +76,10 @@ export function WatchContainer() {
       {/* user menu */}
       {isOpenUserMenu && (
         <PopoverBackdrop onClick={handleUserMenu.close}>
-          <UserMenu className="absolute right-[24px] top-[60px]" />
+          <UserMenu
+            className="absolute right-[24px] top-[60px]"
+            onSignOut={signOutMutate}
+          />
         </PopoverBackdrop>
       )}
     </div>

@@ -11,3 +11,7 @@ export const getSession = () => {
 export const setSession = (token: string) => {
   localStorage.setItem(ACCESS_TOKEN, token);
 };
+
+export const removeSession = () => {
+  localStorage.removeItem(ACCESS_TOKEN);
+};
