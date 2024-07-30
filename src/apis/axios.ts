@@ -9,12 +9,12 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (err) => {
     if (isAxiosError(err)) {
-      if (err.response?.status === 400) {
-        alert('잘못된 요청입니다.');
-      } else if (err.response?.status === 401) {
-        alert('접근 권한이 없습니다.');
-        window.location.href = '/signin';
-      }
+      // if (err.response?.status === 400) {
+      //   alert('잘못된 요청입니다.');
+      // } else if (err.response?.status === 401) {
+      //   alert('접근 권한이 없습니다.');
+      //   window.location.href = '/signin';
+      // }
     }
   },
 );
