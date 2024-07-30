@@ -21,10 +21,12 @@ export const useIsLoggedIn = () => {
   });
 
   useEffect(() => {
-    if (isSuccess) {
+    if (!accessToken) {
+      setIsLoggedIn(false);
+    } else if (isSuccess) {
       setIsLoggedIn(true);
     }
-  }, [isSuccess]);
+  }, [isSuccess, accessToken]);
 
   return { isLoggedIn };
 };
