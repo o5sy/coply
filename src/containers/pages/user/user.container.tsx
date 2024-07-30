@@ -5,10 +5,14 @@ import { VideoHistoryCard } from '@/components/user-page';
 import { getUser } from '@/apis/users';
 import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { useLocalStorage } from '@/hooks';
-import { getSession } from '@/utils/session';
-import { useQuery, skipToken } from '@tanstack/react-query';
+import { getSession, removeSession } from '@/utils/session';
+import { useQuery, skipToken, useMutation } from '@tanstack/react-query';
+import { signOut } from '@/apis/auth';
+import { useRouter } from 'next/router';
 
 export function UserContainer() {
+  const router = useRouter();
+
   const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
 
   const { data } = useQuery({
@@ -19,6 +23,14 @@ export function UserContainer() {
         }
       : skipToken,
     enabled: !!accessToken,
+  });
+
+  const { mutate: signOutMutate } = useMutation({
+    mutationFn: signOut,
+    onSuccess: () => {
+      removeSession();
+      router.push('/');
+    },
   });
 
   return (
@@ -42,7 +54,7 @@ export function UserContainer() {
 
           {/* buttons */}
           <div className="flex flex-col justify-center gap-[8px]">
-            <Button>로그아웃</Button>
+            <Button onClick={() => signOutMutate()}>로그아웃</Button>
             <Button>회원탈퇴</Button>
           </div>
         </section>
