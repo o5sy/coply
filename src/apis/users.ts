@@ -2,17 +2,33 @@ import { axiosInstance } from './axios';
 import {
   GetUserResponse,
   getUserResponseSchema,
+  GetViewingHistoriesResponse,
+  GetViewingHistoryRequestParams,
   GetViewingHistoryResponse,
   getViewingHistoryResponseSchema,
   UpsertViewingHistoryRequestParams,
 } from './models/user';
 
-export const getUser = async (token: string): Promise<GetUserResponse> => {
+export const getUser = async (
+  accessToken: string,
+): Promise<GetUserResponse> => {
   const { data } = await axiosInstance.get('/users/me', {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
   const user = getUserResponseSchema.parse(data);
   return user;
+};
+
+export const getViewingHistories = async (
+  accessToken: string,
+  params: GetViewingHistoryRequestParams,
+): Promise<GetViewingHistoriesResponse> => {
+  const { data } = await axiosInstance.get('/users/viewing-histories', {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    params,
+  });
+  const viewingHistories = getViewingHistoryResponseSchema.parse(data);
+  return viewingHistories;
 };
 
 export const getViewingHistoriesByVideoId = async (
