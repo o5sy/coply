@@ -1,21 +1,23 @@
+import Link from 'next/link';
 import {
   PopoverBackdrop,
   UserMenu,
   VideoInfoSection,
   WatchPageHeader,
 } from '@/components/watch-page';
-import { useOpenState } from '@/hooks';
+import { YoutubePlayerContainer } from '@/containers/youtube-player';
+import { useIsLoggedIn, useOpenState } from '@/hooks';
 import { getFormattedDate } from '@/utils/date.util';
-import Link from 'next/link';
-import YouTube from 'react-youtube';
 import { useGetVideoByIdQuery } from './hooks';
 
 export function WatchContainer() {
-  const { data: video } = useGetVideoByIdQuery();
-
   const { isOpen: isOpenDrawer, handleState: handleDrawer } = useOpenState();
   const { isOpen: isOpenUserMenu, handleState: handleUserMenu } =
     useOpenState();
+
+  const { data: video } = useGetVideoByIdQuery();
+
+  const { isLoggedIn } = useIsLoggedIn();
 
   return (
     <div
@@ -32,14 +34,9 @@ export function WatchContainer() {
         {/* player */}
         <main className="flex-center flex-1 bg-gray-700">
           {video && (
-            <YouTube
+            <YoutubePlayerContainer
               videoId={video.id}
-              opt={{
-                height: '360',
-                width: '640',
-              }}
-              className="h-full w-full"
-              iframeClassName="h-[inherit] w-[inherit]"
+              enabledTracingWatchTime={isLoggedIn}
             />
           )}
         </main>

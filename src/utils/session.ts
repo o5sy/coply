@@ -1,7 +1,11 @@
-const ACCESS_TOKEN = 'accessToken';
+import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 
 export const getSession = () => {
-  return localStorage.getItem(ACCESS_TOKEN);
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  const token = localStorage.getItem(ACCESS_TOKEN);
+  return typeof token === 'string' ? token : JSON.parse(token || 'null');
 };
 
 export const setSession = (token: string) => {

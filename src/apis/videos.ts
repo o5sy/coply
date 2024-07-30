@@ -1,7 +1,7 @@
 import { axiosInstance } from './axios';
 import {
   GetVideoResponse,
-  GetVideosParams,
+  GetVideosRequestParams,
   GetVideosResponse,
   getVideosResponseSchema,
   videoSchema,
@@ -14,7 +14,7 @@ export const getVideoById = async (id: string): Promise<GetVideoResponse> => {
 };
 
 export const getVideos = async (
-  params?: GetVideosParams,
+  params?: GetVideosRequestParams,
 ): Promise<GetVideosResponse> => {
   const { data } = await axiosInstance.get('/videos', { params });
   const videos = getVideosResponseSchema.parse(data);

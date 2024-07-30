@@ -23,7 +23,7 @@ export const getVideosResponseSchema = z.object({
   total: z.number(),
 });
 
-export const getVideosParamsSchema = z
+export const getVideosRequestParamsSchema = z
   .object({
     take: z.number(),
     page: z.number(),
@@ -34,7 +34,9 @@ export const getVideosParamsSchema = z
   .partial();
 
 export type GetVideosResponse = z.infer<typeof getVideosResponseSchema>;
-export type GetVideosParams = z.infer<typeof getVideosParamsSchema>;
+export type GetVideosRequestParams = z.infer<
+  typeof getVideosRequestParamsSchema
+>;
 
 export type GetVideoResponse = z.infer<typeof videoSchema>;
 
