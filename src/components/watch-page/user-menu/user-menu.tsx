@@ -17,7 +17,7 @@ export function UserMenu({ className }: UserMenuProps) {
       <Link className={styles.menuItem} href="/">
         홈
       </Link>
-      <Link className={styles.menuItem} href="/mypage">
+      <Link className={styles.menuItem} href="/user">
         마이페이지
       </Link>
       <button className={`${styles.menuItem} text-left`} type="button">
