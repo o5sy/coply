@@ -1,14 +1,18 @@
+import Link from 'next/link';
 import MenuIcon from 'public/hamburger-menu.svg';
 import ProfileIcon from 'public/profile.svg';
+import { Button } from '../shared';
 
 interface WatchPageHeaderProps {
   title: string;
+  isLoggedIn?: boolean;
   onDrawerMenu: () => void;
   onUserMenu: () => void;
 }
 
 export function WatchPageHeader({
   title,
+  isLoggedIn = false,
   onDrawerMenu,
   onUserMenu,
 }: WatchPageHeaderProps) {
@@ -25,14 +29,20 @@ export function WatchPageHeader({
       <h1 className="pl-[8px] text-lg font-semibold text-white">{title}</h1>
 
       {/* user menu button */}
-      <button
-        className="ml-auto box-content px-[24px]"
-        type="button"
-        onClick={onUserMenu}
-        aria-label="user menu"
-      >
-        <ProfileIcon width={36} height={36} />
-      </button>
+      {isLoggedIn ? (
+        <button
+          className="ml-auto box-content px-[24px]"
+          type="button"
+          onClick={onUserMenu}
+          aria-label="user menu"
+        >
+          <ProfileIcon width={36} height={36} />
+        </button>
+      ) : (
+        <Link className="ml-auto px-[24px]" href="/signin">
+          <Button>로그인</Button>
+        </Link>
+      )}
     </header>
   );
 }

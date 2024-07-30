@@ -29,6 +29,7 @@ export function WatchContainer() {
           title={video?.name ?? ''}
           onDrawerMenu={handleDrawer.open}
           onUserMenu={handleUserMenu.open}
+          isLoggedIn={isLoggedIn}
         />
 
         {/* player */}
