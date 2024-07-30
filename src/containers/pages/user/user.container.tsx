@@ -2,8 +2,25 @@ import Image from 'next/image';
 import { SectionTitle } from '@/components/main-page';
 import { Button } from '@/components/shared';
 import { VideoHistoryCard } from '@/components/user-page';
+import { getUser } from '@/apis/users';
+import { ACCESS_TOKEN } from '@/constants/local-storage-key';
+import { useLocalStorage } from '@/hooks';
+import { getSession } from '@/utils/session';
+import { useQuery, skipToken } from '@tanstack/react-query';
 
 export function UserContainer() {
+  const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
+
+  const { data } = useQuery({
+    queryKey: ['user'],
+    queryFn: accessToken
+      ? () => {
+          return getUser(accessToken);
+        }
+      : skipToken,
+    enabled: !!accessToken,
+  });
+
   return (
     <main className="mb-[100px] w-full">
       <div className="layout">
@@ -19,7 +36,7 @@ export function UserContainer() {
             />
             <div>
               <div className="text-md text-gray-600">내 계정</div>
-              <div className="text-xl">team.coply@gmail.com</div>
+              <div className="text-xl">{data?.email}</div>
             </div>
           </div>
 
