@@ -1,71 +1,13 @@
-import Image from 'next/image';
 import { SectionTitle } from '@/components/main-page';
-import { Button } from '@/components/shared';
 import { VideoHistoryCard } from '@/components/user-page';
-import { getUser } from '@/apis/users';
-import { ACCESS_TOKEN } from '@/constants/local-storage-key';
-import { useLocalStorage } from '@/hooks';
-import { getSession, removeSession } from '@/utils/session';
-import { useQuery, skipToken, useMutation } from '@tanstack/react-query';
-import { resign, signOut } from '@/apis/auth';
-import { useRouter } from 'next/router';
+import { UserSectionContainer } from './containers/user-section.container';
 
 export function UserContainer() {
-  const router = useRouter();
-
-  const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
-
-  const { data } = useQuery({
-    queryKey: ['user'],
-    queryFn: accessToken
-      ? () => {
-          return getUser(accessToken);
-        }
-      : skipToken,
-    enabled: !!accessToken,
-  });
-
-  const { mutate: signOutMutate } = useMutation({
-    mutationFn: signOut,
-    onSuccess: () => {
-      removeSession();
-      router.push('/');
-    },
-  });
-
-  const { mutate: resignMutate } = useMutation({
-    mutationFn: resign,
-    onSuccess: () => {
-      removeSession();
-      router.push('/');
-    },
-  });
-
   return (
     <main className="mb-[100px] w-full">
       <div className="layout">
-        <section className="flex justify-between pt-[32px]">
-          {/* user info */}
-          <div className="flex items-center gap-[30px] text-gray-800">
-            <Image
-              className="rounded-full bg-primary/50 p-[16px]"
-              src="/flag.svg"
-              alt="user"
-              width={90}
-              height={90}
-            />
-            <div>
-              <div className="text-md text-gray-600">내 계정</div>
-              <div className="text-xl">{data?.email}</div>
-            </div>
-          </div>
-
-          {/* buttons */}
-          <div className="flex flex-col justify-center gap-[8px]">
-            <Button onClick={() => signOutMutate()}>로그아웃</Button>
-            <Button onClick={() => resignMutate()}>회원탈퇴</Button>
-          </div>
-        </section>
+        {/* 유저 정보 */}
+        <UserSectionContainer />
 
         {/* 시청 기록 */}
         <section className="pt-[48px]">
