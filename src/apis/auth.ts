@@ -12,3 +12,7 @@ export const signIn = async (
   const response = signInResponseSchema.parse(data);
   return response;
 };
+
+export const signOut = () => {
+  return axiosInstance.post('/auth/logout');
+};

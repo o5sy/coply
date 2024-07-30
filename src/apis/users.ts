@@ -1,15 +1,18 @@
 import { axiosInstance } from './axios';
 import {
+  GetUserResponse,
+  getUserResponseSchema,
   GetViewingHistoryResponse,
   getViewingHistoryResponseSchema,
   UpsertViewingHistoryRequestParams,
 } from './models/user';
 
-export const getUser = async (token: string) => {
+export const getUser = async (token: string): Promise<GetUserResponse> => {
   const { data } = await axiosInstance.get('/users/me', {
     headers: { Authorization: `Bearer ${token}` },
   });
-  return data;
+  const user = getUserResponseSchema.parse(data);
+  return user;
 };
 
 export const getViewingHistoriesByVideoId = async (

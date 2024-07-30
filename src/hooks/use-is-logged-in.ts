@@ -1,33 +1,32 @@
-import { useEffect, useState } from 'react';
-import { axiosInstance } from '@/apis/axios';
+import { getUser } from '@/apis/users';
+import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { getSession } from '@/utils/session';
+import { skipToken, useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { useLocalStorage } from './use-local-storage';
 
 export const useIsLoggedIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const validateUser = async () => {
-    const session = getSession();
-    if (!session) {
-      return false;
-    }
-    try {
-      const res = await axiosInstance.get('users/me', {
-        headers: { Authorization: `Bearer ${session}` },
-      });
-      return res.status === 200;
-    } catch (e) {
-      // todo 리프레시 토큰 발급 받아서 재요청
-      return false;
-    }
-  };
+  const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
+
+  const { isSuccess } = useQuery({
+    queryKey: ['user'],
+    queryFn: accessToken
+      ? () => {
+          return getUser(accessToken);
+        }
+      : skipToken,
+    enabled: !!accessToken,
+  });
 
   useEffect(() => {
-    const checkAuthentication = async () => {
-      const isAuthenticating = await validateUser();
-      setIsLoggedIn(isAuthenticating);
-    };
-    checkAuthentication();
-  }, []);
+    if (!accessToken) {
+      setIsLoggedIn(false);
+    } else if (isSuccess) {
+      setIsLoggedIn(true);
+    }
+  }, [isSuccess, accessToken]);
 
   return { isLoggedIn };
 };
