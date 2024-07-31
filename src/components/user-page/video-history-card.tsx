@@ -45,7 +45,9 @@ export function VideoHistoryCard({
         </div>
         <div className="py-[12px]">
           <div className="flex justify-between gap-[8px]">
-            <div className="flex-1 text-[#0D1A17]">{title}</div>
+            <div className="line-clamp-2 flex-1 py-[4px] text-[#0D1A17]">
+              {title}
+            </div>
             <button
               type="button"
               className="invisible items-start text-gray-500 group-hover:visible"
