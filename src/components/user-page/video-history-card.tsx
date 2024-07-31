@@ -45,7 +45,7 @@ export function VideoHistoryCard({
         </div>
         <div className="py-[12px]">
           <div className="flex justify-between gap-[8px]">
-            <div className="line-clamp-2 flex-1 py-[4px] text-[#0D1A17]">
+            <div className="my-[4px] line-clamp-2 flex-1 text-base text-[#0D1A17]">
               {title}
             </div>
             <button
