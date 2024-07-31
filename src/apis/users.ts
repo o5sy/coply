@@ -3,7 +3,8 @@ import {
   GetUserResponse,
   getUserResponseSchema,
   GetViewingHistoriesResponse,
-  GetViewingHistoryRequestParams,
+  getViewingHistoriesResponseSchema,
+  GetViewingHistoryRequestParams as GetViewingHistoriesRequestParams,
   GetViewingHistoryResponse,
   getViewingHistoryResponseSchema,
   UpsertViewingHistoryRequestParams,
@@ -21,13 +22,13 @@ export const getUser = async (
 
 export const getViewingHistories = async (
   accessToken: string,
-  params: GetViewingHistoryRequestParams,
+  params: GetViewingHistoriesRequestParams,
 ): Promise<GetViewingHistoriesResponse> => {
   const { data } = await axiosInstance.get('/users/viewing-histories', {
     headers: { Authorization: `Bearer ${accessToken}` },
     params,
   });
-  const viewingHistories = getViewingHistoryResponseSchema.parse(data);
+  const viewingHistories = getViewingHistoriesResponseSchema.parse(data);
   return viewingHistories;
 };
 
@@ -37,7 +38,10 @@ export const getViewingHistoriesByVideoId = async (
 ): Promise<GetViewingHistoryResponse> => {
   const { data } = await axiosInstance.get(
     `/users/viewing-histories/${videoId}`,
-    { headers: { Authorization: `Bearer ${accessToken}` } },
+    {
+      headers: { Authorization: `Bearer ${accessToken}` },
+      params: { videoId },
+    },
   );
   const viewingHistories = getViewingHistoryResponseSchema.parse(data);
   return viewingHistories;
@@ -49,7 +53,7 @@ export const updateViewingHistoryByVideoId = (
   params: UpsertViewingHistoryRequestParams,
 ) => {
   return axiosInstance.post(
-    `/users/viewing-histories/${videoId}`,
+    `/users/viewing-histories/${videoId}?videoId=${videoId}`,
     { ...params },
     { headers: { Authorization: `Bearer ${accessToken}` } },
   );

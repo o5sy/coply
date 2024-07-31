@@ -15,7 +15,7 @@ export const getViewingHistoriesResponseSchema = z.object({
   nextCursor: z.string().nullable(),
 });
 
-export const getViewingHistoryRequestParamsSchema = z
+export const getViewingHistoriesRequestParamsSchema = z
   .object({
     cursor: z.string(),
     take: z.number(),
@@ -37,7 +37,7 @@ export type GetViewingHistoriesResponse = z.infer<
 >;
 
 export type GetViewingHistoryRequestParams = z.infer<
-  typeof getViewingHistoryRequestParamsSchema
+  typeof getViewingHistoriesRequestParamsSchema
 >;
 
 export type UpsertViewingHistoryRequestParams = z.infer<
