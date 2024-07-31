@@ -21,9 +21,8 @@ export const useIntersectionObserver = <T extends HTMLElement>({
       }
     }, options);
     observer.observe(ref.current);
-
-    return observer.disconnect;
-  });
+    return () => observer.disconnect();
+  }, []);
 
   return { ref };
 };
