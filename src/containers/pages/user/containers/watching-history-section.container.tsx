@@ -6,6 +6,7 @@ import { useWatchingHistory } from '../hooks';
 export function WatchingHistorySectionContainer() {
   const { data, fetchMore } = useWatchingHistory({ takeCount: 12 });
 
+  // todo 인피니티 스크롤 테스트 필요
   const { ref } = useIntersectionObserver<HTMLUListElement>({
     onTrigger: fetchMore,
     options: {
