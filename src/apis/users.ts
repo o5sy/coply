@@ -55,3 +55,12 @@ export const updateViewingHistoryByVideoId = (
     { headers: { Authorization: `Bearer ${accessToken}` } },
   );
 };
+
+export const deleteViewingHistoryByVideoId = (
+  videoId: string,
+  accessToken: string,
+) => {
+  return axiosInstance.delete(`/users/viewing-histories/${videoId}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+};
