@@ -36,7 +36,7 @@ export type GetViewingHistoriesResponse = z.infer<
   typeof getViewingHistoriesResponseSchema
 >;
 
-export type GetViewingHistoryRequestParams = z.infer<
+export type GetViewingHistoriesRequestParams = z.infer<
   typeof getViewingHistoriesRequestParamsSchema
 >;
 
