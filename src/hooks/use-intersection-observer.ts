@@ -5,6 +5,7 @@ interface UseIntersectionObserverProps {
   options?: IntersectionObserverInit;
 }
 
+// todo prefill 옵션 추가
 export const useIntersectionObserver = <T extends HTMLElement>({
   onTrigger,
   options = { threshold: 0.6 },
