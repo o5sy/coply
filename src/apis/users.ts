@@ -56,10 +56,13 @@ export const updateViewingHistoryByVideoId = (
   );
 };
 
-export const deleteViewingHistoryByVideoId = (
-  videoId: string,
-  accessToken: string,
-) => {
+export const deleteViewingHistoryByVideoId = ({
+  videoId,
+  accessToken,
+}: {
+  videoId: string;
+  accessToken: string;
+}) => {
   return axiosInstance.delete(`/users/viewing-histories/${videoId}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
