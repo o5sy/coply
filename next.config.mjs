@@ -28,6 +28,20 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      // 유튜브 영상 썸네일
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+      // 유튜브 채널 썸네일
+      {
+        protocol: 'https',
+        hostname: 'yt3.ggpht.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
