@@ -40,12 +40,12 @@
       },
       {
         "selector": "function",
-        "format": ["PascalCase"],
-        "modifiers": ["exported"]
+        "format": ["camelCase"]
       },
       {
         "selector": "function",
-        "format": ["camelCase"]
+        "format": ["PascalCase"],
+        "modifiers": ["exported"]
       }
     ],
     "import/prefer-default-export": "off",
