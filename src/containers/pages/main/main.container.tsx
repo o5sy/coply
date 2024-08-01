@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { SectionTitle, Category, VideoCard } from '@/components/main-page';
 import { SearchInput, useSearchInput } from '@/components/shared';
+import { categoryItems } from '@/constants/type-label-map';
 
 export function MainContainer() {
   const { onKeyDown } = useSearchInput();
@@ -28,13 +29,9 @@ export function MainContainer() {
       <section className="layout pt-[48px]">
         <SectionTitle title="카테고리 🗂️" />
         <ul className="flex flex-wrap gap-[16px]">
-          <Category text="Web Development" href="/explore" />
-          <Category text="Programming" href="/explore" />
-          <Category text="DevOps" href="/explore" />
-          <Category text="Frontend" href="/explore" />
-          <Category text="Backend" href="/explore" />
-          <Category text="Mobile" href="/explore" />
-          <Category text="Game" href="/explore" />
+          {Array.from(categoryItems).map(([key, label]) => (
+            <Category key={key} text={label} href="/explore" />
+          ))}
         </ul>
       </section>
 
