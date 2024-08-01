@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
+import { skipToken, useQuery } from '@tanstack/react-query';
 import { getUser } from '@/apis/users';
 import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { getSession } from '@/utils/session';
-import { skipToken, useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
 import { useLocalStorage } from './use-local-storage';
 
 export const useIsLoggedIn = () => {
@@ -28,5 +28,5 @@ export const useIsLoggedIn = () => {
     }
   }, [isSuccess, accessToken]);
 
-  return { isLoggedIn };
+  return { isLoggedIn, accessToken };
 };
