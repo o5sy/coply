@@ -1,9 +1,15 @@
 import { ReactElement } from 'react';
 import { LayoutWithHeader } from '@/components/shared/layout-with-header';
+import { WithAuth } from '@/components/shared/with-auth';
+import { NoAuthGuide } from '@/components/user-page';
 import { UserContainer } from '@/containers/pages/user';
 
 export default function UserPage() {
-  return <UserContainer />;
+  return (
+    <WithAuth fallback={<NoAuthGuide />}>
+      <UserContainer />;
+    </WithAuth>
+  );
 }
 
 UserPage.getLayout = function getLayout(page: ReactElement) {
