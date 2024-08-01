@@ -1,41 +1,12 @@
-/* eslint-disable react/no-array-index-key */
 import Image from 'next/image';
-import { SectionTitle, Category, VideoCard } from '@/components/main-page';
+import { Category, SectionTitle } from '@/components/main-page';
 import { SearchInput, useSearchInput } from '@/components/shared';
 import { categoryItems } from '@/constants/type-label-map';
 import { INIT_CATEGORY_KEY } from '../explore/hooks';
-import { useQueries } from '@tanstack/react-query';
-import { recommendedSections } from './models/main.model';
-import { getVideoById } from '@/apis/videos';
-import { GetVideoResponse } from '@/apis/models/video';
+import { RecommendedVideoSectionListContainer } from './containers';
 
 export function MainContainer() {
   const { onKeyDown } = useSearchInput();
-
-  const videoIds = recommendedSections.flatMap((section) => section.videoIds);
-
-  const videos = useQueries<
-    GetVideoResponse[],
-    Record<string, GetVideoResponse>
-  >({
-    queries: videoIds.map((videoId) => {
-      return {
-        queryKey: ['videos', { videoId }],
-        queryFn: () => getVideoById(videoId),
-      };
-    }),
-    combine: (results) => {
-      const videos = results
-        .map((result) => result.data)
-        .filter((data): data is GetVideoResponse => !!data);
-      return videos.reduce((acc, video) => {
-        return {
-          ...acc,
-          [video.id]: video,
-        };
-      }, {});
-    },
-  });
 
   return (
     <main className="mb-[100px] w-full">
@@ -70,28 +41,7 @@ export function MainContainer() {
       </section>
 
       {/* recommended videos */}
-      {Array.from(recommendedSections).map(({ title, videoIds }, index) => (
-        <section key={index} className="layout pt-[48px]">
-          <SectionTitle title={title} />
-          <ul className="flex flex-wrap justify-between gap-[12px]">
-            {videoIds.map((id) => {
-              const video = videos[id];
-              if (!video) {
-                return null;
-              }
-              return (
-                <VideoCard
-                  key={id}
-                  name={video.name}
-                  channelName={video.videoChannel.name}
-                  thumbnailUrl={video.thumbnailImageUrl}
-                  href={`/watch/${id}`}
-                />
-              );
-            })}
-          </ul>
-        </section>
-      ))}
+      <RecommendedVideoSectionListContainer />
     </main>
   );
 }
