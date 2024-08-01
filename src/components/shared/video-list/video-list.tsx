@@ -1,4 +1,4 @@
-import { VideoCard } from '../main-page';
+import { VideoCard } from '../video-card';
 
 export interface VideoItem {
   id: string;

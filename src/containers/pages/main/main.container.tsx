@@ -1,12 +1,17 @@
-/* eslint-disable react/no-array-index-key */
 import Image from 'next/image';
-import { SectionTitle, Category, VideoCard } from '@/components/main-page';
+import { Category, SectionTitle } from '@/components/main-page';
 import { SearchInput, useSearchInput } from '@/components/shared';
+import { VideoItem, VideoList } from '@/components/shared/video-list';
 import { categoryItems } from '@/constants/type-label-map';
 import { INIT_CATEGORY_KEY } from '../explore/hooks';
+import { useRecommendedVideos } from './hooks';
+import { recommendedSections } from './models/main.model';
+import { getVideoItems } from './utils/convert-response';
 
 export function MainContainer() {
   const { onKeyDown } = useSearchInput();
+
+  const recommendedVideos = useRecommendedVideos();
 
   return (
     <main className="mb-[100px] w-full">
@@ -41,65 +46,15 @@ export function MainContainer() {
       </section>
 
       {/* recommended videos */}
-      <section className="layout pt-[48px]">
-        <SectionTitle title="요즘 핫한 프론트엔드 영상 🔥" />
-        <ul className="flex flex-wrap justify-between gap-[12px]">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <VideoCard
-              key={index}
-              name="React 웹 개발"
-              channelName="코플리 월드"
-              thumbnailUrl="/sample-thumbnail.png"
-              href="/watch"
-            />
-          ))}
-        </ul>
-      </section>
-
-      <section className="layout pt-[48px]">
-        <SectionTitle title="AI 기술 트렌드 👤" />
-        <ul className="flex flex-wrap justify-between gap-[12px]">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <VideoCard
-              key={index}
-              name="LLM 이란?"
-              channelName="코플리 월드"
-              thumbnailUrl="/sample-thumbnail.png"
-              href="/watch"
-            />
-          ))}
-        </ul>
-      </section>
-
-      <section className="layout pt-[48px]">
-        <SectionTitle title="코딩 공부 시작하기 🚀" />
-        <ul className="flex flex-wrap justify-between gap-[12px]">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <VideoCard
-              key={index}
-              name="4차 산업혁명 시대, 코딩을 배워야 하는 이유"
-              channelName="코플리 월드"
-              thumbnailUrl="/sample-thumbnail.png"
-              href="/watch"
-            />
-          ))}
-        </ul>
-      </section>
-
-      <section className="layout pt-[48px]">
-        <SectionTitle title="취업 뽀개기 딱대 👊" />
-        <ul className="flex flex-wrap justify-between gap-[12px]">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <VideoCard
-              key={index}
-              name="이력서, 어떻게 쓸까?"
-              channelName="코플리 월드"
-              thumbnailUrl="/sample-thumbnail.png"
-              href="/watch"
-            />
-          ))}
-        </ul>
-      </section>
+      {Array.from(recommendedSections).map(({ title, videoIds }) => {
+        const videos: VideoItem[] = getVideoItems(videoIds, recommendedVideos);
+        return (
+          <section key={encodeURI(title)} className="layout pt-[48px]">
+            <SectionTitle title={title} />
+            <VideoList items={videos} />
+          </section>
+        );
+      })}
     </main>
   );
 }

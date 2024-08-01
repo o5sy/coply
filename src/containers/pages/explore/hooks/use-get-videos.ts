@@ -1,6 +1,6 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { GetVideosResponse } from '@/apis/models/video';
-import { VideoItem } from '@/components/explore-page';
+import { VideoItem } from '@/components/shared/video-list';
 
 interface UseGetVideosProps {
   queryOptions: UseQueryOptions<GetVideosResponse>;
