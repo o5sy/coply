@@ -4,9 +4,38 @@ import { SectionTitle, Category, VideoCard } from '@/components/main-page';
 import { SearchInput, useSearchInput } from '@/components/shared';
 import { categoryItems } from '@/constants/type-label-map';
 import { INIT_CATEGORY_KEY } from '../explore/hooks';
+import { useQueries } from '@tanstack/react-query';
+import { recommendedSections } from './models/main.model';
+import { getVideoById } from '@/apis/videos';
+import { GetVideoResponse } from '@/apis/models/video';
 
 export function MainContainer() {
   const { onKeyDown } = useSearchInput();
+
+  const videoIds = recommendedSections.flatMap((section) => section.videoIds);
+
+  const videos = useQueries<
+    GetVideoResponse[],
+    Record<string, GetVideoResponse>
+  >({
+    queries: videoIds.map((videoId) => {
+      return {
+        queryKey: ['videos', { videoId }],
+        queryFn: () => getVideoById(videoId),
+      };
+    }),
+    combine: (results) => {
+      const videos = results
+        .map((result) => result.data)
+        .filter((data): data is GetVideoResponse => !!data);
+      return videos.reduce((acc, video) => {
+        return {
+          ...acc,
+          [video.id]: video,
+        };
+      }, {});
+    },
+  });
 
   return (
     <main className="mb-[100px] w-full">
@@ -41,65 +70,28 @@ export function MainContainer() {
       </section>
 
       {/* recommended videos */}
-      <section className="layout pt-[48px]">
-        <SectionTitle title="요즘 핫한 프론트엔드 영상 🔥" />
-        <ul className="flex flex-wrap justify-between gap-[12px]">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <VideoCard
-              key={index}
-              name="React 웹 개발"
-              channelName="코플리 월드"
-              thumbnailUrl="/sample-thumbnail.png"
-              href="/watch"
-            />
-          ))}
-        </ul>
-      </section>
-
-      <section className="layout pt-[48px]">
-        <SectionTitle title="AI 기술 트렌드 👤" />
-        <ul className="flex flex-wrap justify-between gap-[12px]">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <VideoCard
-              key={index}
-              name="LLM 이란?"
-              channelName="코플리 월드"
-              thumbnailUrl="/sample-thumbnail.png"
-              href="/watch"
-            />
-          ))}
-        </ul>
-      </section>
-
-      <section className="layout pt-[48px]">
-        <SectionTitle title="코딩 공부 시작하기 🚀" />
-        <ul className="flex flex-wrap justify-between gap-[12px]">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <VideoCard
-              key={index}
-              name="4차 산업혁명 시대, 코딩을 배워야 하는 이유"
-              channelName="코플리 월드"
-              thumbnailUrl="/sample-thumbnail.png"
-              href="/watch"
-            />
-          ))}
-        </ul>
-      </section>
-
-      <section className="layout pt-[48px]">
-        <SectionTitle title="취업 뽀개기 딱대 👊" />
-        <ul className="flex flex-wrap justify-between gap-[12px]">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <VideoCard
-              key={index}
-              name="이력서, 어떻게 쓸까?"
-              channelName="코플리 월드"
-              thumbnailUrl="/sample-thumbnail.png"
-              href="/watch"
-            />
-          ))}
-        </ul>
-      </section>
+      {Array.from(recommendedSections).map(({ title, videoIds }, index) => (
+        <section key={index} className="layout pt-[48px]">
+          <SectionTitle title={title} />
+          <ul className="flex flex-wrap justify-between gap-[12px]">
+            {videoIds.map((id) => {
+              const video = videos[id];
+              if (!video) {
+                return null;
+              }
+              return (
+                <VideoCard
+                  key={id}
+                  name={video.name}
+                  channelName={video.videoChannel.name}
+                  thumbnailUrl={video.thumbnailImageUrl}
+                  href={`/watch/${id}`}
+                />
+              );
+            })}
+          </ul>
+        </section>
+      ))}
     </main>
   );
 }
