@@ -1,12 +1,10 @@
-import { useQueries, UseQueryResult } from '@tanstack/react-query';
 import { useCallback } from 'react';
+import { UseQueryResult, useQueries } from '@tanstack/react-query';
 import { GetVideoResponse } from '@/apis/models/video';
 import { getVideoById } from '@/apis/videos';
-import { VideoItem, VideoList } from '@/components/explore-page';
-import { SectionTitle } from '@/components/main-page';
 import { recommendedSections } from '../models/main.model';
 
-export function RecommendedVideoSectionListContainer() {
+export const useRecommendedVideos = () => {
   const convertToObject = useCallback(
     (results: UseQueryResult[]): Record<string, GetVideoResponse> => {
       const videos = results
@@ -35,27 +33,5 @@ export function RecommendedVideoSectionListContainer() {
     combine: convertToObject,
   });
 
-  return (
-    <>
-      {Array.from(recommendedSections).map(({ title, videoIds }) => {
-        const videos: VideoItem[] = videoIds.map((id) => {
-          const video = videoResults[id];
-
-          return {
-            id: video.id,
-            name: video.name,
-            channelName: video.videoChannel.name,
-            thumbnailUrl: video.thumbnailImageUrl,
-          };
-        });
-
-        return (
-          <section key={encodeURI(title)} className="layout pt-[48px]">
-            <SectionTitle title={title} />
-            <VideoList items={videos} />
-          </section>
-        );
-      })}
-    </>
-  );
-}
+  return videoResults;
+};

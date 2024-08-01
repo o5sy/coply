@@ -1,12 +1,17 @@
 import Image from 'next/image';
+import { VideoItem, VideoList } from '@/components/explore-page';
 import { Category, SectionTitle } from '@/components/main-page';
 import { SearchInput, useSearchInput } from '@/components/shared';
 import { categoryItems } from '@/constants/type-label-map';
 import { INIT_CATEGORY_KEY } from '../explore/hooks';
-import { RecommendedVideoSectionListContainer } from './containers';
+import { useRecommendedVideos } from './hooks';
+import { recommendedSections } from './models/main.model';
+import { getVideoItems } from './utils/convert-response';
 
 export function MainContainer() {
   const { onKeyDown } = useSearchInput();
+
+  const recommendedVideos = useRecommendedVideos();
 
   return (
     <main className="mb-[100px] w-full">
@@ -41,7 +46,15 @@ export function MainContainer() {
       </section>
 
       {/* recommended videos */}
-      <RecommendedVideoSectionListContainer />
+      {Array.from(recommendedSections).map(({ title, videoIds }) => {
+        const videos: VideoItem[] = getVideoItems(videoIds, recommendedVideos);
+        return (
+          <section key={encodeURI(title)} className="layout pt-[48px]">
+            <SectionTitle title={title} />
+            <VideoList items={videos} />
+          </section>
+        );
+      })}
     </main>
   );
 }
