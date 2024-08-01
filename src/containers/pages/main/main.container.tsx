@@ -46,7 +46,6 @@ export function MainContainer() {
       </section>
 
       {/* recommended videos */}
-      {/* todo VideoList, VideoItem 공용 폴더로 이동 */}
       {Array.from(recommendedSections).map(({ title, videoIds }) => {
         const videos: VideoItem[] = getVideoItems(videoIds, recommendedVideos);
         return (
