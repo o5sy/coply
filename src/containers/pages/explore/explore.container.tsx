@@ -3,9 +3,9 @@ import { getVideos } from '@/apis/videos';
 import { Pagination, VideoList } from '@/components/explore-page';
 import { usePagination } from '@/components/explore-page/pagination/hooks';
 import { SearchInput, Separator, useSearchInput } from '@/components/shared';
-import { useGetVideos } from './hooks';
-import { updateSearchFilterReducer } from './reducers';
 import { categoryFilterItems, levelFilterItems } from './constants';
+import { useDetectCategoryFromParam, useGetVideos } from './hooks';
+import { updateSearchFilterReducer } from './reducers';
 
 const LIMIT_COUNT = 12;
 
@@ -17,6 +17,12 @@ export function ExploreContainer() {
   const [filter, updateFilter] = useReducer(updateSearchFilterReducer, {
     level: 'all',
     category: 'all',
+  });
+
+  useDetectCategoryFromParam({
+    onDetect: (category) => {
+      updateFilter({ type: 'category', payload: category });
+    },
   });
 
   // todo useQuery 를 꺼내고, data 를 전달해서 필요한 객체로 리턴하는 함수를 만드는게 나을듯
@@ -71,7 +77,7 @@ export function ExploreContainer() {
                         type="radio"
                         name="level"
                         value={key}
-                        defaultChecked={key === 'all'}
+                        checked={key === filter.level}
                         onChange={() =>
                           updateFilter({ type: 'level', payload: key })
                         }
@@ -94,7 +100,7 @@ export function ExploreContainer() {
                         type="radio"
                         name="category"
                         value={key}
-                        defaultChecked={key === 'all'}
+                        checked={key === filter.category}
                         onChange={() =>
                           updateFilter({ type: 'category', payload: key })
                         }
