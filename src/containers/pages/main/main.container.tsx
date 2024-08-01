@@ -30,7 +30,11 @@ export function MainContainer() {
         <SectionTitle title="카테고리 🗂️" />
         <ul className="flex flex-wrap gap-[16px]">
           {Array.from(categoryItems).map(([key, label]) => (
-            <Category key={key} text={label} href="/explore" />
+            <Category
+              key={key}
+              text={label}
+              href={`/explore?initCategory=${key}`}
+            />
           ))}
         </ul>
       </section>
