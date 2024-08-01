@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { Button } from '../shared';
-import { Guide } from '../shared/guide';
+import { Button, Guide } from '../shared';
 
 export function NoAuthGuide() {
   return (
