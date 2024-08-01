@@ -1,7 +1,6 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { Category } from '../models';
-import { categoryFilterItems } from '../constants';
 import { isCategoryFilterItemKey } from '../utils/type-checker';
 
 export const INIT_CATEGORY_KEY = 'initCategory';
