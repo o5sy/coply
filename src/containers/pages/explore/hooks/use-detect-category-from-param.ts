@@ -1,7 +1,8 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { categoryFilterItems } from '../constants';
 import { Category } from '../models';
+import { categoryFilterItems } from '../constants';
+import { isCategoryFilterItemKey } from '../utils/type-checker';
 
 export const INIT_CATEGORY_KEY = 'initCategory';
 
@@ -22,11 +23,3 @@ export const useDetectCategoryFromParam = ({
     }
   }, [categoryFromParam]);
 };
-
-function isCategoryFilterItemKey(value: unknown): value is Category {
-  if (typeof value !== 'string') {
-    return false;
-  }
-  const categoryKeys = Array.from(categoryFilterItems.keys());
-  return categoryKeys.includes(value as Category);
-}
