@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { categoryFilterItems } from '../constants';
 import { Category } from '../models';
 
+export const INIT_CATEGORY_KEY = 'initCategory';
+
 interface UseDetectInitialCategoryProps {
   onDetect: (category: Category) => void;
 }
@@ -12,7 +14,7 @@ export const useDetectCategoryFromParam = ({
 }: UseDetectInitialCategoryProps) => {
   const searchParams = useSearchParams();
 
-  const categoryFromParam = searchParams.get('initCategory');
+  const categoryFromParam = searchParams.get(INIT_CATEGORY_KEY);
 
   useEffect(() => {
     if (isCategoryFilterItemKey(categoryFromParam)) {

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { SectionTitle, Category, VideoCard } from '@/components/main-page';
 import { SearchInput, useSearchInput } from '@/components/shared';
 import { categoryItems } from '@/constants/type-label-map';
+import { INIT_CATEGORY_KEY } from '../explore/hooks';
 
 export function MainContainer() {
   const { onKeyDown } = useSearchInput();
@@ -33,7 +34,7 @@ export function MainContainer() {
             <Category
               key={key}
               text={label}
-              href={`/explore?initCategory=${key}`}
+              href={`/explore?${INIT_CATEGORY_KEY}=${key}`}
             />
           ))}
         </ul>
