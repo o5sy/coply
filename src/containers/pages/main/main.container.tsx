@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { VideoItem, VideoList } from '@/components/explore-page';
 import { Category, SectionTitle } from '@/components/main-page';
 import { SearchInput, useSearchInput } from '@/components/shared';
+import { VideoItem, VideoList } from '@/components/shared/video-list';
 import { categoryItems } from '@/constants/type-label-map';
 import { INIT_CATEGORY_KEY } from '../explore/hooks';
 import { useRecommendedVideos } from './hooks';
@@ -46,6 +46,7 @@ export function MainContainer() {
       </section>
 
       {/* recommended videos */}
+      {/* todo VideoList, VideoItem 공용 폴더로 이동 */}
       {Array.from(recommendedSections).map(({ title, videoIds }) => {
         const videos: VideoItem[] = getVideoItems(videoIds, recommendedVideos);
         return (

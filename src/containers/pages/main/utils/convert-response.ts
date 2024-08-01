@@ -1,5 +1,5 @@
 import { GetVideoResponse } from '@/apis/models/video';
-import { VideoItem } from '@/components/explore-page';
+import { VideoItem } from '@/components/shared/video-list';
 
 export const getVideoItems = (
   videoIds: string[],

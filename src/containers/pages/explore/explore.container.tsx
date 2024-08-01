@@ -1,8 +1,9 @@
 import { useReducer } from 'react';
 import { getVideos } from '@/apis/videos';
-import { Pagination, VideoList } from '@/components/explore-page';
+import { Pagination } from '@/components/explore-page';
 import { usePagination } from '@/components/explore-page/pagination/hooks';
 import { SearchInput, Separator, useSearchInput } from '@/components/shared';
+import { VideoList } from '@/components/shared/video-list';
 import { categoryFilterItems, levelFilterItems } from './constants';
 import { useDetectCategoryFromParam, useGetVideos } from './hooks';
 import { updateSearchFilterReducer } from './reducers';
