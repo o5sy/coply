@@ -5,7 +5,7 @@ import { usePagination } from '@/components/explore-page/pagination/hooks';
 import { SearchInput, Separator, useSearchInput } from '@/components/shared';
 import { useGetVideos } from './hooks';
 import { updateSearchFilterReducer } from './reducers';
-import { categoryItems, levelItems } from './constants';
+import { categoryFilterItems, levelFilterItems } from './constants';
 
 const LIMIT_COUNT = 12;
 
@@ -64,13 +64,14 @@ export function ExploreContainer() {
             <fieldset>
               <legend className="text-md pb-[16px] font-bold">난이도</legend>
               <div className="flex flex-col gap-[8px]">
-                {Array.from(levelItems).map(([key, label]) => {
+                {Array.from(levelFilterItems).map(([key, label]) => {
                   return (
                     <label key={key} className="flex gap-[8px]">
                       <input
                         type="radio"
                         name="level"
                         value={key}
+                        defaultChecked={key === 'all'}
                         onChange={() =>
                           updateFilter({ type: 'level', payload: key })
                         }
@@ -86,13 +87,14 @@ export function ExploreContainer() {
             <fieldset>
               <legend className="text-md pb-[16px] font-bold">주제</legend>
               <div className="flex flex-col gap-[8px]">
-                {Array.from(categoryItems).map(([key, label]) => {
+                {Array.from(categoryFilterItems).map(([key, label]) => {
                   return (
                     <label key={key} className="flex gap-[8px]">
                       <input
                         type="radio"
                         name="category"
                         value={key}
+                        defaultChecked={key === 'all'}
                         onChange={() =>
                           updateFilter({ type: 'category', payload: key })
                         }
