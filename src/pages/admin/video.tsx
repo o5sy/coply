@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
-import { LayoutWithAdminHeader } from '@/components/admin';
+import { LayoutWithAdminHeader, WithAdminAuth } from '@/components/admin';
 
 export default function VideoPage() {
-  return <div>video</div>;
+  return <WithAdminAuth>video</WithAdminAuth>;
 }
 
 VideoPage.getLayout = function getLayout(page: ReactElement) {
