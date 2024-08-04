@@ -90,9 +90,9 @@ export function ExploreContainer() {
               </div>
             </fieldset>
 
-            {/* 주제 */}
+            {/* 카테고리 */}
             <fieldset>
-              <legend className="text-md pb-[16px] font-bold">주제</legend>
+              <legend className="text-md pb-[16px] font-bold">카테고리</legend>
               <div className="flex flex-col gap-[8px]">
                 {Array.from(categoryFilterItems).map(([key, label]) => {
                   return (

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { skipToken, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { getVideoById } from '@/apis/videos';
 import { getFirstSegment } from '@/utils/server-side.util';
@@ -9,7 +9,7 @@ export const useGetVideoByIdQuery = () => {
 
   return useQuery({
     queryKey: ['video', id],
-    queryFn: () => getVideoById(id as string),
+    queryFn: id ? () => getVideoById(id) : skipToken,
     enabled: !!id,
   });
 };
