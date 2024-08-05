@@ -39,7 +39,7 @@ export const useUpdateLatestWatchTime = ({
       videoId,
       accessToken,
       params: {
-        duration: currentTime,
+        watchTime: currentTime,
       },
     });
   };
