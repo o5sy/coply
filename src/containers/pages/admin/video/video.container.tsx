@@ -1,41 +1,31 @@
 import { DataTable } from '@/components/admin/data-table/data-table';
 import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
+import { Pagination } from '@/components/explore-page';
 import { Button } from '@/components/shared';
 
 export function VideoContainer() {
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  const rows: TableRowDef[] = dummyVideos.map((video) => ({
-    key: video.id,
-    columns: [
-      '',
-      <div key="id" className="w-[100px]">
-        {video.id}
-      </div>,
-      <div key="name" className="line-clamp-1 w-[300px]">
-        {video.name}
-      </div>,
-      <div key="description" className="line-clamp-1 w-[200px]">
-        {video.description}
-      </div>,
-      <div key="category">카테고리</div>,
-      <div key="level">난이도</div>,
-      <div key="channelName" className="w-[200px]">
-        {video.videoChannel.name}
-      </div>,
-    ],
-    className: 'text-base',
-  }));
-
   return (
     <main className="layout pt-10">
       <div className="flex justify-between">
         <h1 className="text-4xl">Videos</h1>
         <Button>+ 추가</Button>
       </div>
-      <DataTable
-        headers={['', 'id', '제목', '설명', '카테고리', '난이도', '채널명']}
-        rows={rows}
-      />
+      <div className="overflow-auto">
+        <DataTable
+          headers={['', 'id', '제목', '설명', '카테고리', '난이도', '채널명']}
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          rows={rows}
+        />
+      </div>
+      <div className="flex justify-center pt-10">
+        <Pagination
+          page={1}
+          totalPage={10}
+          onPrev={() => {}}
+          onNext={() => {}}
+          onChange={() => {}}
+        />
+      </div>
     </main>
   );
 }
@@ -96,3 +86,29 @@ const dummyVideos = [
     },
   },
 ];
+
+const rows: TableRowDef[] = dummyVideos.map((video) => ({
+  key: video.id,
+  columns: [
+    <Button key="delete">X</Button>,
+    <div key="id" className="w-[100px]">
+      {video.id}
+    </div>,
+    <div key="name" className="line-clamp-1 w-[300px]">
+      {video.name}
+    </div>,
+    <div key="description" className="line-clamp-1 w-[200px]">
+      {video.description}
+    </div>,
+    <div key="category" className="line-clamp-1 w-[80px]">
+      카테고리
+    </div>,
+    <div key="level" className="line-clamp-1 w-[80px]">
+      난이도
+    </div>,
+    <div key="channelName" className="line-clamp-1 w-[100px]">
+      {video.videoChannel.name}
+    </div>,
+  ],
+  className: 'text-base',
+}));
