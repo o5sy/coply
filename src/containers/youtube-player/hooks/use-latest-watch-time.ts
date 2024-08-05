@@ -18,5 +18,5 @@ export const useLatestWatchTime = (videoId?: string) => {
     enabled: !!accessToken && !!videoId,
   });
 
-  return data?.duration || 0;
+  return data?.watchTime || 0;
 };
