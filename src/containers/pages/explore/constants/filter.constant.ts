@@ -1,11 +1,9 @@
-import { categoryItems } from '@/constants/type-label-map';
+import { categoryItems, levelItems } from '@/constants/type-label-map';
 import { Category, Level } from '../models';
 
 export const levelFilterItems = new Map<Level, string>([
   ['all', '전체'],
-  ['BEGINNER', '입문'],
-  ['LOW', '초급'],
-  ['MIDDLE', '중급 이상'],
+  ...Array.from(levelItems),
 ]);
 
 export const categoryFilterItems = new Map<Category, string>([
