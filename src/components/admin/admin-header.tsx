@@ -15,7 +15,9 @@ export function AdminHeader() {
       <div className="layout flex h-[65px] items-center">
         {/* logo */}
         <div className="flex items-start">
-          <Logo />
+          <Link href="/" target="_blank">
+            <Logo />
+          </Link>
           <span className="justify-self-start text-sm italic text-red-600">
             Admin
           </span>
