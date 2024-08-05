@@ -10,7 +10,7 @@ export const useIsLoggedIn = () => {
 
   const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
 
-  const { isSuccess } = useQuery({
+  const { isSuccess, status } = useQuery({
     queryKey: ['user'],
     queryFn: accessToken
       ? () => {
@@ -28,5 +28,5 @@ export const useIsLoggedIn = () => {
     }
   }, [isSuccess, accessToken]);
 
-  return { isLoggedIn, accessToken };
+  return { isLoggedIn, accessToken, status };
 };
