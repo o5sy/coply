@@ -2,17 +2,19 @@ import { z } from 'zod';
 import { videoSchema } from './video';
 
 export const getUserResponseSchema = z.object({
+  id: z.number(),
   email: z.string(),
 });
 
 export const getViewingHistoryResponseSchema = z.object({
-  duration: z.number(),
+  watchTime: z.number(),
   video: videoSchema,
 });
 
 export const getViewingHistoriesResponseSchema = z.object({
   items: z.array(getViewingHistoryResponseSchema),
   nextCursor: z.string().nullable(),
+  hasNextCursor: z.boolean(),
 });
 
 export const getViewingHistoriesRequestParamsSchema = z
@@ -23,7 +25,7 @@ export const getViewingHistoriesRequestParamsSchema = z
   .partial();
 
 export const UpsertViewingHistoryRequestParamsSchema = z.object({
-  duration: z.number(),
+  watchTime: z.number(),
 });
 
 export type GetUserResponse = z.infer<typeof getUserResponseSchema>;
