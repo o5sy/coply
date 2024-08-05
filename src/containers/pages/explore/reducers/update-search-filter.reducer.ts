@@ -2,7 +2,7 @@ import { produce } from 'immer';
 import { Reducer } from 'react';
 import { Category, Level } from '../models';
 
-type UpdateSearchFilterAction =
+export type UpdateSearchFilterAction =
   | { type: 'level'; payload: Level }
   | { type: 'category'; payload: Category };
 
