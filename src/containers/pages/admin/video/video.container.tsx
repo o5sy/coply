@@ -1,5 +1,7 @@
+import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { DataTable } from '@/components/admin/data-table/data-table';
 import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
+import { LevelDropdown } from '@/components/admin/level-dropdown';
 import { Pagination } from '@/components/explore-page';
 import { Button } from '@/components/shared';
 
@@ -101,10 +103,10 @@ const rows: TableRowDef[] = dummyVideos.map((video) => ({
       {video.description}
     </div>,
     <div key="category" className="line-clamp-1 w-[80px]">
-      카테고리
+      <CategoryDropdown category="FE" onSelect={console.log} />
     </div>,
     <div key="level" className="line-clamp-1 w-[80px]">
-      난이도
+      <LevelDropdown levels={['BEGINNER', 'MIDDLE']} onCheck={console.log} />
     </div>,
     <div key="channelName" className="line-clamp-1 w-[100px]">
       {video.videoChannel.name}
