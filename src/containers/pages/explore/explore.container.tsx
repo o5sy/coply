@@ -6,7 +6,10 @@ import { SearchInput, Separator, useSearchInput } from '@/components/shared';
 import { VideoList } from '@/components/shared/video-list';
 import { categoryFilterItems, levelFilterItems } from './constants';
 import { useDetectCategoryFromParam, useGetVideos } from './hooks';
-import { updateSearchFilterReducer } from './reducers';
+import {
+  UpdateSearchFilterAction,
+  updateSearchFilterReducer,
+} from './reducers';
 
 const LIMIT_COUNT = 12;
 
@@ -19,6 +22,11 @@ export function ExploreContainer() {
     level: 'all',
     category: 'all',
   });
+
+  const handleUpdate = (action: UpdateSearchFilterAction) => {
+    updateFilter(action);
+    onChange(1);
+  };
 
   useDetectCategoryFromParam({
     onDetect: (category) => {
@@ -80,7 +88,7 @@ export function ExploreContainer() {
                         value={key}
                         checked={key === filter.level}
                         onChange={() =>
-                          updateFilter({ type: 'level', payload: key })
+                          handleUpdate({ type: 'level', payload: key })
                         }
                       />
                       {label}
@@ -103,7 +111,7 @@ export function ExploreContainer() {
                         value={key}
                         checked={key === filter.category}
                         onChange={() =>
-                          updateFilter({ type: 'category', payload: key })
+                          handleUpdate({ type: 'category', payload: key })
                         }
                       />
                       {label}
