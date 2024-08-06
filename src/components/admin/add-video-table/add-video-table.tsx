@@ -13,39 +13,46 @@ import { LevelDropdown } from '../level-dropdown';
 interface AddVideoTableProps {
   items: ManageVideoItem[];
   onAdd: () => void;
+  onChangeVideoId: (id: string, videoId: string) => void;
   onCheckLevel: (id: string, level: LevelUnion, checked: boolean) => void;
   onSelectCategory: (id: string, category: CategoryUnion) => void;
   onRemove: (id: string) => void;
 }
 
 export function AddVideoTable({
-  items: videos,
+  items,
   onAdd,
   onRemove,
+  onChangeVideoId,
   onSelectCategory,
   onCheckLevel,
 }: AddVideoTableProps) {
-  const rows: TableRowDef[] = videos.map((video) => ({
-    key: video.id,
+  const rows: TableRowDef[] = items.map((item) => ({
+    key: item.id,
     columns: [
-      video.videoId,
+      <input
+        type="text"
+        defaultValue={item.videoId}
+        placeholder="youtube video id"
+        onBlur={(event) => onChangeVideoId(item.id, event.currentTarget.value)}
+      />,
       <CategoryDropdown
-        category={video.category}
-        onSelect={(category) => onSelectCategory(video.id, category)}
+        category={item.category}
+        onSelect={(category) => onSelectCategory(item.id, category)}
       />,
       <LevelDropdown
-        levels={video.levels}
-        onCheck={(checked, level) => onCheckLevel(video.id, level, checked)}
+        levels={item.levels}
+        onCheck={(checked, level) => onCheckLevel(item.id, level, checked)}
       />,
       <button
         className="opacity-0 group-hover:opacity-100"
         type="button"
-        onClick={() => onRemove(video.id)}
+        onClick={() => onRemove(item.id)}
       >
         X
       </button>,
     ],
-    className: 'group',
+    className: 'group text-sm',
   }));
 
   return (
@@ -66,12 +73,12 @@ export function AddVideoTable({
 }
 
 const HEADERS: TableHeaderDef[] = [
-  { key: 'id', className: 'min-w-28' },
+  { key: 'youtube video id', contents: '영상 id', className: 'min-w-28' },
   {
     key: 'category',
     contents: '카테고리',
     className: 'w-28',
   },
-  { key: 'level', contents: '난이도', className: 'w-34' },
+  { key: 'level', contents: '난이도', className: 'w-44' },
   { key: 'delete', contents: '', className: 'w-10' },
 ];

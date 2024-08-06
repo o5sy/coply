@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { AddVideoTable } from '@/components/admin/add-video-table';
 import { Button } from '@/components/shared';
 import {
@@ -25,6 +26,9 @@ export function AddVideoDialogContentContainer() {
         items={videoItems}
         onAdd={() => dispatch({ type: 'addItem' })}
         onRemove={(id) => dispatch({ type: 'removeItem', id })}
+        onChangeVideoId={(id, videoId) =>
+          dispatch({ type: 'updateVideoId', payload: { id, videoId } })
+        }
         onSelectCategory={(id, category) =>
           dispatch({ type: 'updateCategory', payload: { id, category } })
         }
@@ -34,7 +38,9 @@ export function AddVideoDialogContentContainer() {
       />
 
       <DialogFooter>
-        <Button>취소</Button>
+        <DialogPrimitive.Close asChild>
+          <Button>취소</Button>
+        </DialogPrimitive.Close>
         <Button>저장</Button>
       </DialogFooter>
     </>
