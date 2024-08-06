@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-key */
 import { CategoryUnion, LevelUnion } from '@/apis/models/video';
 import { TableCell, TableRow } from '@/components/ui/table';
-import { ManageVideoItem } from '@/containers/pages/admin/video/containers/add-video-dialog-content-container/reducers';
+import {
+  MANAGE_VIDEO_ITEM_MAX_COUNT,
+  ManageVideoItem,
+} from '@/containers/pages/admin/video/containers/add-video-dialog-content-container/reducers';
 import { CategoryDropdown } from '../category-dropdown';
 import { DataTable } from '../data-table/data-table';
 import {
@@ -27,6 +30,8 @@ export function AddVideoTable({
   onSelectCategory,
   onCheckLevel,
 }: AddVideoTableProps) {
+  const showAddButton = items.length < MANAGE_VIDEO_ITEM_MAX_COUNT;
+
   const rows: TableRowDef[] = items.map((item) => ({
     key: item.id,
     columns: [
@@ -60,13 +65,19 @@ export function AddVideoTable({
       headers={HEADERS}
       rows={rows}
       footer={
-        <TableRow>
-          <TableCell colSpan={4}>
-            <button className="w-full text-left" type="button" onClick={onAdd}>
-              + 추가
-            </button>
-          </TableCell>
-        </TableRow>
+        showAddButton && (
+          <TableRow>
+            <TableCell colSpan={4}>
+              <button
+                className="w-full text-left"
+                type="button"
+                onClick={onAdd}
+              >
+                + 추가
+              </button>
+            </TableCell>
+          </TableRow>
+        )
       }
     />
   );

@@ -3,8 +3,8 @@ import { uniqueId } from 'lodash';
 import { Reducer } from 'react';
 import { CategoryUnion, LevelUnion } from '@/apis/models/video';
 
-const MIN = 1;
-const MAX = 10;
+const MANAGE_VIDEO_ITEM_MIN_COUNT = 1;
+export const MANAGE_VIDEO_ITEM_MAX_COUNT = 10;
 
 export interface ManageVideoItem {
   id: string;
@@ -29,7 +29,7 @@ export const manageVideoReducer: Reducer<
 > = (prevState, action) => {
   switch (action.type) {
     case 'addItem': {
-      if (prevState.length >= MAX) {
+      if (prevState.length >= MANAGE_VIDEO_ITEM_MAX_COUNT) {
         return prevState;
       }
       return produce(prevState, (draft) => {
@@ -70,7 +70,7 @@ export const manageVideoReducer: Reducer<
         }
       });
     case 'removeItem':
-      if (prevState.length <= MIN) {
+      if (prevState.length <= MANAGE_VIDEO_ITEM_MIN_COUNT) {
         return prevState;
       }
       return produce(prevState, (draft) => {
