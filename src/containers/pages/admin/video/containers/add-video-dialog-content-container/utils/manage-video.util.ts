@@ -1,7 +1,7 @@
 import { uniqueId } from 'lodash';
-import { ManageVideoState } from '../reducers';
+import { ManageVideoItem } from '../reducers';
 
-export const getInitialVideos = (count: number = 1): ManageVideoState => {
+export const getInitialVideos = (count: number = 1): ManageVideoItem[] => {
   return Array.from({ length: count }, () => ({
     id: uniqueId(),
     videoId: '',

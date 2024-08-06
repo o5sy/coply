@@ -6,12 +6,12 @@ import { CategoryUnion, LevelUnion } from '@/apis/models/video';
 const MIN = 1;
 const MAX = 10;
 
-export type ManageVideoState = {
+export interface ManageVideoItem {
   id: string;
   videoId: string;
   category: CategoryUnion;
   level: LevelUnion[];
-}[];
+}
 
 type ManageVideoAction =
   | { type: 'addItem' }
@@ -24,7 +24,7 @@ type ManageVideoAction =
   | { type: 'removeItem'; id: string };
 
 export const manageVideoReducer: Reducer<
-  ManageVideoState,
+  ManageVideoItem[],
   ManageVideoAction
 > = (prevState, action) => {
   switch (action.type) {
