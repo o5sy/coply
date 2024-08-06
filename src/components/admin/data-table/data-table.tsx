@@ -1,6 +1,8 @@
+import { ReactNode } from 'react';
 import {
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -10,9 +12,10 @@ import { TableRowDef } from './types/data-table.type';
 interface DataTableProps {
   headers: string[];
   rows: TableRowDef[];
+  footer?: ReactNode;
 }
 
-export function DataTable({ headers, rows }: DataTableProps) {
+export function DataTable({ headers, rows, footer }: DataTableProps) {
   return (
     <table>
       <TableHeader>
@@ -32,6 +35,7 @@ export function DataTable({ headers, rows }: DataTableProps) {
           </TableRow>
         ))}
       </TableBody>
+      {footer && <TableFooter>{footer}</TableFooter>}
     </table>
   );
 }
