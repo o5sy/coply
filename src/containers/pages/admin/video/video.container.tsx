@@ -5,6 +5,7 @@ import {
   TableHeaderDef,
   TableRowDef,
 } from '@/components/admin/data-table/types/data-table.type';
+import { DialogTriggerWrapper } from '@/components/admin/dialog-trigger-wrapper';
 import { LevelDropdown } from '@/components/admin/level-dropdown';
 import { Pagination } from '@/components/explore-page';
 import { Button } from '@/components/shared';
@@ -14,10 +15,10 @@ export function VideoContainer() {
     <main className="layout pt-10">
       <div className="flex justify-between">
         <h1 className="text-4xl">Videos</h1>
-        {/* <DialogTriggerWrapper
+        <DialogTriggerWrapper
           trigger={<Button>+ 추가</Button>}
-          dialogContent={<AddVideoDialogContent />}
-        /> */}
+          dialogContent={null}
+        />
       </div>
       <div className="overflow-auto">
         <DataTable headers={HEADERS} rows={rows} />
