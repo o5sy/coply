@@ -9,6 +9,7 @@ import { DialogTriggerWrapper } from '@/components/admin/dialog-trigger-wrapper'
 import { LevelDropdown } from '@/components/admin/level-dropdown';
 import { Pagination } from '@/components/explore-page';
 import { Button } from '@/components/shared';
+import { AddVideoDialogContentContainer } from './containers/add-video-dialog-content-container';
 
 export function VideoContainer() {
   return (
@@ -17,7 +18,7 @@ export function VideoContainer() {
         <h1 className="text-4xl">Videos</h1>
         <DialogTriggerWrapper
           trigger={<Button>+ 추가</Button>}
-          dialogContent={null}
+          dialogContent={<AddVideoDialogContentContainer />}
         />
       </div>
       <div className="overflow-auto">
