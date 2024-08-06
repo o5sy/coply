@@ -6,7 +6,7 @@ import { CategoryUnion, LevelUnion } from '@/apis/models/video';
 const MIN = 1;
 const MAX = 10;
 
-type ManageVideoState = {
+export type ManageVideoState = {
   id: string;
   videoId: string;
   category: CategoryUnion;
