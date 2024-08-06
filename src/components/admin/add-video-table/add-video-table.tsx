@@ -80,5 +80,5 @@ const HEADERS: TableHeaderDef[] = [
     className: 'w-28',
   },
   { key: 'level', contents: '난이도', className: 'w-44' },
-  { key: 'delete', contents: '', className: 'w-10' },
+  { key: 'remove', contents: '', className: 'w-10' },
 ];
