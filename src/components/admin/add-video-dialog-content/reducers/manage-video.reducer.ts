@@ -3,6 +3,9 @@ import { uniqueId } from 'lodash';
 import { Reducer } from 'react';
 import { CategoryUnion, LevelUnion } from '@/apis/models/video';
 
+const MIN = 1;
+const MAX = 10;
+
 type ManageVideoState = {
   id: string;
   videoId: string;
@@ -26,6 +29,9 @@ export const manageVideoReducer: Reducer<
 > = (prevState, action) => {
   switch (action.type) {
     case 'addItem': {
+      if (prevState.length >= MAX) {
+        return prevState;
+      }
       return produce(prevState, (draft) => {
         draft.push({
           id: uniqueId(),
@@ -64,6 +70,9 @@ export const manageVideoReducer: Reducer<
         }
       });
     case 'removeItem':
+      if (prevState.length <= MIN) {
+        return prevState;
+      }
       return produce(prevState, (draft) => {
         const index = draft.findIndex((todo) => todo.id === action.id);
         if (index !== -1) {
