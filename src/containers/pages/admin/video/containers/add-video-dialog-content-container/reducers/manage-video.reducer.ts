@@ -10,7 +10,7 @@ export interface ManageVideoItem {
   id: string;
   videoId: string;
   category: CategoryUnion;
-  level: LevelUnion[];
+  levels: LevelUnion[];
 }
 
 type ManageVideoAction =
@@ -37,7 +37,7 @@ export const manageVideoReducer: Reducer<
           id: uniqueId(),
           videoId: '',
           category: 'FE',
-          level: ['BEGINNER'],
+          levels: ['BEGINNER'],
         });
       });
     }
@@ -61,9 +61,9 @@ export const manageVideoReducer: Reducer<
         const index = draft.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
           if (action.payload.checked) {
-            draft[index].level.push(action.payload.level);
+            draft[index].levels.push(action.payload.level);
           } else {
-            draft[index].level = draft[index].level.filter(
+            draft[index].levels = draft[index].levels.filter(
               (item) => item !== action.payload.level,
             );
           }

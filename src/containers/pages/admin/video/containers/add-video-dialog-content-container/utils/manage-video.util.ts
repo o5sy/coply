@@ -6,6 +6,6 @@ export const getInitialVideos = (count: number = 1): ManageVideoItem[] => {
     id: uniqueId(),
     videoId: '',
     category: 'FE',
-    level: ['BEGINNER'],
+    levels: ['BEGINNER'],
   }));
 };
