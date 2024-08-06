@@ -3,7 +3,7 @@ import { uniqueId } from 'lodash';
 import { Reducer } from 'react';
 import { CategoryUnion, LevelUnion } from '@/apis/models/video';
 
-const MANAGE_VIDEO_ITEM_MIN_COUNT = 1;
+export const MANAGE_VIDEO_ITEM_MIN_COUNT = 1;
 export const MANAGE_VIDEO_ITEM_MAX_COUNT = 10;
 
 export interface ManageVideoItem {

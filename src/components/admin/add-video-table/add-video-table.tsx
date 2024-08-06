@@ -3,6 +3,7 @@ import { CategoryUnion, LevelUnion } from '@/apis/models/video';
 import { TableCell, TableRow } from '@/components/ui/table';
 import {
   MANAGE_VIDEO_ITEM_MAX_COUNT,
+  MANAGE_VIDEO_ITEM_MIN_COUNT,
   ManageVideoItem,
 } from '@/containers/pages/admin/video/containers/add-video-dialog-content-container/reducers';
 import { CategoryDropdown } from '../category-dropdown';
@@ -49,13 +50,15 @@ export function AddVideoTable({
         levels={item.levels}
         onCheck={(checked, level) => onCheckLevel(item.id, level, checked)}
       />,
-      <button
-        className="opacity-0 group-hover:opacity-100"
-        type="button"
-        onClick={() => onRemove(item.id)}
-      >
-        X
-      </button>,
+      items.length > MANAGE_VIDEO_ITEM_MIN_COUNT && (
+        <button
+          className="opacity-0 group-hover:opacity-100"
+          type="button"
+          onClick={() => onRemove(item.id)}
+        >
+          X
+        </button>
+      ),
     ],
     className: 'group text-sm',
   }));
