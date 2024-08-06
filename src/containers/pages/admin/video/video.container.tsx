@@ -1,23 +1,28 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { DataTable } from '@/components/admin/data-table/data-table';
-import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
+import {
+  TableHeaderDef,
+  TableRowDef,
+} from '@/components/admin/data-table/types/data-table.type';
+import { DialogTriggerWrapper } from '@/components/admin/dialog-trigger-wrapper';
 import { LevelDropdown } from '@/components/admin/level-dropdown';
 import { Pagination } from '@/components/explore-page';
 import { Button } from '@/components/shared';
+import { AddVideoDialogContentContainer } from './containers/add-video-dialog-content-container';
 
 export function VideoContainer() {
   return (
     <main className="layout pt-10">
       <div className="flex justify-between">
         <h1 className="text-4xl">Videos</h1>
-        <Button>+ 추가</Button>
+        <DialogTriggerWrapper
+          trigger={<Button>+ 추가</Button>}
+          dialogContent={<AddVideoDialogContentContainer />}
+        />
       </div>
       <div className="overflow-auto">
-        <DataTable
-          headers={['', 'id', '제목', '설명', '카테고리', '난이도', '채널명']}
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
-          rows={rows}
-        />
+        <DataTable headers={HEADERS} rows={rows} />
       </div>
       <div className="flex justify-center pt-10">
         <Pagination
@@ -89,10 +94,19 @@ const dummyVideos = [
   },
 ];
 
+const HEADERS: TableHeaderDef[] = [
+  { key: 'remove', contents: '' },
+  { key: 'id' },
+  { key: 'name', contents: '제목' },
+  { key: 'description', contents: '설명' },
+  { key: 'category', contents: '카테고리' },
+  { key: 'level', contents: '난이도' },
+];
+
 const rows: TableRowDef[] = dummyVideos.map((video) => ({
   key: video.id,
   columns: [
-    <Button key="delete">X</Button>,
+    <Button key="remove">X</Button>,
     <div key="id" className="w-[100px]">
       {video.id}
     </div>,
