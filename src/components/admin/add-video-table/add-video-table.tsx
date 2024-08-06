@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/jsx-key */
 import { CategoryUnion, LevelUnion } from '@/apis/models/video';
 import { TableCell, TableRow } from '@/components/ui/table';
