@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { CategoryDropdown } from '@/components/admin/category-dropdown';
+
 import { DataTable } from '@/components/admin/data-table/data-table';
 import {
   TableHeaderDef,
   TableRowDef,
 } from '@/components/admin/data-table/types/data-table.type';
+import { DeleteVideoDialogContent } from '@/components/admin/delete-video-dialog-content';
 import { DialogTriggerWrapper } from '@/components/admin/dialog-trigger-wrapper';
 import { LevelDropdown } from '@/components/admin/level-dropdown';
 import { Pagination } from '@/components/explore-page';
@@ -106,7 +108,11 @@ const HEADERS: TableHeaderDef[] = [
 const rows: TableRowDef[] = dummyVideos.map((video) => ({
   key: video.id,
   columns: [
-    <Button key="remove">X</Button>,
+    <DialogTriggerWrapper
+      key="remove"
+      trigger={<Button>X</Button>}
+      dialogContent={<DeleteVideoDialogContent />}
+    />,
     <div key="id" className="w-[100px]">
       {video.id}
     </div>,
