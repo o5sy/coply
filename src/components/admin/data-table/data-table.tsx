@@ -7,10 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { TableRowDef } from './types/data-table.type';
+import { TableHeaderDef, TableRowDef } from './types/data-table.type';
 
 interface DataTableProps {
-  headers: string[];
+  headers: TableHeaderDef[];
   rows: TableRowDef[];
   footer?: ReactNode;
 }
@@ -20,8 +20,10 @@ export function DataTable({ headers, rows, footer }: DataTableProps) {
     <table>
       <TableHeader>
         <TableRow>
-          {headers.map((header) => (
-            <TableHead key={header}>{header}</TableHead>
+          {headers.map(({ key, contents, ...props }) => (
+            <TableHead key={key} {...props}>
+              {contents ?? key}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
