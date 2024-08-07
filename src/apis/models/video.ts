@@ -1,13 +1,15 @@
 import { z } from 'zod';
 
 const levels = ['BEGINNER', 'LOW', 'MIDDLE'] as const;
-const categories = ['FE', 'BE', 'PREPARE', 'INTRODUCTION'] as const;
+const categories = ['FE', 'BE', 'AI', 'DESIGN', 'ETC'] as const;
 
 export const videoSchema = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
   thumbnailImageUrl: z.string(),
+  level: z.enum(levels),
+  category: z.enum(categories),
   uploadedAt: z.string(),
   videoChannel: z.object({
     id: z.number(),
