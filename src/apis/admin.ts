@@ -20,3 +20,12 @@ export const getVideosForAdmin = async (
   const videos = getVideosResponseSchema.parse(data);
   return videos;
 };
+
+export const deleteVideoByIdForAdmin = async (
+  accessToken: string,
+  videoId: string,
+) => {
+  return axiosInstance.delete(`/admin/videos/${videoId}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+};
