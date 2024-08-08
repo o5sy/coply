@@ -2,9 +2,8 @@ import { skipToken, useQuery } from '@tanstack/react-query';
 import { getVideosForAdmin } from '@/apis/admin';
 import { DataTable } from '@/components/admin/data-table/data-table';
 import { DialogTriggerWrapper } from '@/components/admin/dialog-trigger-wrapper';
-import { Pagination } from '@/components/explore-page';
-import { usePagination } from '@/components/explore-page/pagination/hooks';
-import { Button } from '@/components/shared';
+import { Button, Pagination } from '@/components/shared';
+import { usePagination } from '@/components/shared/pagination/hooks';
 import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { useLocalStorage } from '@/hooks';
 import { getSession } from '@/utils/session';
@@ -14,7 +13,6 @@ import { useVideoTable } from './hooks';
 const LIMIT_COUNT = 20;
 
 export function VideoContainer() {
-  // todo pagination 훅, 컴포넌트 공용으로 분리
   const { currentPage, onPrev, onNext, onChange } = usePagination();
 
   const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
