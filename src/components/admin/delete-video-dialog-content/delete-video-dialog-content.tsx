@@ -2,7 +2,13 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Button } from '@/components/shared';
 import { DialogHeader, DialogFooter } from '@/components/ui/dialog';
 
-export function DeleteVideoDialogContent() {
+interface DeleteVideoDialogContentProps {
+  onDelete: () => void;
+}
+
+export function DeleteVideoDialogContent({
+  onDelete,
+}: DeleteVideoDialogContentProps) {
   return (
     <>
       <DialogHeader>
@@ -13,7 +19,7 @@ export function DeleteVideoDialogContent() {
         <DialogPrimitive.Close asChild>
           <Button>취소</Button>
         </DialogPrimitive.Close>
-        <Button>저장</Button>
+        <Button onClick={onDelete}>삭제</Button>
       </DialogFooter>
     </>
   );
