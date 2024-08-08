@@ -25,6 +25,7 @@ export const useRecommendedVideos = () => {
     queries: videoIds.map((videoId) => ({
       queryKey: ['videos', { videoId }],
       queryFn: () => getVideoById(videoId),
+      retry: 0,
     })),
     combine: convertToObject,
   });
