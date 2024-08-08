@@ -6,9 +6,10 @@ export const useLocalStorage = <T>(key: string, initialValue: T | null) => {
       return initialValue;
     }
     const value = localStorage.getItem(key);
-    return typeof value === 'string'
-      ? value
-      : JSON.parse(localStorage.getItem(key) || JSON.stringify(initialValue));
+    if (!value || value === 'null') {
+      return null;
+    }
+    return JSON.parse(JSON.stringify(value));
   });
 
   useEffect(() => {
@@ -20,5 +21,5 @@ export const useLocalStorage = <T>(key: string, initialValue: T | null) => {
     localStorage.setItem(key, value);
   }, [key, initialValue]);
 
-  return [value, setValue];
+  return [value, setValue] as const;
 };
