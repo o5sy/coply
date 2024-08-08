@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { skipToken, useQuery } from '@tanstack/react-query';
-import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { getVideosForAdmin } from '@/apis/admin';
+import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { DataTable } from '@/components/admin/data-table/data-table';
-import {
-  TableHeaderDef,
-  TableRowDef,
-} from '@/components/admin/data-table/types/data-table.type';
+import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
 import { DeleteVideoDialogContent } from '@/components/admin/delete-video-dialog-content';
 import { DialogTriggerWrapper } from '@/components/admin/dialog-trigger-wrapper';
 import { LevelDropdown } from '@/components/admin/level-dropdown';
@@ -16,6 +12,8 @@ import { Button } from '@/components/shared';
 import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { useLocalStorage } from '@/hooks';
 import { getSession } from '@/utils/session';
+import { skipToken, useQuery } from '@tanstack/react-query';
+import { HEADERS } from './constants/admin-video.constant';
 import { AddVideoDialogContentContainer } from './containers/add-video-dialog-content-container';
 
 const LIMIT_COUNT = 20;
@@ -95,12 +93,3 @@ export function VideoContainer() {
     </main>
   );
 }
-
-const HEADERS: TableHeaderDef[] = [
-  { key: 'remove', contents: '' },
-  { key: 'id' },
-  { key: 'name', contents: '제목' },
-  { key: 'description', contents: '설명' },
-  { key: 'category', contents: '카테고리' },
-  { key: 'level', contents: '난이도' },
-];
