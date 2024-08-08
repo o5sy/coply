@@ -1,25 +1,48 @@
+import { deleteVideoByIdForAdmin } from '@/apis/admin';
 import { GetVideoResponse } from '@/apis/models/video';
 import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
-import { DeleteVideoDialogContent } from '@/components/admin/delete-video-dialog-content';
-import { DialogTriggerWrapper } from '@/components/admin/dialog-trigger-wrapper';
 import { LevelDropdown } from '@/components/admin/level-dropdown';
-import { Button } from '@/components/shared';
+import { ACCESS_TOKEN } from '@/constants/local-storage-key';
+import { useLocalStorage } from '@/hooks';
+import { getSession } from '@/utils/session';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { HEADERS } from '../constants/admin-video.constant';
+import { DeleteVideoDialogContainer } from '../containers/delete-video-dialog-container';
 
 interface UseVideoTableProps {
   videos?: GetVideoResponse[];
 }
 
 export const useVideoTable = ({ videos }: UseVideoTableProps) => {
+  const queryClient = useQueryClient();
+
+  const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
+
+  const { mutate } = useMutation({
+    mutationFn: accessToken
+      ? ({ accessToken, videoId }: { accessToken: string; videoId: string }) =>
+          deleteVideoByIdForAdmin(accessToken, videoId)
+      : undefined,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'videos'] });
+    },
+  });
+
+  const handleDelete = (id: string) => {
+    if (!accessToken) {
+      return;
+    }
+    mutate({ accessToken, videoId: id });
+  };
+
   const rows: TableRowDef[] =
     videos?.map((video) => ({
       key: video.id,
       columns: [
-        <DialogTriggerWrapper
+        <DeleteVideoDialogContainer
           key="remove"
-          trigger={<Button>X</Button>}
-          dialogContent={<DeleteVideoDialogContent />}
+          onDelete={() => handleDelete(video.id)}
         />,
         <div key="id" className="w-[100px]">
           {video.id}
