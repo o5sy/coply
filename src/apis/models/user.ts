@@ -24,7 +24,7 @@ export const getViewingHistoriesRequestParamsSchema = z
   })
   .partial();
 
-export const UpsertViewingHistoryRequestParamsSchema = z.object({
+export const upsertViewingHistoryRequestParamsSchema = z.object({
   watchTime: z.number(),
 });
 
@@ -43,5 +43,5 @@ export type GetViewingHistoriesRequestParams = z.infer<
 >;
 
 export type UpsertViewingHistoryRequestParams = z.infer<
-  typeof UpsertViewingHistoryRequestParamsSchema
+  typeof upsertViewingHistoryRequestParamsSchema
 >;

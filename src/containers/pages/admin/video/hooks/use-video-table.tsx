@@ -2,7 +2,7 @@ import {
   deleteVideoByIdForAdmin,
   updateVideoInfoByIdForAdmin,
 } from '@/apis/admin';
-import { UpdateVideoInfoByIdForAdminParams } from '@/apis/models/admin';
+import { UpdateVideoInfoByIdForAdminRequestParams } from '@/apis/models/admin';
 import { GetVideoResponse } from '@/apis/models/video';
 import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
@@ -42,7 +42,7 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
         }: {
           accessToken: string;
           videoId: string;
-          params: UpdateVideoInfoByIdForAdminParams;
+          params: UpdateVideoInfoByIdForAdminRequestParams;
         }) => updateVideoInfoByIdForAdmin(accessToken, videoId, params)
       : undefined,
     onSuccess: () => {
@@ -59,7 +59,7 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
 
   const handleUpdate = (
     id: string,
-    params: UpdateVideoInfoByIdForAdminParams,
+    params: UpdateVideoInfoByIdForAdminRequestParams,
   ) => {
     if (!accessToken) {
       return;

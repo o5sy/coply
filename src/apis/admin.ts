@@ -1,7 +1,8 @@
 import { axiosInstance } from './axios';
 import {
+  AddVideoForAdminRequestParams,
   GetVideosForAdminRequestParams,
-  UpdateVideoInfoByIdForAdminParams,
+  UpdateVideoInfoByIdForAdminRequestParams,
 } from './models/admin';
 import { GetVideosResponse, getVideosResponseSchema } from './models/video';
 
@@ -36,9 +37,18 @@ export const deleteVideoByIdForAdmin = async (
 export const updateVideoInfoByIdForAdmin = async (
   accessToken: string,
   videoId: string,
-  params: UpdateVideoInfoByIdForAdminParams,
+  params: UpdateVideoInfoByIdForAdminRequestParams,
 ) => {
   return axiosInstance.patch(`/admin/videos/${videoId}`, params, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+};
+
+export const addVideoForAdmin = async (
+  accessToken: string,
+  params: AddVideoForAdminRequestParams,
+) => {
+  return axiosInstance.post('/admin/videos', params, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
 };
