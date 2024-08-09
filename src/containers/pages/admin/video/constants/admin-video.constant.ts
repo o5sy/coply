@@ -7,4 +7,5 @@ export const HEADERS: TableHeaderDef[] = [
   { key: 'description', contents: '설명' },
   { key: 'category', contents: '카테고리' },
   { key: 'level', contents: '난이도' },
+  { key: 'channel name', contents: '채널명' },
 ];
