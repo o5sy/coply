@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-const levels = ['BEGINNER', 'LOW', 'MIDDLE'] as const;
-const categories = ['FE', 'BE', 'AI', 'DESIGN', 'ETC'] as const;
+export const levels = ['BEGINNER', 'LOW', 'MIDDLE'] as const;
+export const categories = ['FE', 'BE', 'AI', 'DESIGN', 'ETC'] as const;
 
 export const videoSchema = z.object({
   id: z.string(),

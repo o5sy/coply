@@ -1,4 +1,8 @@
-import { deleteVideoByIdForAdmin } from '@/apis/admin';
+import {
+  deleteVideoByIdForAdmin,
+  updateVideoInfoByIdForAdmin,
+} from '@/apis/admin';
+import { UpdateVideoInfoByIdForAdminParams } from '@/apis/models/admin';
 import { GetVideoResponse } from '@/apis/models/video';
 import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
@@ -19,10 +23,27 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
 
   const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
 
-  const { mutate } = useMutation({
+  const deleteMutation = useMutation({
     mutationFn: accessToken
       ? ({ accessToken, videoId }: { accessToken: string; videoId: string }) =>
           deleteVideoByIdForAdmin(accessToken, videoId)
+      : undefined,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'videos'] });
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: accessToken
+      ? ({
+          accessToken,
+          videoId,
+          params,
+        }: {
+          accessToken: string;
+          videoId: string;
+          params: UpdateVideoInfoByIdForAdminParams;
+        }) => updateVideoInfoByIdForAdmin(accessToken, videoId, params)
       : undefined,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin', 'videos'] });
@@ -33,7 +54,17 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
     if (!accessToken) {
       return;
     }
-    mutate({ accessToken, videoId: id });
+    deleteMutation.mutate({ accessToken, videoId: id });
+  };
+
+  const handleUpdate = (
+    id: string,
+    params: UpdateVideoInfoByIdForAdminParams,
+  ) => {
+    if (!accessToken) {
+      return;
+    }
+    updateMutation.mutate({ accessToken, videoId: id, params });
   };
 
   const rows: TableRowDef[] =
@@ -54,10 +85,20 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
           {video.description}
         </div>,
         <div key="category" className="line-clamp-1 w-[80px]">
-          <CategoryDropdown category={video.category} onSelect={console.log} />
+          <CategoryDropdown
+            category={video.category}
+            onChange={(category) =>
+              handleUpdate(video.id, { category, level: video.level })
+            }
+          />
         </div>,
         <div key="level" className="line-clamp-1 w-[80px]">
-          <LevelDropdown levels={[video.level]} onCheck={console.log} />
+          <LevelDropdown
+            level={video.level}
+            onChange={(level) =>
+              handleUpdate(video.id, { level, category: video.category })
+            }
+          />
         </div>,
         <div key="channelName" className="line-clamp-1 w-[100px]">
           {video.videoChannel.name}

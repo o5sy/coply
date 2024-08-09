@@ -12,12 +12,12 @@ import { categoryItems } from '@/constants/type-label-map';
 
 interface CategoryDropdownProps {
   category: CategoryUnion;
-  onSelect: (category: CategoryUnion) => void;
+  onChange: (category: CategoryUnion) => void;
 }
 
 export function CategoryDropdown({
   category,
-  onSelect,
+  onChange,
 }: CategoryDropdownProps) {
   return (
     <DropdownMenu>
@@ -29,7 +29,7 @@ export function CategoryDropdown({
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
           value={category}
-          onValueChange={(value) => onSelect(value as CategoryUnion)}
+          onValueChange={(value) => onChange(value as CategoryUnion)}
         >
           {Array.from(categoryItems).map(([key, label]) => (
             <DropdownMenuRadioItem key={key} value={key}>
