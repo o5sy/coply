@@ -8,17 +8,31 @@ const getVideosForAdminRequestParamsSchema = z
   })
   .partial();
 
-const updateVideoInfoByIdForAdminParamsSchema = z
+const updateVideoInfoByIdForAdminRequestParamsSchema = z
   .object({
     category: z.enum(categories),
     level: z.enum(levels),
   })
   .partial();
 
+const addVideoForAdminRequestParamsSchema = z.object({
+  videos: z
+    .object({
+      videoId: z.string(),
+      category: z.enum(categories),
+      level: z.enum(levels),
+    })
+    .array(),
+});
+
 export type GetVideosForAdminRequestParams = z.infer<
   typeof getVideosForAdminRequestParamsSchema
 >;
 
-export type UpdateVideoInfoByIdForAdminParams = z.infer<
-  typeof updateVideoInfoByIdForAdminParamsSchema
+export type UpdateVideoInfoByIdForAdminRequestParams = z.infer<
+  typeof updateVideoInfoByIdForAdminRequestParamsSchema
+>;
+
+export type AddVideoForAdminRequestParams = z.infer<
+  typeof addVideoForAdminRequestParamsSchema
 >;
