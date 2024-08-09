@@ -87,17 +87,13 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
         <div key="category" className="line-clamp-1 w-[80px]">
           <CategoryDropdown
             category={video.category}
-            onChange={(category) =>
-              handleUpdate(video.id, { category, level: video.level })
-            }
+            onChange={(category) => handleUpdate(video.id, { category })}
           />
         </div>,
         <div key="level" className="line-clamp-1 w-[80px]">
           <LevelDropdown
             level={video.level}
-            onChange={(level) =>
-              handleUpdate(video.id, { level, category: video.category })
-            }
+            onChange={(level) => handleUpdate(video.id, { level })}
           />
         </div>,
         <div key="channelName" className="line-clamp-1 w-[100px]">
