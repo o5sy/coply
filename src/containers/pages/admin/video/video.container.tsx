@@ -9,10 +9,13 @@ import { useLocalStorage } from '@/hooks';
 import { getSession } from '@/utils/session';
 import { AddVideoDialogContentContainer } from './containers/add-video-dialog-content-container';
 import { useVideoTable } from './hooks';
+import { useState } from 'react';
 
 const LIMIT_COUNT = 20;
 
 export function VideoContainer() {
+  const [open, setOpen] = useState(false);
+
   const { currentPage, onPrev, onNext, onChange } = usePagination();
 
   const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
@@ -39,8 +42,12 @@ export function VideoContainer() {
       <div className="flex justify-between">
         <h1 className="text-4xl">Videos</h1>
         <DialogTriggerWrapper
+          open={open}
+          onOpenChange={setOpen}
           trigger={<Button>+ 추가</Button>}
-          dialogContent={<AddVideoDialogContentContainer />}
+          dialogContent={
+            <AddVideoDialogContentContainer onSuccess={() => setOpen(false)} />
+          }
         />
       </div>
 

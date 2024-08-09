@@ -11,12 +11,20 @@ import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { useLocalStorage } from '@/hooks';
 import { getSession } from '@/utils/session';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useReducer } from 'react';
 import { manageVideoReducer } from './reducers';
 import { getInitialVideos } from './utils';
 
-export function AddVideoDialogContentContainer() {
+interface AddVideoDialogContentProps {
+  onSuccess?: () => void;
+}
+
+export function AddVideoDialogContentContainer({
+  onSuccess,
+}: AddVideoDialogContentProps) {
+  const queryClient = useQueryClient();
+
   const [videoItems, dispatch] = useReducer(
     manageVideoReducer,
     getInitialVideos(),
@@ -34,6 +42,12 @@ export function AddVideoDialogContentContainer() {
           params: AddVideoForAdminRequestParams;
         }) => addVideoForAdmin(accessToken, params)
       : undefined,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['admin', 'videos'],
+      });
+      onSuccess?.();
+    },
   });
 
   const handleSave = () => {
