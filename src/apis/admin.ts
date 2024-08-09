@@ -40,6 +40,5 @@ export const updateVideoInfoByIdForAdmin = async (
 ) => {
   return axiosInstance.patch(`/admin/videos/${videoId}`, params, {
     headers: { Authorization: `Bearer ${accessToken}` },
-    params: { ...params },
   });
 };
