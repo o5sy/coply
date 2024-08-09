@@ -58,15 +58,20 @@ export const manageVideoReducer: Reducer<
       });
     case 'updateLevel':
       return produce(prevState, (draft) => {
+        // const index = draft.findIndex((item) => item.id === action.payload.id);
+        // if (index !== -1) {
+        //   if (action.payload.checked) {
+        //     draft[index].levels.push(action.payload.level);
+        //   } else {
+        //     draft[index].levels = draft[index].levels.filter(
+        //       (item) => item !== action.payload.level,
+        //     );
+        //   }
+        // }
+        // todo 단일 선택 임시 설정
         const index = draft.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
-          if (action.payload.checked) {
-            draft[index].levels.push(action.payload.level);
-          } else {
-            draft[index].levels = draft[index].levels.filter(
-              (item) => item !== action.payload.level,
-            );
-          }
+          draft[index].levels = [action.payload.level];
         }
       });
     case 'removeItem':
