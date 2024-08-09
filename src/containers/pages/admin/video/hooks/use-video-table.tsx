@@ -54,10 +54,10 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
           {video.description}
         </div>,
         <div key="category" className="line-clamp-1 w-[80px]">
-          <CategoryDropdown category={video.category} onSelect={console.log} />
+          <CategoryDropdown category={video.category} onChange={console.log} />
         </div>,
         <div key="level" className="line-clamp-1 w-[80px]">
-          <LevelDropdown levels={[video.level]} onCheck={console.log} />
+          <LevelDropdown level={video.level} onChange={console.log} />
         </div>,
         <div key="channelName" className="line-clamp-1 w-[100px]">
           {video.videoChannel.name}

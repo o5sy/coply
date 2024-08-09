@@ -45,11 +45,13 @@ export function AddVideoTable({
       />,
       <CategoryDropdown
         category={item.category}
-        onSelect={(category) => onSelectCategory(item.id, category)}
+        onChange={(category) => onSelectCategory(item.id, category)}
       />,
       <LevelDropdown
-        levels={item.levels}
-        onCheck={(checked, level) => onCheckLevel(item.id, level, checked)}
+        // levels={item.levels}
+        // onCheck={(checked, level) => onCheckLevel(item.id, level, checked)}
+        level={item.levels.at(0) ?? 'BEGINNER'}
+        onChange={(level) => onCheckLevel(item.id, level, true)}
       />,
       items.length > MANAGE_VIDEO_ITEM_MIN_COUNT && (
         <button
