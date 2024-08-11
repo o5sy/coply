@@ -58,7 +58,7 @@ export function VideoHistoryCard({
           </div>
           <div className="text-primary">{channelName}</div>
           <progress
-            className="h-[4px] appearance-none"
+            className="h-[4px] w-full appearance-none"
             value={progressRatio}
             max={100}
           />
