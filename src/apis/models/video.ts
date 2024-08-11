@@ -8,6 +8,7 @@ export const videoSchema = z.object({
   name: z.string(),
   description: z.string(),
   thumbnailImageUrl: z.string(),
+  duration: z.number(),
   level: z.enum(levels),
   category: z.enum(categories),
   uploadedAt: z.string(),
