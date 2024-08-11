@@ -1,8 +1,13 @@
 import { ReactElement } from 'react';
 import { LayoutWithAdminHeader, WithAdminAuth } from '@/components/admin';
+import { RoadmapContainer } from '@/containers/pages/admin/roadmap';
 
 export default function RoadmapPage() {
-  return <WithAdminAuth>roadmap</WithAdminAuth>;
+  return (
+    <WithAdminAuth>
+      <RoadmapContainer />
+    </WithAdminAuth>
+  );
 }
 
 RoadmapPage.getLayout = function getLayout(page: ReactElement) {
