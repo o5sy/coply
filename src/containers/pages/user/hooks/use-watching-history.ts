@@ -22,7 +22,8 @@ export const useWatchingHistory = ({ takeCount }: UseWatchingHistoryProps) => {
         }
       : skipToken,
     enabled: !!accessToken,
-    getNextPageParam: (lastPage) => lastPage.nextCursor || undefined,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasNextCursor ? lastPage.nextCursor : undefined,
     initialPageParam: '',
     select: (data) => ({
       pages: data.pages.flatMap((page) => page.items),
