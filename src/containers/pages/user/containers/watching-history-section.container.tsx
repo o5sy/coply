@@ -13,12 +13,9 @@ export function WatchingHistorySectionContainer() {
 
   const { data, fetchMore } = useWatchingHistory({ takeCount: 12 });
 
-  // todo 인피니티 스크롤 개선 (한개씩 불러와도 정상 작동되도록)
   // todo 더 추상화된 기능을 가진 훅이나 컴포넌트 추가
   const { ref } = useIntersectionObserver<HTMLDivElement>({
-    onTrigger: () => {
-      fetchMore();
-    },
+    onTrigger: fetchMore,
     options: {
       threshold: [0.1],
       rootMargin: '0px 0px 100px 0px',
