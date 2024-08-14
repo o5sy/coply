@@ -16,6 +16,7 @@ export const useLatestWatchTime = (videoId?: string) => {
           }
         : skipToken,
     enabled: !!accessToken && !!videoId,
+    staleTime: 0,
   });
 
   return data?.watchTime || 0;
