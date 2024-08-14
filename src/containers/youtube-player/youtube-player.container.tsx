@@ -1,5 +1,14 @@
-import YouTube, { YouTubeEvent } from 'react-youtube';
-import { useLatestWatchTime, useUpdateLatestWatchTime } from './hooks';
+import { useQueryClient } from '@tanstack/react-query';
+import { getViewingHistoriesByVideoId } from '@/apis/users';
+import {
+  YouTubeEvent,
+  YouTubePlayerState,
+} from '@/components/youtube-player/types/youtube-player.type';
+import { YouTubePlayer } from '@/components/youtube-player/youtube-player';
+import { ACCESS_TOKEN } from '@/constants/local-storage-key';
+import { useLocalStorage } from '@/hooks';
+import { getSession } from '@/utils/session';
+import { useUpdateLatestWatchTime } from './hooks';
 
 interface YoutubePlayerContainerProps {
   videoId: string;
@@ -7,42 +16,54 @@ interface YoutubePlayerContainerProps {
 }
 
 // todo enabledTracingWatchTime 에 따라 비즈니스 로직이 다 필요 없어짐. 최적화할 방법 찾아보기
-export function YoutubePlayerContainer({
+export function YouTubePlayerContainer({
   videoId,
   enabledTracingWatchTime = false,
 }: YoutubePlayerContainerProps) {
-  const latestWatchTime = useLatestWatchTime(videoId);
+  const queryClient = useQueryClient();
+
+  const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
+
   const {
     startPollingWatchTime,
     stopPollingWatchTime,
     debouncedUpdateWatchTime,
   } = useUpdateLatestWatchTime({ videoId });
 
-  // todo 동작 테스트 후 주석 정리
-  const handleReady = (event: YouTubeEvent) => {
-    if (!enabledTracingWatchTime) {
+  const getLatestWatchTime = (videoId: string, accessToken: string) =>
+    queryClient.fetchQuery({
+      queryKey: ['viewing-histories', { videoId }],
+      queryFn: () => {
+        return getViewingHistoriesByVideoId(videoId, accessToken);
+      },
+      staleTime: 0,
+    });
+
+  const handleReady = async (event: YouTubeEvent) => {
+    if (!enabledTracingWatchTime || !accessToken) {
       return;
     }
 
-    console.log(latestWatchTime);
+    const { watchTime: latestWatchTime } = await getLatestWatchTime(
+      videoId,
+      accessToken,
+    );
+
     if (latestWatchTime) {
       event.target.seekTo(latestWatchTime, true);
     }
   };
 
-  // ! api 요청할 시점에 currentTime 을 가져와야 하는데 스케줄이 등록되는 시점의 currentTime 으로 날림
-  // todo 스케줄 등록되는 시점에 getCurrentTime 호출하도록 수정
   const handleStateChange = async (event: YouTubeEvent) => {
     if (!enabledTracingWatchTime) {
       return;
     }
 
-    if (event.data === YouTube.PlayerState.PLAYING) {
-      const currentTime = await event.target.getCurrentTime();
-      startPollingWatchTime(currentTime);
+    if (event.data === YouTubePlayerState.PLAYING) {
+      startPollingWatchTime(event.target);
     } else if (
-      event.data === YouTube.PlayerState.PAUSED ||
-      event.data === YouTube.PlayerState.ENDED
+      event.data === YouTubePlayerState.PAUSED ||
+      event.data === YouTubePlayerState.ENDED
     ) {
       const currentTime = await event.target.getCurrentTime();
       stopPollingWatchTime();
@@ -51,14 +72,13 @@ export function YoutubePlayerContainer({
   };
 
   return (
-    <YouTube
+    <YouTubePlayer
       videoId={videoId}
       opts={{
         height: '360',
         width: '640',
       }}
       className="h-full w-full"
-      iframeClassName="h-[inherit] w-[inherit]"
       onReady={handleReady}
       onStateChange={handleStateChange}
     />

@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { YouTubePlayer } from 'youtube-player/dist/types';
 import { UpsertViewingHistoryRequestParams } from '@/apis/models/user';
 import { updateViewingHistoryByVideoId } from '@/apis/users';
 import { ACCESS_TOKEN } from '@/constants/local-storage-key';
@@ -47,16 +48,13 @@ export const useUpdateLatestWatchTime = ({
   const { startDebouncedInterval, clearDebouncedInterval } =
     useDebouncedInterval(intervalTime);
 
-  // todo 동작 테스트 후 주석 정리
   const debouncedUpdateWatchTime = useDebounce((currentTime: number) => {
-    console.log('🚀 ~ debouncedUpdateWatchTime ~ currentTime:', currentTime);
     mutateWatchTime(currentTime);
   }, intervalTime);
 
-  // todo 동작 테스트 후 주석 정리
-  const startPollingWatchTime = (currentTime: number) => {
-    startDebouncedInterval(() => {
-      console.log('🚀 ~ onStateChange ~ currentTime:', currentTime);
+  const startPollingWatchTime = (player: YouTubePlayer) => {
+    startDebouncedInterval(async () => {
+      const currentTime = await player.getCurrentTime();
       mutateWatchTime(currentTime);
     });
   };
