@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
+import { YouTubePlayer } from 'youtube-player/dist/types';
 import { UpsertViewingHistoryRequestParams } from '@/apis/models/user';
 import { updateViewingHistoryByVideoId } from '@/apis/users';
 import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { useDebounce, useLocalStorage } from '@/hooks';
 import { getSession } from '@/utils/session';
 import { useDebouncedInterval } from '../../pages/watch/hooks/use-debounced-interval';
-import { YouTubePlayer } from 'react-youtube';
 
 interface UseUpdateLatestWatchTimeProps {
   videoId?: string;

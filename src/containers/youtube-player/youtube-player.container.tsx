@@ -1,13 +1,16 @@
 import { useQueryClient } from '@tanstack/react-query';
-import YouTube, { YouTubeEvent } from 'react-youtube';
 import { getViewingHistoriesByVideoId } from '@/apis/users';
+import {
+  YouTubeEvent,
+  YouTubePlayerState,
+} from '@/components/youtube-player/types/youtube-player.type';
 import { YouTubePlayer } from '@/components/youtube-player/youtube-player';
 import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { useLocalStorage } from '@/hooks';
 import { getSession } from '@/utils/session';
 import { useUpdateLatestWatchTime } from './hooks';
 
-interface YouTubePlayerContainerProps {
+interface YoutubePlayerContainerProps {
   videoId: string;
   enabledTracingWatchTime?: boolean;
 }
@@ -16,7 +19,7 @@ interface YouTubePlayerContainerProps {
 export function YouTubePlayerContainer({
   videoId,
   enabledTracingWatchTime = false,
-}: YouTubePlayerContainerProps) {
+}: YoutubePlayerContainerProps) {
   const queryClient = useQueryClient();
 
   const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
@@ -56,11 +59,11 @@ export function YouTubePlayerContainer({
       return;
     }
 
-    if (event.data === YouTube.PlayerState.PLAYING) {
+    if (event.data === YouTubePlayerState.PLAYING) {
       startPollingWatchTime(event.target);
     } else if (
-      event.data === YouTube.PlayerState.PAUSED ||
-      event.data === YouTube.PlayerState.ENDED
+      event.data === YouTubePlayerState.PAUSED ||
+      event.data === YouTubePlayerState.ENDED
     ) {
       const currentTime = await event.target.getCurrentTime();
       stopPollingWatchTime();
