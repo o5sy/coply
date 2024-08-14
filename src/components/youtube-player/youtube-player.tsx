@@ -4,6 +4,7 @@ import { Options, YouTubePlayer } from 'youtube-player/dist/types';
 import { YouTubeEvent } from './youtube-player.type';
 import { getYouTubeApi, getYouTubeApiUrl } from './youtube-player.util';
 
+// todo 타입 정리(react-youtube, youtube-player 패키지 삭제)
 interface YoutubePlayerProps {
   // YouTube video id
   videoId: string;
