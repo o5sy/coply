@@ -18,7 +18,7 @@ export function YoutubePlayerContainer({
     startPollingWatchTime,
     stopPollingWatchTime,
     debouncedUpdateWatchTime,
-  } = useUpdateLatestWatchTime({ videoId, intervalTime: 1000 });
+  } = useUpdateLatestWatchTime({ videoId });
 
   const handleReady = (event: YouTubeEvent) => {
     if (!enabledTracingWatchTime) {
