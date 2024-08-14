@@ -40,6 +40,8 @@ export function YouTubePlayerContainer({
     });
 
   const handleReady = async (event: YouTubeEvent) => {
+    event.target.unMute();
+
     if (!enabledTracingWatchTime || !accessToken) {
       return;
     }
