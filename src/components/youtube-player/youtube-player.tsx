@@ -82,7 +82,6 @@ export function YouTubePlayer({
       <div id={id} className={className} />
 
       {/* 1. script 불러오기 */}
-      {/* todo 페이지 컴포넌트로 옮기고 여기서 오류날 경우 script load 필요하다는 오류 던지기 */}
       <Script src={getYouTubeApiUrl()} type="text/javascript" async />
     </>
   );
