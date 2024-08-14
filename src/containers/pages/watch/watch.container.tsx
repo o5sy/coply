@@ -5,7 +5,7 @@ import {
   VideoInfoSection,
   WatchPageHeader,
 } from '@/components/watch-page';
-import { YoutubePlayerContainer } from '@/containers/youtube-player';
+import { YouTubePlayerContainer } from '@/containers/youtube-player';
 import { useIsLoggedIn, useOpenState } from '@/hooks';
 import { getFormattedDate } from '@/utils/date.util';
 import { useGetVideoByIdQuery } from './hooks';
@@ -43,7 +43,7 @@ export function WatchContainer() {
         {/* player */}
         <main className="flex-center flex-1 bg-gray-700">
           {video && (
-            <YoutubePlayerContainer
+            <YouTubePlayerContainer
               videoId={video.id}
               enabledTracingWatchTime={isLoggedIn}
             />

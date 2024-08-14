@@ -1,11 +1,11 @@
 import Script from 'next/script';
 import { ComponentProps, useEffect, useState } from 'react';
-import { Options, YouTubePlayer } from 'youtube-player/dist/types';
+import { Options } from 'youtube-player/dist/types';
 import { YouTubeEvent } from './types/youtube-player.type';
 import { getYouTubeApi, getYouTubeApiUrl } from './utils/youtube-player.util';
 
 // todo 타입 정리(react-youtube, youtube-player 패키지 삭제)
-interface YoutubePlayerProps {
+interface YouTubePlayerProps {
   // YouTube video id
   videoId: string;
 
@@ -22,7 +22,7 @@ interface YoutubePlayerProps {
   onPlaybackQualityChange?: (event: YouTubeEvent<string>) => void;
 }
 
-export function YoutubePlayer({
+export function YouTubePlayer({
   videoId,
   id = 'player',
   opts,
@@ -32,7 +32,7 @@ export function YoutubePlayer({
   onStateChange,
   onPlaybackQualityChange,
   onPlaybackRateChange,
-}: YoutubePlayerProps) {
+}: YouTubePlayerProps) {
   const [YouTubeApi, setYouTubeApi] = useState<Window['YT'] | null>(
     getYouTubeApi(),
   );
@@ -65,9 +65,7 @@ export function YoutubePlayer({
       height: opts?.height,
       playVars: opts?.playerVars,
       events: {
-        onReady(event: { target: YouTubePlayer; data: unknown }) {
-          onReady?.(event);
-        },
+        onReady,
         onStateChange,
         onPlaybackQualityChange,
         onPlaybackRateChange,
