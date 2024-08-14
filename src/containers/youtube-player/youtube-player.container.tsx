@@ -1,6 +1,11 @@
+import { useQueryClient } from '@tanstack/react-query';
 import YouTube, { YouTubeEvent } from 'react-youtube';
+import { getViewingHistoriesByVideoId } from '@/apis/users';
 import { YoutubePlayer } from '@/components/youtube-player/youtube-player';
-import { useLatestWatchTime, useUpdateLatestWatchTime } from './hooks';
+import { ACCESS_TOKEN } from '@/constants/local-storage-key';
+import { useLocalStorage } from '@/hooks';
+import { getSession } from '@/utils/session';
+import { useUpdateLatestWatchTime } from './hooks';
 
 interface YoutubePlayerContainerProps {
   videoId: string;
@@ -12,18 +17,34 @@ export function YoutubePlayerContainer({
   videoId,
   enabledTracingWatchTime = false,
 }: YoutubePlayerContainerProps) {
-  // todo 이거 먼저 조회 후 ready 실행되도록 수정
-  const latestWatchTime = useLatestWatchTime(videoId);
+  const queryClient = useQueryClient();
+
+  const [accessToken] = useLocalStorage(ACCESS_TOKEN, getSession());
+
   const {
     startPollingWatchTime,
     stopPollingWatchTime,
     debouncedUpdateWatchTime,
   } = useUpdateLatestWatchTime({ videoId });
 
-  const handleReady = (event: YouTubeEvent) => {
-    if (!enabledTracingWatchTime) {
+  const getLatestWatchTime = (videoId: string, accessToken: string) =>
+    queryClient.fetchQuery({
+      queryKey: ['viewing-histories', { videoId }],
+      queryFn: () => {
+        return getViewingHistoriesByVideoId(videoId, accessToken);
+      },
+      staleTime: 0,
+    });
+
+  const handleReady = async (event: YouTubeEvent) => {
+    if (!enabledTracingWatchTime || !accessToken) {
       return;
     }
+
+    const { watchTime: latestWatchTime } = await getLatestWatchTime(
+      videoId,
+      accessToken,
+    );
 
     if (latestWatchTime) {
       event.target.seekTo(latestWatchTime, true);
