@@ -1,4 +1,5 @@
 import YouTube, { YouTubeEvent } from 'react-youtube';
+import { YoutubePlayer } from '@/components/youtube-player/youtube-player';
 import { useLatestWatchTime, useUpdateLatestWatchTime } from './hooks';
 
 interface YoutubePlayerContainerProps {
@@ -11,35 +12,31 @@ export function YoutubePlayerContainer({
   videoId,
   enabledTracingWatchTime = false,
 }: YoutubePlayerContainerProps) {
+  // todo 이거 먼저 조회 후 ready 실행되도록 수정
   const latestWatchTime = useLatestWatchTime(videoId);
   const {
     startPollingWatchTime,
     stopPollingWatchTime,
     debouncedUpdateWatchTime,
-  } = useUpdateLatestWatchTime({ videoId });
+  } = useUpdateLatestWatchTime({ videoId, intervalTime: 1000 });
 
-  // todo 동작 테스트 후 주석 정리
   const handleReady = (event: YouTubeEvent) => {
     if (!enabledTracingWatchTime) {
       return;
     }
 
-    console.log(latestWatchTime);
     if (latestWatchTime) {
       event.target.seekTo(latestWatchTime, true);
     }
   };
 
-  // ! api 요청할 시점에 currentTime 을 가져와야 하는데 스케줄이 등록되는 시점의 currentTime 으로 날림
-  // todo 스케줄 등록되는 시점에 getCurrentTime 호출하도록 수정
   const handleStateChange = async (event: YouTubeEvent) => {
     if (!enabledTracingWatchTime) {
       return;
     }
 
     if (event.data === YouTube.PlayerState.PLAYING) {
-      const currentTime = await event.target.getCurrentTime();
-      startPollingWatchTime(currentTime);
+      startPollingWatchTime(event.target);
     } else if (
       event.data === YouTube.PlayerState.PAUSED ||
       event.data === YouTube.PlayerState.ENDED
@@ -51,14 +48,13 @@ export function YoutubePlayerContainer({
   };
 
   return (
-    <YouTube
+    <YoutubePlayer
       videoId={videoId}
       opts={{
         height: '360',
         width: '640',
       }}
       className="h-full w-full"
-      iframeClassName="h-[inherit] w-[inherit]"
       onReady={handleReady}
       onStateChange={handleStateChange}
     />

@@ -5,6 +5,7 @@ import { ACCESS_TOKEN } from '@/constants/local-storage-key';
 import { useDebounce, useLocalStorage } from '@/hooks';
 import { getSession } from '@/utils/session';
 import { useDebouncedInterval } from '../../pages/watch/hooks/use-debounced-interval';
+import { YouTubePlayer } from 'react-youtube';
 
 interface UseUpdateLatestWatchTimeProps {
   videoId?: string;
@@ -47,16 +48,13 @@ export const useUpdateLatestWatchTime = ({
   const { startDebouncedInterval, clearDebouncedInterval } =
     useDebouncedInterval(intervalTime);
 
-  // todo 동작 테스트 후 주석 정리
   const debouncedUpdateWatchTime = useDebounce((currentTime: number) => {
-    console.log('🚀 ~ debouncedUpdateWatchTime ~ currentTime:', currentTime);
     mutateWatchTime(currentTime);
   }, intervalTime);
 
-  // todo 동작 테스트 후 주석 정리
-  const startPollingWatchTime = (currentTime: number) => {
-    startDebouncedInterval(() => {
-      console.log('🚀 ~ onStateChange ~ currentTime:', currentTime);
+  const startPollingWatchTime = (player: YouTubePlayer) => {
+    startDebouncedInterval(async () => {
+      const currentTime = await player.getCurrentTime();
       mutateWatchTime(currentTime);
     });
   };
