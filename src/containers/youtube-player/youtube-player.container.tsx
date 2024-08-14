@@ -40,6 +40,8 @@ export function YouTubePlayerContainer({
     });
 
   const handleReady = async (event: YouTubeEvent) => {
+    event.target.unMute();
+
     if (!enabledTracingWatchTime || !accessToken) {
       return;
     }
@@ -68,6 +70,11 @@ export function YouTubePlayerContainer({
       const currentTime = await event.target.getCurrentTime();
       stopPollingWatchTime();
       debouncedUpdateWatchTime(currentTime);
+
+      if (event.data === YouTubePlayerState.ENDED) {
+        // 영상 종료됐을 때 관련 동영상 표시하지 않도록 추가함
+        event.target.stopVideo();
+      }
     }
   };
 
