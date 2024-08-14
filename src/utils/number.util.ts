@@ -6,6 +6,6 @@ export const roundToFixed = (num: number, digits: number = 0) => {
 
 export const getPercentage = (num: number, digits: number = 0) => {
   const rounded = roundToFixed(num, digits);
-  const limitedRatio = Math.max(0, Math.min(100, rounded));
+  const limitedRatio = Math.max(0, Math.min(100, rounded)) * 100;
   return limitedRatio;
 };
