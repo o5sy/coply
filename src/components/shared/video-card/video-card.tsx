@@ -33,9 +33,11 @@ export function VideoCard({
             fill
           />
         </div>
-        <div className="py-[12px]">
-          <div className="text-[#0D1A17]">{name}</div>
-          <div className="text-primary">{channelName}</div>
+        <div className="py-3">
+          <div className="mb-1 line-clamp-2 text-base font-semibold text-gray-800">
+            {name}
+          </div>
+          <div className="line-clamp-1 text-sm text-primary">{channelName}</div>
         </div>
       </Link>
     </li>
