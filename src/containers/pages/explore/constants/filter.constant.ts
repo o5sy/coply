@@ -7,6 +7,6 @@ export const levelFilterItems = new Map<Level, string>([
 ]);
 
 export const categoryFilterItems = new Map<Category, string>([
-  ['all', '전체'],
+  // ['all', '전체'],
   ...Array.from(categoryItems),
 ]);

@@ -24,7 +24,7 @@ export function ExploreContainer() {
 
   const [filter, updateFilter] = useReducer(updateSearchFilterReducer, {
     level: 'all',
-    category: 'all',
+    categories: [],
   });
 
   const handleUpdate = (action: UpdateSearchFilterAction) => {
@@ -34,7 +34,10 @@ export function ExploreContainer() {
 
   useDetectCategoryFromParam({
     onDetect: (category) => {
-      updateFilter({ type: 'category', payload: category });
+      updateFilter({
+        type: 'categories',
+        payload: { category, checked: true },
+      });
     },
   });
 
@@ -51,7 +54,7 @@ export function ExploreContainer() {
           page: currentPage,
           keyword: keywordFromParam || undefined,
           level: filter.level === 'all' ? undefined : filter.level,
-          category: filter.category === 'all' ? undefined : filter.category,
+          categories: filter.categories,
         });
       },
       staleTime: 60 * 1000,
@@ -110,12 +113,18 @@ export function ExploreContainer() {
                   return (
                     <label key={key} className="flex gap-[8px]">
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="category"
                         value={key}
-                        checked={key === filter.category}
-                        onChange={() =>
-                          handleUpdate({ type: 'category', payload: key })
+                        checked={filter.categories.includes(key)}
+                        onChange={(e) =>
+                          handleUpdate({
+                            type: 'categories',
+                            payload: {
+                              category: key,
+                              checked: e.target.checked,
+                            },
+                          })
                         }
                       />
                       {label}

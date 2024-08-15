@@ -31,7 +31,8 @@ export const getVideosRequestParamsSchema = z
     take: z.number(),
     page: z.number(),
     keyword: z.string(),
-    category: z.enum(categories),
+    // 실제 요청 형태: ?categories[]=FE&categories[]=BE
+    categories: z.array(z.enum(categories)),
     level: z.enum(levels),
   })
   .partial();
