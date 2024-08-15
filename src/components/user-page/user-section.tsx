@@ -12,7 +12,7 @@ export function UserSection({ email, onSignOut, onResign }: UserSectionProps) {
     <section className="flex justify-between pt-[32px]">
       <div className="flex items-center gap-[30px] text-gray-800">
         <Image
-          className="rounded-full bg-primary/50 p-[16px]"
+          className="rounded-full bg-primary/30 p-[16px]"
           src="/flag.svg"
           alt="user"
           width={90}
@@ -26,8 +26,17 @@ export function UserSection({ email, onSignOut, onResign }: UserSectionProps) {
 
       {/* buttons */}
       <div className="flex flex-col justify-center gap-[8px]">
-        <Button onClick={onSignOut}>로그아웃</Button>
-        <Button onClick={onResign}>회원탈퇴</Button>
+        <Button
+          colorType="gray"
+          variant="outline"
+          size="sm"
+          onClick={onSignOut}
+        >
+          로그아웃
+        </Button>
+        <Button colorType="gray" onClick={onResign} size="sm">
+          회원탈퇴
+        </Button>
       </div>
     </section>
   );
