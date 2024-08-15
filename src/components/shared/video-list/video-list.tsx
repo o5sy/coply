@@ -18,8 +18,7 @@ export function VideoList({ items }: VideoListProps) {
         <VideoCard
           key={id}
           className="w-[unset]"
-          // todo 기본 이미지 변경
-          thumbnailUrl={thumbnailUrl || '/sample-thumbnail.png'}
+          thumbnailUrl={thumbnailUrl}
           href={`/watch/${id}`}
           name={name}
           channelName={channelName}

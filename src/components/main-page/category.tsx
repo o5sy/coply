@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '../shared';
 
 interface CategoryProps {
   text: string;
@@ -8,9 +9,13 @@ export function Category({ text, href }: CategoryProps) {
   return (
     <li>
       <Link href={href} className="flex">
-        <span className="rounded-md border-[1px] border-solid border-primary px-[16px] py-[12px] font-bold">
+        <Button
+          variant="outline"
+          size="lg"
+          className="font-semibold text-gray-900"
+        >
           {text}
-        </span>
+        </Button>
       </Link>
     </li>
   );

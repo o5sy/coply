@@ -13,3 +13,8 @@
     @apply flex items-center justify-center;
   }
 }
+
+html {
+  font-family: var(--font-noto-sans-kr);
+  @apply text-base;
+}

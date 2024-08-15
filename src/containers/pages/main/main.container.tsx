@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { Category, SectionTitle } from '@/components/main-page';
+import { Category, HeroCopy, SectionTitle } from '@/components/main-page';
 import { SearchInput, useSearchInput } from '@/components/shared';
 import { VideoItem, VideoList } from '@/components/shared/video-list';
 import { categoryItems } from '@/constants/type-label-map';
@@ -16,20 +15,18 @@ export function MainContainer() {
   return (
     <main className="mb-[100px] w-full">
       {/* hero */}
-      <section className="layout flex-center pt-[32px]">
-        <Image src="/hero.png" width={1200} height={320} alt="로드맵 이미지" />
+      <section className="bg-primary/25">
+        <div className="layout flex flex-col gap-[48px] py-[100px]">
+          <HeroCopy />
+          <SearchInput
+            className="basis-x-[600px]"
+            inputProps={{
+              placeholder: '찾고 싶은 영상을 검색해보세요',
+              onKeyDown,
+            }}
+          />
+        </div>
       </section>
-
-      {/* search */}
-      <div className="layout flex-center pt-[24px]">
-        <SearchInput
-          className="w-full"
-          inputProps={{
-            placeholder: '배우고 싶은 지식을 입력해보세요.',
-            onKeyDown,
-          }}
-        />
-      </div>
 
       {/* category */}
       <section className="layout pt-[48px]">

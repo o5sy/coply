@@ -22,6 +22,11 @@ export function LayoutWithHeader({
       <div className="relative">
         <Header isLoggedIn={isLoggedIn} />
         {children}
+        <footer className="h-30 bg-slate-800">
+          <div className="layout py-8 text-sm text-gray-300">
+            코플리 | team.coply@gmail.com
+          </div>
+        </footer>
       </div>
     </>
   );

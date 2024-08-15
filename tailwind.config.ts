@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type { Config } from 'tailwindcss';
 
 const config = {
@@ -14,7 +15,7 @@ const config = {
     // },
     extend: {
       colors: {
-        primary: '#529480',
+        primary: '#0d9488', // teal-600
         secondary: '#E8F2F0',
       },
       //   keyframes: {

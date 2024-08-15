@@ -35,13 +35,16 @@ export const getViewingHistories = async (
 export const getViewingHistoriesByVideoId = async (
   videoId: string,
   accessToken: string,
-): Promise<GetViewingHistoryResponse> => {
-  const { data } = await axiosInstance.get(
+): Promise<GetViewingHistoryResponse | null> => {
+  const { data, status } = await axiosInstance.get(
     `/users/viewing-histories/${videoId}`,
     { headers: { Authorization: `Bearer ${accessToken}` } },
   );
-  const viewingHistories = getViewingHistoryResponseSchema.parse(data);
-  return viewingHistories;
+  if (status === 200) {
+    const viewingHistories = getViewingHistoryResponseSchema.parse(data);
+    return viewingHistories;
+  }
+  return null;
 };
 
 export const updateViewingHistoryByVideoId = (
