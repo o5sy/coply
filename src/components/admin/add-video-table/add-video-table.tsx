@@ -20,7 +20,11 @@ interface AddVideoTableProps {
   onAdd: () => void;
   onChangeVideoId: (id: string, videoId: string) => void;
   onCheckLevel: (id: string, level: LevelUnion, checked: boolean) => void;
-  onSelectCategory: (id: string, category: CategoryUnion) => void;
+  onCheckCategory: (
+    id: string,
+    category: CategoryUnion,
+    checked: boolean,
+  ) => void;
   onRemove: (id: string) => void;
 }
 
@@ -29,7 +33,7 @@ export function AddVideoTable({
   onAdd,
   onRemove,
   onChangeVideoId,
-  onSelectCategory,
+  onCheckCategory,
   onCheckLevel,
 }: AddVideoTableProps) {
   const showAddButton = items.length < MANAGE_VIDEO_ITEM_MAX_COUNT;
@@ -44,8 +48,10 @@ export function AddVideoTable({
         onBlur={(event) => onChangeVideoId(item.id, event.currentTarget.value)}
       />,
       <CategoryDropdown
-        category={item.category}
-        onChange={(category) => onSelectCategory(item.id, category)}
+        categories={item.categories}
+        onCheck={(checked, category) =>
+          onCheckCategory(item.id, category, checked)
+        }
       />,
       <LevelDropdown
         // levels={item.levels}

@@ -9,14 +9,18 @@ export const MANAGE_VIDEO_ITEM_MAX_COUNT = 10;
 export interface ManageVideoItem {
   id: string;
   videoId: string;
-  category: CategoryUnion;
+  categories: CategoryUnion[];
+  // todo 단일 선택으로 변경
   levels: LevelUnion[];
 }
 
 type ManageVideoAction =
   | { type: 'addItem' }
   | { type: 'updateVideoId'; payload: { id: string; videoId: string } }
-  | { type: 'updateCategory'; payload: { id: string; category: CategoryUnion } }
+  | {
+      type: 'updateCategory';
+      payload: { id: string; category: CategoryUnion; checked: boolean };
+    }
   | {
       type: 'updateLevel';
       payload: { id: string; level: LevelUnion; checked: boolean };
@@ -36,7 +40,7 @@ export const manageVideoReducer: Reducer<
         draft.push({
           id: uniqueId(),
           videoId: '',
-          category: 'FE',
+          categories: ['FE'],
           levels: ['BEGINNER'],
         });
       });
@@ -53,7 +57,13 @@ export const manageVideoReducer: Reducer<
       return produce(prevState, (draft) => {
         const index = draft.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
-          draft[index].category = action.payload.category;
+          if (action.payload.checked) {
+            draft[index].categories.push(action.payload.category);
+          } else {
+            draft[index].categories = draft[index].categories.filter(
+              (item) => item !== action.payload.category,
+            );
+          }
         }
       });
     case 'updateLevel':
