@@ -3,7 +3,7 @@ import {
   updateVideoInfoByIdForAdmin,
 } from '@/apis/admin';
 import { UpdateVideoInfoByIdForAdminRequestParams } from '@/apis/models/admin';
-import { GetVideoResponse } from '@/apis/models/video';
+import { CategoryUnion, GetVideoResponse } from '@/apis/models/video';
 import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
 import { LevelDropdown } from '@/components/admin/level-dropdown';
@@ -67,6 +67,16 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
     updateMutation.mutate({ accessToken, videoId: id, params });
   };
 
+  const handleCheckCategory =
+    (video: GetVideoResponse) =>
+    (checked: boolean, checkedCategory: CategoryUnion) => {
+      handleUpdate(video.id, {
+        categories: checked
+          ? [...video.categories, checkedCategory]
+          : video.categories.filter((category) => category !== checkedCategory),
+      });
+    };
+
   const rows: TableRowDef[] =
     videos?.map((video) => ({
       key: video.id,
@@ -86,8 +96,8 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
         </div>,
         <div key="category" className="line-clamp-1 w-[80px]">
           <CategoryDropdown
-            category={video.category}
-            onChange={(category) => handleUpdate(video.id, { category })}
+            categories={video.categories}
+            onCheck={handleCheckCategory(video)}
           />
         </div>,
         <div key="level" className="line-clamp-1 w-[80px]">
