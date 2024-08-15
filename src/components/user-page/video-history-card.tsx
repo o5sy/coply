@@ -1,9 +1,8 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { MouseEvent } from 'react';
 import { cn } from '@/utils/styling';
 import { VideoThumbnail } from '../shared/video-thumbnail';
-import { Button } from '../shared';
-import Image from 'next/image';
 
 interface VideoHistoryCardProps {
   thumbnailUrl: string;
