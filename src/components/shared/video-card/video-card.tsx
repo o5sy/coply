@@ -5,16 +5,16 @@ import { twMerge } from 'tailwind-merge';
 interface VideoCardProps {
   name: string;
   channelName: string;
-  thumbnailUrl: string;
   href: string;
+  thumbnailUrl?: string;
   className?: string;
 }
 
 export function VideoCard({
   name,
   channelName,
-  thumbnailUrl,
   href,
+  thumbnailUrl,
   className,
 }: VideoCardProps) {
   return (
@@ -25,13 +25,23 @@ export function VideoCard({
       )}
     >
       <Link href={href}>
-        <div className="relative aspect-[1.8/1] w-full overflow-hidden rounded-lg">
-          <Image
-            className="object-cover transition-transform group-hover:scale-110"
-            src={thumbnailUrl}
-            alt="thumbnail"
-            fill
-          />
+        <div className="aspect-[1.8/1] w-full overflow-hidden rounded-lg transition-transform group-hover:scale-105">
+          {thumbnailUrl ? (
+            <div className="relative h-full w-full">
+              <Image
+                className="absolute object-cover"
+                src={thumbnailUrl}
+                alt={name}
+                fill
+              />
+            </div>
+          ) : (
+            <div className="flex-center h-full w-full bg-primary/25">
+              <div className="relative h-full w-[16%]">
+                <Image className="absolute" src="/flag.svg" fill alt={name} />
+              </div>
+            </div>
+          )}
         </div>
         <div className="py-3">
           <div className="mb-1 line-clamp-2 text-base font-semibold text-gray-800">
