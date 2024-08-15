@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/jsx-key */
-import { CategoryUnion, LevelUnion } from '@/apis/models/video';
+import { Category, Level } from '@/apis/models/video';
 import { TableCell, TableRow } from '@/components/ui/table';
 import {
   MANAGE_VIDEO_ITEM_MAX_COUNT,
@@ -19,8 +19,8 @@ interface AddVideoTableProps {
   items: ManageVideoItem[];
   onAdd: () => void;
   onChangeVideoId: (id: string, videoId: string) => void;
-  onCheckLevel: (id: string, level: LevelUnion, checked: boolean) => void;
-  onSelectCategory: (id: string, category: CategoryUnion) => void;
+  onChangeLevel: (id: string, level: Level) => void;
+  onCheckCategory: (id: string, category: Category, checked: boolean) => void;
   onRemove: (id: string) => void;
 }
 
@@ -29,8 +29,8 @@ export function AddVideoTable({
   onAdd,
   onRemove,
   onChangeVideoId,
-  onSelectCategory,
-  onCheckLevel,
+  onCheckCategory,
+  onChangeLevel,
 }: AddVideoTableProps) {
   const showAddButton = items.length < MANAGE_VIDEO_ITEM_MAX_COUNT;
 
@@ -44,14 +44,14 @@ export function AddVideoTable({
         onBlur={(event) => onChangeVideoId(item.id, event.currentTarget.value)}
       />,
       <CategoryDropdown
-        category={item.category}
-        onChange={(category) => onSelectCategory(item.id, category)}
+        categories={item.categories}
+        onCheck={(checked, category) =>
+          onCheckCategory(item.id, category, checked)
+        }
       />,
       <LevelDropdown
-        // levels={item.levels}
-        // onCheck={(checked, level) => onCheckLevel(item.id, level, checked)}
-        level={item.levels.at(0) ?? 'BEGINNER'}
-        onChange={(level) => onCheckLevel(item.id, level, true)}
+        level={item.level}
+        onChange={(level) => onChangeLevel(item.id, level)}
       />,
       items.length > MANAGE_VIDEO_ITEM_MIN_COUNT && (
         <button

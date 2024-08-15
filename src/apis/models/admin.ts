@@ -10,7 +10,7 @@ const getVideosForAdminRequestParamsSchema = z
 
 const updateVideoInfoByIdForAdminRequestParamsSchema = z
   .object({
-    category: z.enum(categories),
+    categories: z.array(z.enum(categories)),
     level: z.enum(levels),
   })
   .partial();
@@ -19,7 +19,7 @@ const addVideoForAdminRequestParamsSchema = z.object({
   videos: z
     .object({
       videoId: z.string(),
-      category: z.enum(categories),
+      categories: z.array(z.enum(categories)),
       level: z.enum(levels),
     })
     .array(),

@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 import { uniqueId } from 'lodash';
 import { Reducer } from 'react';
-import { CategoryUnion, LevelUnion } from '@/apis/models/video';
+import { Category, Level } from '@/apis/models/video';
 
 export const MANAGE_VIDEO_ITEM_MIN_COUNT = 1;
 export const MANAGE_VIDEO_ITEM_MAX_COUNT = 10;
@@ -9,18 +9,18 @@ export const MANAGE_VIDEO_ITEM_MAX_COUNT = 10;
 export interface ManageVideoItem {
   id: string;
   videoId: string;
-  category: CategoryUnion;
-  levels: LevelUnion[];
+  categories: Category[];
+  level: Level;
 }
 
 type ManageVideoAction =
   | { type: 'addItem' }
   | { type: 'updateVideoId'; payload: { id: string; videoId: string } }
-  | { type: 'updateCategory'; payload: { id: string; category: CategoryUnion } }
   | {
-      type: 'updateLevel';
-      payload: { id: string; level: LevelUnion; checked: boolean };
+      type: 'updateCategory';
+      payload: { id: string; category: Category; checked: boolean };
     }
+  | { type: 'updateLevel'; payload: { id: string; level: Level } }
   | { type: 'removeItem'; id: string };
 
 export const manageVideoReducer: Reducer<
@@ -36,8 +36,8 @@ export const manageVideoReducer: Reducer<
         draft.push({
           id: uniqueId(),
           videoId: '',
-          category: 'FE',
-          levels: ['BEGINNER'],
+          categories: ['FE'],
+          level: 'BEGINNER',
         });
       });
     }
@@ -53,25 +53,20 @@ export const manageVideoReducer: Reducer<
       return produce(prevState, (draft) => {
         const index = draft.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
-          draft[index].category = action.payload.category;
+          if (action.payload.checked) {
+            draft[index].categories.push(action.payload.category);
+          } else {
+            draft[index].categories = draft[index].categories.filter(
+              (item) => item !== action.payload.category,
+            );
+          }
         }
       });
     case 'updateLevel':
       return produce(prevState, (draft) => {
-        // const index = draft.findIndex((item) => item.id === action.payload.id);
-        // if (index !== -1) {
-        //   if (action.payload.checked) {
-        //     draft[index].levels.push(action.payload.level);
-        //   } else {
-        //     draft[index].levels = draft[index].levels.filter(
-        //       (item) => item !== action.payload.level,
-        //     );
-        //   }
-        // }
-        // todo 단일 선택 임시 설정
         const index = draft.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
-          draft[index].levels = [action.payload.level];
+          draft[index].level = action.payload.level;
         }
       });
     case 'removeItem':

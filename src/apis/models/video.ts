@@ -10,7 +10,7 @@ export const videoSchema = z.object({
   thumbnailImageUrl: z.string(),
   duration: z.number(),
   level: z.enum(levels),
-  category: z.enum(categories),
+  categories: z.array(z.enum(categories)),
   uploadedAt: z.string(),
   videoChannel: z.object({
     id: z.number(),
@@ -31,7 +31,8 @@ export const getVideosRequestParamsSchema = z
     take: z.number(),
     page: z.number(),
     keyword: z.string(),
-    category: z.enum(categories),
+    // 실제 요청 형태: ?categories[]=FE&categories[]=BE
+    categories: z.array(z.enum(categories)),
     level: z.enum(levels),
   })
   .partial();
@@ -43,5 +44,5 @@ export type GetVideosRequestParams = z.infer<
 
 export type GetVideoResponse = z.infer<typeof videoSchema>;
 
-export type LevelUnion = (typeof levels)[number];
-export type CategoryUnion = (typeof categories)[number];
+export type Level = (typeof levels)[number];
+export type Category = (typeof categories)[number];

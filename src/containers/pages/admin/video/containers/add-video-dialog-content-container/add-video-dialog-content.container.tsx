@@ -59,8 +59,8 @@ export function AddVideoDialogContentContainer({
       .map<AddVideoForAdminRequestParams['videos'][number]>((item) => {
         return {
           videoId: item.videoId,
-          category: item.category,
-          level: item.levels.at(0) ?? 'BEGINNER',
+          categories: item.categories,
+          level: item.level,
         };
       });
     if (videos.length > 0) {
@@ -81,11 +81,14 @@ export function AddVideoDialogContentContainer({
         onChangeVideoId={(id, videoId) =>
           dispatch({ type: 'updateVideoId', payload: { id, videoId } })
         }
-        onSelectCategory={(id, category) =>
-          dispatch({ type: 'updateCategory', payload: { id, category } })
+        onCheckCategory={(id, category, checked) =>
+          dispatch({
+            type: 'updateCategory',
+            payload: { id, category, checked },
+          })
         }
-        onCheckLevel={(id, level, checked) =>
-          dispatch({ type: 'updateLevel', payload: { id, level, checked } })
+        onChangeLevel={(id, level) =>
+          dispatch({ type: 'updateLevel', payload: { id, level } })
         }
       />
 

@@ -1,4 +1,4 @@
-import { LevelUnion } from '@/apis/models/video';
+import { Level } from '@/apis/models/video';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,22 +11,14 @@ import {
 import { levelItems } from '@/constants/type-label-map';
 
 interface LevelDropdownProps {
-  // levels: LevelUnion[];
-  // onCheck: (checked: boolean, level: LevelUnion) => void;
-  level: LevelUnion;
-  onChange: (level: LevelUnion) => void;
+  level: Level;
+  onChange: (level: Level) => void;
 }
 
 export function LevelDropdown({ level, onChange }: LevelDropdownProps) {
-  // const label = levels.reduce((result, level, index) => {
-  //   if (index === 0) return levelItems.get(level) ?? '';
-  //   return `${result}, ${levelItems.get(level)}`;
-  // }, '');
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="line-clamp-1 w-full text-left">
-        {/* {label} */}
         {levelItems.get(level)}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -34,7 +26,7 @@ export function LevelDropdown({ level, onChange }: LevelDropdownProps) {
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
           value={level}
-          onValueChange={(value) => onChange(value as LevelUnion)}
+          onValueChange={(value) => onChange(value as Level)}
         >
           {Array.from(levelItems).map(([key, label]) => (
             <DropdownMenuRadioItem key={key} value={key}>
@@ -42,15 +34,6 @@ export function LevelDropdown({ level, onChange }: LevelDropdownProps) {
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>
-        {/* {Array.from(levelItems).map(([key, label]) => (
-          <DropdownMenuCheckboxItem
-            key={key}
-            checked={levels.includes(key)}
-            onCheckedChange={(checked) => onCheck(checked, key)}
-          >
-            {label}
-          </DropdownMenuCheckboxItem>
-        ))} */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
