@@ -47,7 +47,7 @@ export function YouTubePlayerContainer({
     }
 
     const result = await getLatestWatchTime(videoId, accessToken);
-    if (typeof result === 'object') {
+    if (result) {
       event.target.seekTo(result.watchTime, true);
     }
   };

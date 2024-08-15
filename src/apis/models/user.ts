@@ -6,13 +6,10 @@ export const getUserResponseSchema = z.object({
   email: z.string(),
 });
 
-export const getViewingHistoryResponseSchema = z.union([
-  z.object({
-    watchTime: z.number(),
-    video: videoSchema,
-  }),
-  z.string(),
-]);
+export const getViewingHistoryResponseSchema = z.object({
+  watchTime: z.number(),
+  video: videoSchema,
+});
 
 export const getViewingHistoriesResponseSchema = z.object({
   items: z.array(getViewingHistoryResponseSchema),
