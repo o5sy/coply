@@ -20,14 +20,14 @@ export function VideoCard({
   return (
     <li
       className={twMerge(
-        'aspect-[1.2/1] min-w-[250px] cursor-pointer',
+        'group aspect-[1.2/1] min-w-[250px] cursor-pointer',
         className,
       )}
     >
       <Link href={href}>
-        <div className="relative h-[74%] w-full">
+        <div className="relative aspect-[1.8/1] w-full overflow-hidden rounded-lg">
           <Image
-            className="object-cover"
+            className="object-cover transition-transform group-hover:scale-110"
             src={thumbnailUrl}
             alt="thumbnail"
             fill
