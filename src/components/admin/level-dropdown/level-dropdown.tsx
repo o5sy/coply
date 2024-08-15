@@ -11,22 +11,14 @@ import {
 import { levelItems } from '@/constants/type-label-map';
 
 interface LevelDropdownProps {
-  // levels: LevelUnion[];
-  // onCheck: (checked: boolean, level: LevelUnion) => void;
   level: LevelUnion;
   onChange: (level: LevelUnion) => void;
 }
 
 export function LevelDropdown({ level, onChange }: LevelDropdownProps) {
-  // const label = levels.reduce((result, level, index) => {
-  //   if (index === 0) return levelItems.get(level) ?? '';
-  //   return `${result}, ${levelItems.get(level)}`;
-  // }, '');
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="line-clamp-1 w-full text-left">
-        {/* {label} */}
         {levelItems.get(level)}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -42,15 +34,6 @@ export function LevelDropdown({ level, onChange }: LevelDropdownProps) {
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>
-        {/* {Array.from(levelItems).map(([key, label]) => (
-          <DropdownMenuCheckboxItem
-            key={key}
-            checked={levels.includes(key)}
-            onCheckedChange={(checked) => onCheck(checked, key)}
-          >
-            {label}
-          </DropdownMenuCheckboxItem>
-        ))} */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
