@@ -60,7 +60,7 @@ export function AddVideoDialogContentContainer({
         return {
           videoId: item.videoId,
           categories: item.categories,
-          level: item.levels.at(0) ?? 'BEGINNER',
+          level: item.level,
         };
       });
     if (videos.length > 0) {
@@ -87,8 +87,8 @@ export function AddVideoDialogContentContainer({
             payload: { id, category, checked },
           })
         }
-        onCheckLevel={(id, level, checked) =>
-          dispatch({ type: 'updateLevel', payload: { id, level, checked } })
+        onChangeLevel={(id, level) =>
+          dispatch({ type: 'updateLevel', payload: { id, level } })
         }
       />
 

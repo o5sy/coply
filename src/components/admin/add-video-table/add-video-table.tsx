@@ -19,7 +19,7 @@ interface AddVideoTableProps {
   items: ManageVideoItem[];
   onAdd: () => void;
   onChangeVideoId: (id: string, videoId: string) => void;
-  onCheckLevel: (id: string, level: LevelUnion, checked: boolean) => void;
+  onChangeLevel: (id: string, level: LevelUnion) => void;
   onCheckCategory: (
     id: string,
     category: CategoryUnion,
@@ -34,7 +34,7 @@ export function AddVideoTable({
   onRemove,
   onChangeVideoId,
   onCheckCategory,
-  onCheckLevel,
+  onChangeLevel,
 }: AddVideoTableProps) {
   const showAddButton = items.length < MANAGE_VIDEO_ITEM_MAX_COUNT;
 
@@ -54,10 +54,8 @@ export function AddVideoTable({
         }
       />,
       <LevelDropdown
-        // levels={item.levels}
-        // onCheck={(checked, level) => onCheckLevel(item.id, level, checked)}
-        level={item.levels.at(0) ?? 'BEGINNER'}
-        onChange={(level) => onCheckLevel(item.id, level, true)}
+        level={item.level}
+        onChange={(level) => onChangeLevel(item.id, level)}
       />,
       items.length > MANAGE_VIDEO_ITEM_MIN_COUNT && (
         <button
