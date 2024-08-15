@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { MouseEvent } from 'react';
 import { cn } from '@/utils/styling';
 import { VideoThumbnail } from '../shared/video-thumbnail';
+import { Button } from '../shared';
+import Image from 'next/image';
 
 interface VideoHistoryCardProps {
   thumbnailUrl: string;
@@ -38,16 +40,16 @@ export function VideoHistoryCard({
         <VideoThumbnail thumbnailUrl={thumbnailUrl} alt={title} />
 
         <div className="py-[12px]">
-          <div className="flex justify-between gap-[8px]">
+          <div className="flex justify-between gap-1">
             <div className="mb-1 line-clamp-2 text-base font-semibold text-gray-800">
               {title}
             </div>
             <button
               type="button"
-              className="invisible items-start text-gray-500 group-hover:visible"
+              className="flex-center invisible h-6 w-6 shrink-0 grow-0 items-start rounded-md text-gray-500 hover:bg-gray-200 group-hover:visible"
               onClick={handleDelete}
             >
-              X
+              <Image src="/close.svg" alt="delete" width={16} height={16} />
             </button>
           </div>
           <div className="line-clamp-1 text-sm text-primary">{channelName}</div>
