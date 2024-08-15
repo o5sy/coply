@@ -1,27 +1,26 @@
-import { InputHTMLAttributes, LabelHTMLAttributes } from 'react';
-
+import { InputHTMLAttributes } from 'react';
 import Image from 'next/image';
-import { twMerge } from 'tailwind-merge';
 
-interface SearchInputProps extends LabelHTMLAttributes<HTMLLabelElement> {
+import { cn } from '@/utils/styling';
+
+interface SearchInputProps {
+  className?: string;
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
-export function SearchInput({ inputProps, ...rest }: SearchInputProps) {
+export function SearchInput({ className, inputProps }: SearchInputProps) {
   return (
-    <label
-      {...rest}
-      className={twMerge(
-        'flex gap-[8px] rounded-lg bg-secondary px-[16px] py-[8px]',
-        rest.className,
-      )}
+    <div
+      className={cn('relative flex h-10 rounded-lg bg-slate-100', className)}
     >
-      <Image src="/search.svg" alt="search" width={18} height={18} />
+      <div className="flex-center absolute h-10 w-10">
+        <Image src="/search.svg" alt="search" width={18} height={18} />
+      </div>
       <input
         placeholder="search"
         {...inputProps}
-        className={twMerge('flex-1 text-primary', inputProps?.className)}
+        className={cn('flex-1 rounded-lg pl-10 pr-4', inputProps?.className)}
       />
-    </label>
+    </div>
   );
 }
