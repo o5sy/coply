@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/jsx-key */
-import { CategoryUnion, LevelUnion } from '@/apis/models/video';
+import { Category, Level } from '@/apis/models/video';
 import { TableCell, TableRow } from '@/components/ui/table';
 import {
   MANAGE_VIDEO_ITEM_MAX_COUNT,
@@ -19,12 +19,8 @@ interface AddVideoTableProps {
   items: ManageVideoItem[];
   onAdd: () => void;
   onChangeVideoId: (id: string, videoId: string) => void;
-  onChangeLevel: (id: string, level: LevelUnion) => void;
-  onCheckCategory: (
-    id: string,
-    category: CategoryUnion,
-    checked: boolean,
-  ) => void;
+  onChangeLevel: (id: string, level: Level) => void;
+  onCheckCategory: (id: string, category: Category, checked: boolean) => void;
   onRemove: (id: string) => void;
 }
 

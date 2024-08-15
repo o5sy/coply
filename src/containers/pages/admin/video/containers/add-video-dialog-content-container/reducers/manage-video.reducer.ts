@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 import { uniqueId } from 'lodash';
 import { Reducer } from 'react';
-import { CategoryUnion, LevelUnion } from '@/apis/models/video';
+import { Category, Level } from '@/apis/models/video';
 
 export const MANAGE_VIDEO_ITEM_MIN_COUNT = 1;
 export const MANAGE_VIDEO_ITEM_MAX_COUNT = 10;
@@ -9,8 +9,8 @@ export const MANAGE_VIDEO_ITEM_MAX_COUNT = 10;
 export interface ManageVideoItem {
   id: string;
   videoId: string;
-  categories: CategoryUnion[];
-  level: LevelUnion;
+  categories: Category[];
+  level: Level;
 }
 
 type ManageVideoAction =
@@ -18,9 +18,9 @@ type ManageVideoAction =
   | { type: 'updateVideoId'; payload: { id: string; videoId: string } }
   | {
       type: 'updateCategory';
-      payload: { id: string; category: CategoryUnion; checked: boolean };
+      payload: { id: string; category: Category; checked: boolean };
     }
-  | { type: 'updateLevel'; payload: { id: string; level: LevelUnion } }
+  | { type: 'updateLevel'; payload: { id: string; level: Level } }
   | { type: 'removeItem'; id: string };
 
 export const manageVideoReducer: Reducer<

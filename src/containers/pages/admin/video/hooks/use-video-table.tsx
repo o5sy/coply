@@ -3,7 +3,7 @@ import {
   updateVideoInfoByIdForAdmin,
 } from '@/apis/admin';
 import { UpdateVideoInfoByIdForAdminRequestParams } from '@/apis/models/admin';
-import { CategoryUnion, GetVideoResponse } from '@/apis/models/video';
+import { Category, GetVideoResponse } from '@/apis/models/video';
 import { CategoryDropdown } from '@/components/admin/category-dropdown';
 import { TableRowDef } from '@/components/admin/data-table/types/data-table.type';
 import { LevelDropdown } from '@/components/admin/level-dropdown';
@@ -69,7 +69,7 @@ export const useVideoTable = ({ videos }: UseVideoTableProps) => {
 
   const handleCheckCategory =
     (video: GetVideoResponse) =>
-    (checked: boolean, checkedCategory: CategoryUnion) => {
+    (checked: boolean, checkedCategory: Category) => {
       handleUpdate(video.id, {
         categories: checked
           ? [...video.categories, checkedCategory]

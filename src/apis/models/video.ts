@@ -44,5 +44,5 @@ export type GetVideosRequestParams = z.infer<
 
 export type GetVideoResponse = z.infer<typeof videoSchema>;
 
-export type LevelUnion = (typeof levels)[number];
-export type CategoryUnion = (typeof categories)[number];
+export type Level = (typeof levels)[number];
+export type Category = (typeof categories)[number];

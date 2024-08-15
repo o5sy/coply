@@ -1,4 +1,3 @@
-import { CategoryUnion, LevelUnion } from '@/apis/models/video';
+import { Level } from '@/apis/models/video';
 
-export type Level = 'all' | LevelUnion;
-export type Category = CategoryUnion;
+export type FilterLevel = 'all' | Level;

@@ -1,5 +1,5 @@
+import { Category } from '@/apis/models/video';
 import { categoryFilterItems } from '../constants';
-import { Category } from '../models';
 
 export function isCategoryFilterItemKey(value: unknown): value is Category {
   if (typeof value !== 'string') {

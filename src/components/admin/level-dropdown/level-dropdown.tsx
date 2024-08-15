@@ -1,4 +1,4 @@
-import { LevelUnion } from '@/apis/models/video';
+import { Level } from '@/apis/models/video';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,8 @@ import {
 import { levelItems } from '@/constants/type-label-map';
 
 interface LevelDropdownProps {
-  level: LevelUnion;
-  onChange: (level: LevelUnion) => void;
+  level: Level;
+  onChange: (level: Level) => void;
 }
 
 export function LevelDropdown({ level, onChange }: LevelDropdownProps) {
@@ -26,7 +26,7 @@ export function LevelDropdown({ level, onChange }: LevelDropdownProps) {
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
           value={level}
-          onValueChange={(value) => onChange(value as LevelUnion)}
+          onValueChange={(value) => onChange(value as Level)}
         >
           {Array.from(levelItems).map(([key, label]) => (
             <DropdownMenuRadioItem key={key} value={key}>

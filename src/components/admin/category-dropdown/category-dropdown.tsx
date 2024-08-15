@@ -1,4 +1,4 @@
-import { CategoryUnion } from '@/apis/models/video';
+import { Category } from '@/apis/models/video';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -10,8 +10,8 @@ import {
 import { categoryItems } from '@/constants/type-label-map';
 
 interface CategoryDropdownProps {
-  categories: CategoryUnion[];
-  onCheck: (checked: boolean, category: CategoryUnion) => void;
+  categories: Category[];
+  onCheck: (checked: boolean, category: Category) => void;
 }
 
 export function CategoryDropdown({

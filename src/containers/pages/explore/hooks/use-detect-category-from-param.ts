@@ -1,6 +1,6 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { Category } from '../models';
+import { Category } from '@/apis/models/video';
 import { isCategoryFilterItemKey } from '../utils/type-checker';
 
 export const INIT_CATEGORY_KEY = 'initCategory';

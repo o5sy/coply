@@ -1,13 +1,14 @@
 import { produce } from 'immer';
 import { Reducer } from 'react';
-import { Category, Level } from '../models';
+import { Category } from '@/apis/models/video';
+import { FilterLevel } from '../models';
 
 export type UpdateSearchFilterAction =
-  | { type: 'level'; payload: Level }
+  | { type: 'level'; payload: FilterLevel }
   | { type: 'categories'; payload: { category: Category; checked: boolean } };
 
 type UpdateSearchFilterState = {
-  level: Level;
+  level: FilterLevel;
   categories: Category[];
 };
 
