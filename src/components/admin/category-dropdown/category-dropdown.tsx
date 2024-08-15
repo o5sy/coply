@@ -1,42 +1,47 @@
 import { CategoryUnion } from '@/apis/models/video';
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { categoryItems } from '@/constants/type-label-map';
 
 interface CategoryDropdownProps {
-  category: CategoryUnion;
-  onChange: (category: CategoryUnion) => void;
+  categories: CategoryUnion[];
+  onCheck: (checked: boolean, category: CategoryUnion) => void;
 }
 
 export function CategoryDropdown({
-  category,
-  onChange,
+  categories,
+  onCheck,
 }: CategoryDropdownProps) {
+  const label = categories.reduce((result, category, index) => {
+    const categoryLabel = categoryItems.get(category) ?? '';
+    if (index === 0) return categoryLabel;
+    if (!categoryLabel) return result;
+    return `${result}, ${categoryLabel}`;
+  }, '');
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="w-full text-left">
-        {categoryItems.get(category)}
+        {label}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>카테고리</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup
-          value={category}
-          onValueChange={(value) => onChange(value as CategoryUnion)}
-        >
-          {Array.from(categoryItems).map(([key, label]) => (
-            <DropdownMenuRadioItem key={key} value={key}>
-              {label}
-            </DropdownMenuRadioItem>
-          ))}
-        </DropdownMenuRadioGroup>
+        {Array.from(categoryItems).map(([key, label]) => (
+          <DropdownMenuCheckboxItem
+            key={key}
+            checked={categories.includes(key)}
+            onCheckedChange={(checked) => onCheck(checked, key)}
+          >
+            {label}
+          </DropdownMenuCheckboxItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
