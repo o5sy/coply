@@ -10,7 +10,7 @@ export const videoSchema = z.object({
   thumbnailImageUrl: z.string(),
   duration: z.number(),
   level: z.enum(levels),
-  category: z.enum(categories),
+  categories: z.array(z.enum(categories)),
   uploadedAt: z.string(),
   videoChannel: z.object({
     id: z.number(),
