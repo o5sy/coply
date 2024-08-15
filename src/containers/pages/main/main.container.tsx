@@ -15,7 +15,7 @@ export function MainContainer() {
   return (
     <main className="mb-[100px] w-full">
       {/* hero */}
-      <section className="bg-primary/30">
+      <section className="bg-primary/25">
         <div className="layout flex flex-col gap-[48px] py-[100px]">
           <HeroCopy />
           <SearchInput
