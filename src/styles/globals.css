@@ -4,7 +4,10 @@
 
 @layer components {
   .layout {
-    @apply mx-auto box-content max-w-[1200px] px-[32px];
+    @apply mx-auto box-content max-w-[1200px] px-8;
+
+    /* mobile */
+    @apply max-sm:px-5;
   }
 }
 
