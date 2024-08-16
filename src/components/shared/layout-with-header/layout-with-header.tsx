@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { PropsWithChildren } from 'react';
 import { useIsLoggedIn } from '@/hooks';
 import { ResponsiveHeader } from '@/components/responsive-header';
+import { Footer } from '@/components/footer';
 
 interface LayoutWithHeaderProps {
   title?: string;
@@ -19,14 +20,10 @@ export function LayoutWithHeader({
         <title>{title}</title>
       </Head>
 
-      <div className="relative">
+      <div className="relative flex h-full flex-col">
         <ResponsiveHeader isLoggedIn={isLoggedIn} />
         {children}
-        <footer className="h-30 bg-slate-800">
-          <div className="layout py-8 text-sm text-gray-300">
-            코플리 | team.coply@gmail.com
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
