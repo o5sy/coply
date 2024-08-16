@@ -6,7 +6,7 @@ export function HeroCopy() {
       <span className="flex gap-5 max-sm:gap-3">
         <div className="relative">
           <Image
-            className="absolute -top-4 left-0"
+            className="absolute -top-4 left-0 max-sm:-top-5"
             src="/youtube-logo.webp"
             width={1143 / 14}
             height={255 / 14}
