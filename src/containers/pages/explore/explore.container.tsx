@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 import { getVideos } from '@/apis/videos';
 import {
+  Guide,
   Pagination,
   SearchInput,
   Separator,
@@ -144,16 +145,20 @@ export function ExploreContainer() {
             </div>
             <section className="flex w-full flex-col items-center justify-center">
               {/* 영상 리스트 */}
-              {/* todo 없을 때 Nodata ui 표시 */}
-              {videos ? <VideoList items={videos} /> : <div>nodata</div>}
-              {/* 페이지네이션 */}
-              <Pagination
-                page={currentPage}
-                totalPage={totalPage}
-                onPrev={onPrev}
-                onNext={onNext}
-                onChange={onChange}
-              />
+              {videos?.length ? (
+                <>
+                  <VideoList items={videos} />
+                  <Pagination
+                    page={currentPage}
+                    totalPage={totalPage}
+                    onPrev={onPrev}
+                    onNext={onNext}
+                    onChange={onChange}
+                  />
+                </>
+              ) : (
+                <Guide text="검색 결과가 없습니다" />
+              )}
             </section>
           </div>
         </div>
