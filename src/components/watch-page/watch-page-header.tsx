@@ -26,7 +26,9 @@ export function WatchPageHeader({
       >
         <MenuIcon stroke="white" alt="영상 정보" />
       </button>
-      <h1 className="pl-[8px] text-lg font-semibold text-white">{title}</h1>
+      <h1 className="text-md line-clamp-2 pl-[8px] font-semibold text-white max-sm:text-sm">
+        {title}
+      </h1>
 
       {/* user menu button */}
       {isLoggedIn ? (
