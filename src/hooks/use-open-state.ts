@@ -12,6 +12,7 @@ export const useOpenState = (
   const handleState = {
     open: () => setIsOpen(true),
     close: () => setIsOpen(false),
+    toggle: () => setIsOpen((prev) => !prev),
   };
 
   return {
