@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { cn } from '@/utils/styling';
-import { Logo } from '../header/logo';
+import { Logo } from '../responsive-header/logo';
 
 const tabs = ['video', 'roadmap'] as const;
 
