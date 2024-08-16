@@ -18,6 +18,9 @@ const config = {
         primary: '#0d9488', // teal-600
         secondary: '#E8F2F0',
       },
+      screens: {
+        sm: '480px',
+      },
       //   keyframes: {
       //     'accordion-down': {
       //       from: { height: '0' },
