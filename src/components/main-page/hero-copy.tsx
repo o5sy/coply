@@ -2,8 +2,8 @@ import Image from 'next/image';
 
 export function HeroCopy() {
   return (
-    <h1 className="text-5xl font-bold leading-snug text-gray-800">
-      <span className="flex gap-5">
+    <h1 className="text-5xl font-bold leading-snug text-gray-800 max-sm:text-4xl">
+      <span className="flex gap-5 max-sm:gap-3">
         <div className="relative">
           <Image
             className="absolute -top-4 left-0"
