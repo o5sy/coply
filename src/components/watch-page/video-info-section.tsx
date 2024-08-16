@@ -18,7 +18,7 @@ export function VideoInfoSection({
   onClose,
 }: VideoInfoSectionProps) {
   return (
-    <div className="flex h-full w-[400px] flex-col overflow-hidden bg-gray-600 px-[24px] py-[30px]">
+    <div className="flex h-full w-full flex-col overflow-hidden bg-gray-600 px-[24px] py-[30px] md:w-[400px]">
       <div className="flex">
         {/* title */}
         <h1 className="flex-1 text-3xl font-bold text-white">{title}</h1>
