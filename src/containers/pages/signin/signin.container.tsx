@@ -16,9 +16,9 @@ export function SignInContainer() {
   });
 
   return (
-    <main className="my-[240px] flex flex-col items-center">
-      <Image src="/flag.svg" width={120} height={120} alt="logo" />
-      <Link className="mb-[52px] font-sans text-6xl text-gray-700" href="/">
+    <main className="flex h-full flex-col items-center justify-center">
+      <Image src="/flag.svg" width={100} height={100} alt="logo" />
+      <Link className="mb-9 text-5xl text-primary" href="/">
         Coply
       </Link>
       <GoogleButton onClick={onGoogleLogin} disabled={isLoading} />
