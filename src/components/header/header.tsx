@@ -20,7 +20,7 @@ export function Header({ isLoggedIn = false }: HeaderProps) {
 
         {/* search input */}
         <SearchInput
-          className="w-[300px]"
+          className="w-[300px] max-sm:hidden"
           inputProps={{
             onKeyDown,
             defaultValue: keywordFromParam,
