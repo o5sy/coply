@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '@/utils/styling';
 import { Logo } from '../header/logo';
 
 const tabs = ['video', 'roadmap'] as const;
@@ -28,7 +28,7 @@ export function AdminHeader() {
           {tabs.map((tab) => (
             <Link
               key={tab}
-              className={twMerge(
+              className={cn(
                 'block rounded-lg px-3 py-2 capitalize hover:text-primary',
                 selectedTab === tab && 'bg-primary/25 font-bold text-primary',
               )}

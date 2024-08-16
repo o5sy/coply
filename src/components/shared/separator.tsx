@@ -1,4 +1,4 @@
-import { twMerge } from 'tailwind-merge';
+import { cn } from '@/utils/styling';
 
 interface SeparatorProps {
   className?: string;
@@ -7,10 +7,7 @@ interface SeparatorProps {
 export function Separator({ className }: SeparatorProps) {
   return (
     <div
-      className={twMerge(
-        'border-[1px] border-solid border-gray-500',
-        className,
-      )}
+      className={cn('border-[1px] border-solid border-gray-500', className)}
     />
   );
 }

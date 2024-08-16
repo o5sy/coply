@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '@/utils/styling';
 import styles from './user-menu.module.css';
 
 interface UserMenuProps {
@@ -10,7 +10,7 @@ interface UserMenuProps {
 export function UserMenu({ className, onSignOut }: UserMenuProps) {
   return (
     <div
-      className={twMerge(
+      className={cn(
         'flex w-[200px] flex-col rounded-lg bg-gray-600 p-[16px]',
         className,
       )}

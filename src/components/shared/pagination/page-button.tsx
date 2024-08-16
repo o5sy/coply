@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '@/utils/styling';
 
 interface PageButtonProps {
   isActive?: boolean;
@@ -14,7 +14,7 @@ export function PageButton({
   return (
     <button
       type="button"
-      className={twMerge(
+      className={cn(
         'flex-center h-[48px] w-[48px]',
         isActive && 'rounded-full bg-primary font-bold text-white',
       )}
