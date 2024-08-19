@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode, useState } from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import {
   HydrationBoundary,
   QueryClient,
@@ -36,11 +37,16 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={pageProps.dehydratedState}>
-        {getLayout(<Component {...pageProps} />)}
-      </HydrationBoundary>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <HydrationBoundary state={pageProps.dehydratedState}>
+          {getLayout(<Component {...pageProps} />)}
+        </HydrationBoundary>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </>
   );
 }
