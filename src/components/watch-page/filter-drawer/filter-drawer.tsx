@@ -10,7 +10,7 @@ interface FilterDrawerProps {
 export function FilterDrawer({ filterProps, onClose }: FilterDrawerProps) {
   return (
     <Portal>
-      <div className="absolute left-0 top-0 z-10 h-full w-full overflow-hidden bg-white">
+      <div className="fixed left-0 top-0 z-10 h-screen w-full overflow-hidden bg-white">
         <div className="flex h-full flex-col">
           {/* header */}
           <FilterDrawerHeader onClose={onClose} />

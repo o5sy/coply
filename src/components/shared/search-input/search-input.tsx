@@ -19,7 +19,7 @@ export function SearchInput({ className, inputProps }: SearchInputProps) {
       <input
         placeholder="search"
         {...inputProps}
-        className={cn('flex-1 rounded-lg pl-10 pr-4', inputProps?.className)}
+        className={cn('w-full rounded-lg pl-10 pr-4', inputProps?.className)}
       />
     </div>
   );
