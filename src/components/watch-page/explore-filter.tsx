@@ -2,8 +2,10 @@ import { Category } from '@/apis/models/video';
 import { categoryItems } from '@/constants/type-label-map';
 import { levelFilterItems } from '@/containers/pages/explore/constants';
 import { FilterLevel } from '@/containers/pages/explore/models';
+import { cn } from '@/utils/styling';
 
 export interface ExploreFilterProps {
+  className?: string;
   level: FilterLevel;
   categories: Category[];
   onLevelChange: (level: FilterLevel) => void;
@@ -11,13 +13,14 @@ export interface ExploreFilterProps {
 }
 
 export function ExploreFilter({
+  className,
   level,
   categories,
   onCategoryChange,
   onLevelChange,
 }: ExploreFilterProps) {
   return (
-    <div className="flex flex-col gap-5">
+    <div className={cn('flex flex-col gap-5', className)}>
       {/* 난이도 */}
       <fieldset>
         <legend className="text-md pb-[16px] font-bold">난이도</legend>
