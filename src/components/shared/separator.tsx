@@ -4,10 +4,11 @@ interface SeparatorProps {
   className?: string;
 }
 
+// todo 삭제
 export function Separator({ className }: SeparatorProps) {
   return (
     <div
-      className={cn('border-[1px] border-solid border-gray-500', className)}
+      className={cn('border-b-[1px] border-solid border-gray-500', className)}
     />
   );
 }
