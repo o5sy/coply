@@ -1,4 +1,3 @@
-import { all } from 'node_modules/axios/index.cjs';
 import { useEffect } from 'react';
 
 interface UsePreventScrollProps {
