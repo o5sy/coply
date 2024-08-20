@@ -19,6 +19,7 @@ import {
   UpdateSearchFilterAction,
   updateSearchFilterReducer,
 } from './reducers';
+import { FilterDrawer } from '@/components/watch-page/filter-drawer';
 
 const LIMIT_COUNT = 12;
 
@@ -127,46 +128,23 @@ export function ExploreContainer() {
             </Button>
           </div>
 
-          {/* todo 1. drawer 분리 */}
           {isOpen && (
-            <Portal>
-              <aside className="absolute left-0 top-0 z-10 h-full w-full overflow-hidden bg-white">
-                {/* todo 2. drawer header 분리 */}
-                <div className="flex justify-between px-8 py-4">
-                  <div className="text-xl">필터</div>
-                  <button
-                    type="button"
-                    className="flex-center h-8 w-8 shrink-0 grow-0 items-start rounded-md text-gray-500 hover:bg-gray-200"
-                    onClick={handleState.close}
-                  >
-                    <Image
-                      src="/close.svg"
-                      alt="delete"
-                      width={24}
-                      height={24}
-                    />
-                  </button>
-                </div>
-
-                <Separator />
-
-                <div className="h-full overflow-y-auto px-8 py-4">
-                  <ExploreFilter
-                    level={filter.level}
-                    categories={filter.categories}
-                    onLevelChange={(level) => {
-                      handleUpdate({ type: 'level', payload: level });
-                    }}
-                    onCategoryChange={(category, checked) => {
-                      handleUpdate({
-                        type: 'categories',
-                        payload: { category, checked },
-                      });
-                    }}
-                  />
-                </div>
-              </aside>
-            </Portal>
+            <FilterDrawer
+              filterProps={{
+                level: filter.level,
+                categories: filter.categories,
+                onLevelChange: (level) => {
+                  handleUpdate({ type: 'level', payload: level });
+                },
+                onCategoryChange: (category, checked) => {
+                  handleUpdate({
+                    type: 'categories',
+                    payload: { category, checked },
+                  });
+                },
+              }}
+              onClose={handleState.close}
+            />
           )}
 
           <div className="w-full">
