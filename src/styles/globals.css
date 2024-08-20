@@ -25,10 +25,3 @@ html {
   font-family: var(--font-noto-sans-kr);
   @apply text-base;
 }
-
-html,
-body,
-body > div:first-child,
-div#__next {
-  min-height: 100%;
-}
