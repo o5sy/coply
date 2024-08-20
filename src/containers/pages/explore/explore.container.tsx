@@ -1,3 +1,5 @@
+import { useReducer } from 'react';
+import FilterIcon from 'public/filter.svg';
 import { getVideos } from '@/apis/videos';
 import {
   Button,
@@ -10,10 +12,11 @@ import { usePagination } from '@/components/shared/pagination/hooks';
 import { VideoList } from '@/components/shared/video-list';
 import { ExploreFilter } from '@/components/watch-page/explore-filter';
 import { FilterDrawer } from '@/components/watch-page/filter-drawer';
-import { useOpenState } from '@/hooks';
-import FilterIcon from 'public/filter.svg';
-import { useReducer } from 'react';
-import { useDetectCategoryFromParam, useGetVideos } from './hooks';
+import {
+  useDetectCategoryFromParam,
+  useGetVideos,
+  useOpenFilterDrawer,
+} from './hooks';
 import {
   UpdateSearchFilterAction,
   updateSearchFilterReducer,
@@ -31,8 +34,7 @@ export function ExploreContainer() {
     categories: [],
   });
 
-  const { isOpen: isOpenFilterDrawer, handleState: handleFilterDrawer } =
-    useOpenState();
+  const { isOpenFilterDrawer, handleFilterDrawer } = useOpenFilterDrawer();
 
   useDetectCategoryFromParam({
     onDetect: (category) => {
@@ -144,7 +146,6 @@ export function ExploreContainer() {
         </div>
       </main>
 
-      {/* todo drawer 열린 상태에서 사이즈 커지면 닫힘 */}
       {/* 모바일 사이즈에서의 필터 */}
       {isOpenFilterDrawer && (
         <FilterDrawer
