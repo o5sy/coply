@@ -9,6 +9,7 @@ export * from './video-card';
 export * from './video-list';
 export * from './video-thumbnail';
 export * from './with-auth';
+export * from './portal';
 
 // eslint no-cycle 오류 때문에 export 안함
 // export * from './layout-with-header';

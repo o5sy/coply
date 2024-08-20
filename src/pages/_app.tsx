@@ -41,9 +41,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+
       <QueryClientProvider client={queryClient}>
         <HydrationBoundary state={pageProps.dehydratedState}>
           {getLayout(<Component {...pageProps} />)}
+          <div id="portal" />
         </HydrationBoundary>
         <ReactQueryDevtools />
       </QueryClientProvider>
