@@ -19,7 +19,6 @@ export function MainContainer() {
         <div className="layout flex flex-col gap-12 py-24 max-sm:py-20">
           <HeroCopy />
           <SearchInput
-            className="basis-x-[600px]"
             inputProps={{
               placeholder: '찾고 싶은 영상을 검색해보세요',
               onKeyDown,
