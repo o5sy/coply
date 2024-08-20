@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export function HeroCopy() {
   return (
-    <h1 className="text-5xl font-bold leading-snug text-gray-800 max-sm:text-4xl">
+    <h1 className="text-5xl font-bold leading-snug text-gray-800 max-md:text-4xl max-sm:text-3xl">
       <span className="flex gap-5 max-sm:gap-3">
         <div className="relative">
           <Image
@@ -10,7 +10,7 @@ export function HeroCopy() {
             src="/youtube-logo.webp"
             width={1143 / 14}
             height={255 / 14}
-            alt="youtube logo"
+            alt="YouTube"
           />
           YouTube
         </div>

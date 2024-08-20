@@ -20,7 +20,7 @@ export function LayoutWithHeader({
         <title>{title}</title>
       </Head>
 
-      <div className="relative flex h-full flex-col">
+      <div className="flex min-h-screen flex-col">
         <ResponsiveHeader isLoggedIn={isLoggedIn} />
         {children}
         <Footer />

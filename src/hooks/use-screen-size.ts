@@ -2,6 +2,14 @@ import { useMemo } from 'react';
 import { getScreenSize } from '@/utils/screen-size.util';
 import { useMediaQuery } from './use-media-query';
 
+export enum ScreenSize {
+  small = 1,
+  medium = 2,
+  large = 3,
+  extraLarge = 4,
+  doubleExtraLarge = 5,
+}
+
 const { sm, md, lg, xl } = getScreenSize();
 
 export const useScreenSize = () => {
@@ -11,23 +19,23 @@ export const useScreenSize = () => {
   const isMedium = useMediaQuery(`(${sm} < width <= ${md})`);
   const isSmall = useMediaQuery(`(width <= ${sm})`);
 
-  const screenSize = useMemo((): '2xl' | 'xl' | 'lg' | 'md' | 'sm' => {
+  const screenSize = useMemo((): ScreenSize => {
     if (is2ExtraLarge) {
-      return '2xl';
+      return ScreenSize.doubleExtraLarge;
     }
     if (isExtraLarge) {
-      return 'xl';
+      return ScreenSize.extraLarge;
     }
     if (isLarge) {
-      return 'lg';
+      return ScreenSize.large;
     }
     if (isMedium) {
-      return 'md';
+      return ScreenSize.medium;
     }
     if (isSmall) {
-      return 'sm';
+      return ScreenSize.small;
     }
-    return '2xl';
+    return ScreenSize.doubleExtraLarge;
   }, [is2ExtraLarge, isExtraLarge, isLarge, isMedium, isSmall]);
 
   return {

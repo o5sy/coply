@@ -13,10 +13,10 @@ export function MainContainer() {
   const recommendedVideos = useRecommendedVideos();
 
   return (
-    <main className="mb-[100px] w-full">
+    <main className="mb-24 w-full">
       {/* hero */}
       <section className="bg-primary/25">
-        <div className="layout flex flex-col gap-[48px] py-[100px]">
+        <div className="layout flex flex-col gap-12 py-24 max-sm:py-20">
           <HeroCopy />
           <SearchInput
             className="basis-x-[600px]"
@@ -29,9 +29,9 @@ export function MainContainer() {
       </section>
 
       {/* category */}
-      <section className="layout pt-[48px]">
+      <section className="layout pt-12">
         <SectionTitle title="카테고리 🗂️" />
-        <ul className="flex flex-wrap gap-[16px]">
+        <ul className="flex flex-wrap gap-4">
           {Array.from(categoryItems).map(([key, label]) => (
             <Category
               key={key}
@@ -46,7 +46,7 @@ export function MainContainer() {
       {Array.from(recommendedSections).map(({ title, videoIds }) => {
         const videos: VideoItem[] = getVideoItems(videoIds, recommendedVideos);
         return (
-          <section key={encodeURI(title)} className="layout pt-[48px]">
+          <section key={encodeURI(title)} className="layout pt-12">
             <SectionTitle title={title} />
             <VideoList items={videos} />
           </section>

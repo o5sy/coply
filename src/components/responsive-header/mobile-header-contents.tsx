@@ -1,6 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useOpenState } from '@/hooks';
+import { useEffect } from 'react';
+import {
+  ScreenSize,
+  useOpenState,
+  usePreventScroll,
+  useScreenSize,
+} from '@/hooks';
 import { Button, PopoverBackdrop } from '../shared';
 import { Logo } from './logo';
 
@@ -13,6 +19,19 @@ const MENU_ITEM_STYLE =
 
 export function MobileHeader({ isLoggedIn = false }: MobileHeaderProps) {
   const { isOpen, handleState } = useOpenState();
+
+  const { screenSize } = useScreenSize();
+
+  useEffect(() => {
+    if (screenSize <= ScreenSize.medium) {
+      return;
+    }
+    if (isOpen) {
+      handleState.close();
+    }
+  }, [screenSize, isOpen, handleState]);
+
+  usePreventScroll({ scrollable: !isOpen });
 
   return (
     <>
@@ -43,7 +62,7 @@ export function MobileHeader({ isLoggedIn = false }: MobileHeaderProps) {
 
       {isOpen && (
         <PopoverBackdrop
-          className="absolute left-0 top-[65px] h-screen bg-black/70"
+          className="top-[65px] h-screen bg-black/70"
           onClick={handleState.close}
         >
           <div className="flex w-full flex-col gap-3 bg-white px-5 pb-7 text-gray-800 shadow-md">
