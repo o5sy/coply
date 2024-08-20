@@ -7,10 +7,10 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { noto_sans_kr } from '@/styles/fonts';
 
 import '@/styles/globals.css';
 import '@/styles/reset.css';
-
 import type { AppProps } from 'next/app';
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
@@ -44,8 +44,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <QueryClientProvider client={queryClient}>
         <HydrationBoundary state={pageProps.dehydratedState}>
-          {getLayout(<Component {...pageProps} />)}
-          <div id="portal" />
+          <main className={noto_sans_kr.className}>
+            {getLayout(<Component {...pageProps} />)}
+            <div id="portal" />
+          </main>
         </HydrationBoundary>
         <ReactQueryDevtools />
       </QueryClientProvider>
