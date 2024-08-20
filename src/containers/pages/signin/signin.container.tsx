@@ -16,7 +16,7 @@ export function SignInContainer() {
   });
 
   return (
-    <main className="flex h-full flex-col items-center justify-center">
+    <main className="flex h-screen flex-col items-center justify-center">
       <Image src="/flag.svg" width={100} height={100} alt="logo" />
       <Link className="mb-9 text-5xl text-primary" href="/">
         Coply
