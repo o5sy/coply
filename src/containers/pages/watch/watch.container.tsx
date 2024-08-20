@@ -1,6 +1,6 @@
 import Link from 'next/link';
+import { useMutation } from '@tanstack/react-query';
 import {
-  PopoverBackdrop,
   UserMenu,
   VideoInfoSection,
   WatchPageHeader,
@@ -8,10 +8,10 @@ import {
 import { YouTubePlayerContainer } from '@/containers/youtube-player';
 import { useIsLoggedIn, useOpenState } from '@/hooks';
 import { getFormattedDate } from '@/utils/date.util';
-import { useGetVideoByIdQuery } from './hooks';
-import { useMutation } from '@tanstack/react-query';
+import { PopoverBackdrop } from '@/components/shared';
 import { signOut } from '@/apis/auth';
 import { removeSession } from '@/utils/session';
+import { useGetVideoByIdQuery } from './hooks';
 
 export function WatchContainer() {
   const { isOpen: isOpenDrawer, handleState: handleDrawer } = useOpenState();

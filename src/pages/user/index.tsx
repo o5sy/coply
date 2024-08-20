@@ -7,7 +7,7 @@ import { UserContainer } from '@/containers/pages/user';
 export default function UserPage() {
   return (
     <WithAuth fallback={<NoAuthGuide />}>
-      <UserContainer />;
+      <UserContainer />
     </WithAuth>
   );
 }

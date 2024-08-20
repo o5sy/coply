@@ -26,12 +26,14 @@ export function WatchPageHeader({
       >
         <MenuIcon stroke="white" alt="영상 정보" />
       </button>
-      <h1 className="pl-[8px] text-lg font-semibold text-white">{title}</h1>
+      <h1 className="text-md line-clamp-2 pl-2 font-semibold text-white max-sm:text-sm">
+        {title}
+      </h1>
 
       {/* user menu button */}
       {isLoggedIn ? (
         <button
-          className="ml-auto box-content px-[24px]"
+          className="ml-auto box-content flex-shrink-0 px-6"
           type="button"
           onClick={onUserMenu}
           aria-label="user menu"
@@ -39,7 +41,7 @@ export function WatchPageHeader({
           <ProfileIcon width={36} height={36} />
         </button>
       ) : (
-        <Link className="ml-auto px-[24px]" href="/signin">
+        <Link className="ml-auto flex-shrink-0 px-6" href="/signin">
           <Button>로그인</Button>
         </Link>
       )}
