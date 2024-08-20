@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .layout {
+    @apply mx-auto box-content max-w-[1200px] px-8;
+
+    /* mobile */
+    @apply max-sm:px-5;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .separate-line {
+    @apply border-b-[1px] border-solid border-gray-500;
+  }
+}
+
+html {
+  @apply text-base;
+}

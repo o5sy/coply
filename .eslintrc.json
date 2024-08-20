@@ -40,13 +40,44 @@
       },
       {
         "selector": "function",
-        "format": ["PascalCase"],
-        "modifiers": ["exported"]
+        "format": ["camelCase"]
       },
       {
         "selector": "function",
-        "format": ["camelCase"]
+        "format": ["PascalCase"],
+        "modifiers": ["exported"]
       }
-    ]
+    ],
+    "import/prefer-default-export": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "some": ["nesting", "id"]
+      }
+    ],
+    "react/require-default-props": "off",
+    "comma-dangle": ["error", "always-multiline"],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ]
+      }
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["draft"] }
+    ],
+    "consistent-return": "off"
   }
 }
