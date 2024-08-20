@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect, useRef, MouseEvent } from 'react';
 import { cn } from '@/utils/styling';
 
 interface PopoverBackdropProps {
@@ -11,6 +11,8 @@ export function PopoverBackdrop({
   className,
   onClick,
 }: PropsWithChildren<PopoverBackdropProps>) {
+  const ref = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -21,10 +23,17 @@ export function PopoverBackdrop({
     return () => document.removeEventListener('keydown', handleKeyDown);
   });
 
+  const handleClick = (e: MouseEvent) => {
+    if (ref.current && ref.current === e.target) {
+      onClick?.();
+    }
+  };
+
   return (
     <div
+      ref={ref}
       className={cn('absolute left-0 top-0 h-full w-full', className)}
-      onClick={onClick}
+      onClick={handleClick}
       role="presentation"
     >
       {children}
