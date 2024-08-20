@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useOpenState, useScreenSize } from '@/hooks';
+import { useEffect, useMemo } from 'react';
+import { ScreenSize, useOpenState, useScreenSize } from '@/hooks';
 
 export const useOpenFilterDrawer = () => {
   const { isOpen: isOpenFilterDrawer, handleState: handleFilterDrawer } =
@@ -7,15 +7,23 @@ export const useOpenFilterDrawer = () => {
 
   const { screenSize } = useScreenSize();
 
+  const isResponsiveSize = useMemo(() => {
+    return screenSize <= ScreenSize.medium;
+  }, [screenSize]);
+
   useEffect(() => {
     // filter drawer 열린 상태에서 뷰포트 너비 커지면 닫힘
-    if (screenSize === 'sm' || screenSize === 'md') {
+    if (isResponsiveSize) {
       return;
     }
     if (isOpenFilterDrawer) {
       handleFilterDrawer.close();
     }
-  }, [handleFilterDrawer, isOpenFilterDrawer, screenSize]);
+  }, [handleFilterDrawer, isOpenFilterDrawer, isResponsiveSize]);
 
-  return { isOpenFilterDrawer, handleFilterDrawer };
+  return {
+    isOpenFilterDrawer,
+    handleFilterDrawer,
+    isResponsiveSize,
+  };
 };

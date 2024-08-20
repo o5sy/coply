@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { useOpenState, usePreventScroll, useScreenSize } from '@/hooks';
+import {
+  ScreenSize,
+  useOpenState,
+  usePreventScroll,
+  useScreenSize,
+} from '@/hooks';
 import { Button, PopoverBackdrop } from '../shared';
 import { Logo } from './logo';
 
@@ -18,7 +23,7 @@ export function MobileHeader({ isLoggedIn = false }: MobileHeaderProps) {
   const { screenSize } = useScreenSize();
 
   useEffect(() => {
-    if (screenSize === 'sm' || screenSize === 'md') {
+    if (screenSize <= ScreenSize.medium) {
       return;
     }
     if (isOpen) {
