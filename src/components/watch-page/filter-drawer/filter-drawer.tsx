@@ -10,15 +10,18 @@ interface FilterDrawerProps {
 export function FilterDrawer({ filterProps, onClose }: FilterDrawerProps) {
   return (
     <Portal>
-      <aside className="absolute left-0 top-0 z-10 h-full w-full overflow-hidden bg-white">
-        {/* header */}
-        <FilterDrawerHeader onClose={onClose} />
+      <div className="absolute left-0 top-0 z-10 h-full w-full overflow-hidden bg-white">
+        <div className="flex h-full flex-col">
+          {/* header */}
+          <FilterDrawerHeader onClose={onClose} />
 
-        {/* filter */}
-        <div className="h-full overflow-y-auto px-8 py-4">
-          <ExploreFilter {...filterProps} />
+          {/* filter */}
+          <ExploreFilter
+            className="h-full flex-1 overflow-y-auto px-8 py-4"
+            {...filterProps}
+          />
         </div>
-      </aside>
+      </div>
     </Portal>
   );
 }
