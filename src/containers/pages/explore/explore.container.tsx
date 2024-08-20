@@ -34,7 +34,8 @@ export function ExploreContainer() {
     categories: [],
   });
 
-  const { isOpenFilterDrawer, handleFilterDrawer } = useOpenFilterDrawer();
+  const { isOpenFilterDrawer, handleFilterDrawer, isResponsiveSize } =
+    useOpenFilterDrawer();
 
   useDetectCategoryFromParam({
     onDetect: (category) => {
@@ -88,23 +89,25 @@ export function ExploreContainer() {
 
           <div className="flex w-full flex-col gap-[24px] md:flex-row">
             {/* 필터 */}
-            <aside className="w-1/4 min-w-[150px] max-md:hidden">
-              <div className="separate-line pb-6 text-xl">필터</div>
-              <ExploreFilter
-                className="py-5"
-                level={filter.level}
-                categories={filter.categories}
-                onLevelChange={(level) => {
-                  handleUpdate({ type: 'level', payload: level });
-                }}
-                onCategoryChange={(category, checked) => {
-                  handleUpdate({
-                    type: 'categories',
-                    payload: { category, checked },
-                  });
-                }}
-              />
-            </aside>
+            {!isResponsiveSize && (
+              <aside className="w-1/4 min-w-[150px]">
+                <div className="separate-line pb-6 text-xl">필터</div>
+                <ExploreFilter
+                  className="py-5"
+                  level={filter.level}
+                  categories={filter.categories}
+                  onLevelChange={(level) => {
+                    handleUpdate({ type: 'level', payload: level });
+                  }}
+                  onCategoryChange={(category, checked) => {
+                    handleUpdate({
+                      type: 'categories',
+                      payload: { category, checked },
+                    });
+                  }}
+                />
+              </aside>
+            )}
 
             <div className="w-full">
               <div className="flex justify-between gap-1 pb-6">
