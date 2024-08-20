@@ -1,16 +1,19 @@
+import Image from 'next/image';
 import { useReducer } from 'react';
 import { getVideos } from '@/apis/videos';
 import {
+  Button,
   Guide,
   Pagination,
+  Portal,
   SearchInput,
   Separator,
   useSearchInput,
 } from '@/components/shared';
-import { VideoList } from '@/components/shared/video-list';
 import { usePagination } from '@/components/shared/pagination/hooks';
-import { categoryItems } from '@/constants/type-label-map';
-import { levelFilterItems } from './constants';
+import { VideoList } from '@/components/shared/video-list';
+import { ExploreFilter } from '@/components/watch-page/explore-filter';
+import { useOpenState } from '@/hooks';
 import { useDetectCategoryFromParam, useGetVideos } from './hooks';
 import {
   UpdateSearchFilterAction,
@@ -65,10 +68,20 @@ export function ExploreContainer() {
 
   const totalPage = Math.ceil(totalCount / LIMIT_COUNT);
 
+  const { isOpen, handleState } = useOpenState();
+
+  // 사이즈 크면: 기본 필터 -> ok
+  // 작으면: 기본 필터 표시 x, 버튼 표시 -> ok
+  // drawer ui: 필터 텍스트, 필터, 닫기 버튼 -> ok
+  // 버튼 클릭하면 drawer 표시 -> ok
+  // 닫기 버튼 클릭 시 닫힘 -> ok
+  // todo drawer 열린 상태에서 사이즈 커지면 닫힘
+  // 컴포넌트 분리
+
   return (
     <main className="mb-[100px] w-full">
       <div className="layout">
-        <div className="flex items-center justify-between py-[32px]">
+        <div className="flex flex-col gap-3 py-[32px] md:flex-row md:items-center md:justify-between">
           <h1 className="text-3xl font-bold">영상 탐색</h1>
           <SearchInput
             inputProps={{
@@ -78,64 +91,83 @@ export function ExploreContainer() {
           />
         </div>
 
-        <div className="flex w-full gap-[24px]">
+        <div className="flex w-full flex-col gap-[24px] md:flex-row">
+          {/* todo 3. responsive filter 분리 */}
           {/* 필터 */}
-          <aside className="flex w-[300px] flex-col gap-[24px]">
-            <div className="text-xl">필터</div>
-            <Separator className="border-black" />
+          {/* 반응형 작업 임시 hidden 설정 */}
+          <div className="w-1/4 min-w-[150px] max-md:hidden">
+            <aside className="flex w-full flex-col gap-[24px]">
+              <div className="text-xl">필터</div>
+              <Separator className="border-black" />
+              <ExploreFilter
+                level={filter.level}
+                categories={filter.categories}
+                onLevelChange={(level) => {
+                  handleUpdate({ type: 'level', payload: level });
+                }}
+                onCategoryChange={(category, checked) => {
+                  handleUpdate({
+                    type: 'categories',
+                    payload: { category, checked },
+                  });
+                }}
+              />
+            </aside>
+          </div>
 
-            {/* 난이도 */}
-            <fieldset>
-              <legend className="text-md pb-[16px] font-bold">난이도</legend>
-              <div className="flex flex-col gap-[8px]">
-                {Array.from(levelFilterItems).map(([key, label]) => {
-                  return (
-                    <label key={key} className="flex gap-[8px]">
-                      <input
-                        type="radio"
-                        name="level"
-                        value={key}
-                        checked={key === filter.level}
-                        onChange={() =>
-                          handleUpdate({ type: 'level', payload: key })
-                        }
-                      />
-                      {label}
-                    </label>
-                  );
-                })}
-              </div>
-            </fieldset>
+          {/* todo 4. radix 참고해서 drawer, drawerTrigger, drawerContents 로 추상화 */}
+          {/*  */}
+          <div className="hidden max-md:flex">
+            <Button
+              variant="outline"
+              colorType="gray"
+              onClick={handleState.open}
+            >
+              필터
+            </Button>
+          </div>
 
-            {/* 카테고리 */}
-            <fieldset>
-              <legend className="text-md pb-[16px] font-bold">카테고리</legend>
-              <div className="flex flex-col gap-[8px]">
-                {Array.from(categoryItems).map(([key, label]) => {
-                  return (
-                    <label key={key} className="flex gap-[8px]">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value={key}
-                        checked={filter.categories.includes(key)}
-                        onChange={(e) =>
-                          handleUpdate({
-                            type: 'categories',
-                            payload: {
-                              category: key,
-                              checked: e.target.checked,
-                            },
-                          })
-                        }
-                      />
-                      {label}
-                    </label>
-                  );
-                })}
-              </div>
-            </fieldset>
-          </aside>
+          {/* todo 1. drawer 분리 */}
+          {isOpen && (
+            <Portal>
+              <aside className="absolute left-0 top-0 z-10 h-full w-full overflow-hidden bg-white">
+                {/* todo 2. drawer header 분리 */}
+                <div className="flex justify-between px-8 py-4">
+                  <div className="text-xl">필터</div>
+                  <button
+                    type="button"
+                    className="flex-center h-8 w-8 shrink-0 grow-0 items-start rounded-md text-gray-500 hover:bg-gray-200"
+                    onClick={handleState.close}
+                  >
+                    <Image
+                      src="/close.svg"
+                      alt="delete"
+                      width={24}
+                      height={24}
+                    />
+                  </button>
+                </div>
+
+                <Separator />
+
+                <div className="h-full overflow-y-auto px-8 py-4">
+                  <ExploreFilter
+                    level={filter.level}
+                    categories={filter.categories}
+                    onLevelChange={(level) => {
+                      handleUpdate({ type: 'level', payload: level });
+                    }}
+                    onCategoryChange={(category, checked) => {
+                      handleUpdate({
+                        type: 'categories',
+                        payload: { category, checked },
+                      });
+                    }}
+                  />
+                </div>
+              </aside>
+            </Portal>
+          )}
 
           <div className="w-full">
             <div className="pb-[24px] text-xl">
