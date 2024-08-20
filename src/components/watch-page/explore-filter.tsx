@@ -3,7 +3,7 @@ import { categoryItems } from '@/constants/type-label-map';
 import { levelFilterItems } from '@/containers/pages/explore/constants';
 import { FilterLevel } from '@/containers/pages/explore/models';
 
-interface ExploreFilterProps {
+export interface ExploreFilterProps {
   level: FilterLevel;
   categories: Category[];
   onLevelChange: (level: FilterLevel) => void;
