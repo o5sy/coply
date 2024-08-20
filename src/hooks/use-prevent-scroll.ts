@@ -1,10 +1,25 @@
+import { all } from 'node_modules/axios/index.cjs';
 import { useEffect } from 'react';
 
-export const usePreventScroll = () => {
+interface UsePreventScrollProps {
+  scrollable?: boolean;
+}
+
+export const usePreventScroll = (
+  { scrollable = false }: UsePreventScrollProps = { scrollable: false },
+) => {
+  const allowScroll = (isAllow: boolean) => {
+    if (!isAllow) {
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+    document.body.style.overflow = 'unset';
+  };
+
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    allowScroll(scrollable);
     return () => {
-      document.body.style.overflow = 'unset';
+      allowScroll(true);
     };
-  }, []);
+  }, [scrollable]);
 };
