@@ -1,40 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Coply (코플리) 
+YouTube 개발 영상 중, 추천하고 싶은 콘텐츠를 카테고리 별로 모아볼 수 있는 서비스
 
-## Getting Started
+## 주요 기술
+- [Next.js](https://github.com/vercel/next.js) pages router
+- [Axios](https://github.com/axios/axios): HTTP 통신을 간편하게 처리하기 위해 사용
+- [TanStack/Query](https://github.com/tanstack/query): 서버 상태를 관리하고, 캐싱을 하고, 필요에 맞게 업데이트해 상태를 동기화하는데 사용
+- [Zod](https://github.com/colinhacks/zod): REST API schema 를 정의하고, 응답 데이터 형식을 검증하기 위해 사용
+- [tailwindcss](https://github.com/tailwindlabs/tailwindcss): 유틸리티 클래스를 사용해 ui 를 빠르고 쉽게 구현하기 위해 사용
+- [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference?hl=ko): YouTube 영상을 재생하고, 플레이어 정보를 받고, 부가 기능을 제공하기 위해 사용
+- [shadcn-ui](https://github.com/shadcn-ui/ui), [radix-ui](https://github.com/radix-ui/themes): 관리자 페이지를 빠르게 개발하기 위해 사용
+- [eslint](https://github.com/eslint/eslint), [prettier](https://github.com/prettier/prettier)
 
-First, run the development server:
-
+## 개발 서버 실행
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 브랜치 관리
+- 주요 브랜치
+  - `main`: 프로덕션 버전 배포 브랜치
+  - `develop`: 개발 버전 브랜치
+  - `feat`, `fix`, `refactor`: 기능 개발, 수정, 리팩토링 브랜치
+- 관리 흐름
+  - 초기 설정: `main` -> `develop` 분기
+  - 개발 단계
+    1. `develop` -> `local/feat/{feat-name}` 분기
+    2. 개발
+    3. remote 에 push -> pr 생성(`feat/{feat-name}` -> `develop`) -> ci 체크 -> `develop` 에 merge (Squash and merge)
+    4. `local/develop` 에 `remote/develop` pull
+    5. 이후 반복
+  - 배포
+    1. pr 생성(`develop` -> `main`) -> `main` 에 merge (Rebase and merge)
+    2. github release, 버전 tag 추가
+    3. `local/main` 에 `remote/main` pull, `local/develop` 에 `remote/main` pull
+   
+## 기능
+1. 카테고리, 난이도별 조회 (`/explore`)
+2. 영상 재생, 시청 기록 저장 (`/watch/{id}`)
+3. 구글 로그인 (`/signin`)
+4. 유저 정보 조회 (`/user`)
+5. 반응형 디자인
